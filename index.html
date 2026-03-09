@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Everyday Alchemy — Resonance Architecture™</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --obsidian: #0a0908;
+    --deep: #111009;
+    --charcoal: #1a1814;
+    --ash: #2a2822;
+    --gold: #c9a96e;
+    --gold-light: #e2c98a;
+    --gold-dim: #8a6e3e;
+    --cream: #f0e8d8;
+    --fog: rgba(240,232,216,0.06);
+    --fog-mid: rgba(240,232,216,0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body { 
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    max-width: 100%;
+  }
+
+  body {
+    background: var(--obsidian);
+    color: var(--cream);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ---- SACRED GEOMETRY BACKGROUND ---- */
+  .geo-canvas {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.18;
+  }
+
+  /* ---- NAV ---- */
+  nav {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    z-index: 100;
+    padding: 24px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(10,9,8,0.97);
+    box-sizing: border-box;
+  }
+
+  .nav-logo {
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 40px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'Jost', sans-serif;
+    font-weight: 200;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    color: rgba(240,232,216,0.5);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--gold-light); }
+
+  /* ---- HERO ---- */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    padding: 120px 40px 80px;
+    z-index: 1;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(201,169,110,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-sigil {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 48px;
+    opacity: 0.85;
+    animation: rotate-slow 60s linear infinite;
+  }
+
+  @keyframes rotate-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  .hero-eyebrow {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.5em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: fade-up 1s ease 0.3s forwards;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(52px, 7vw, 100px);
+    font-weight: 300;
+    line-height: 1.0;
+    letter-spacing: -0.01em;
+    color: var(--cream);
+    margin-bottom: 12px;
+    opacity: 0;
+    animation: fade-up 1s ease 0.5s forwards;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+
+  .hero-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(18px, 2.5vw, 28px);
+    font-weight: 300;
+    font-style: italic;
+    color: rgba(240,232,216,0.5);
+    margin-bottom: 64px;
+    opacity: 0;
+    animation: fade-up 1s ease 0.7s forwards;
+  }
+
+  .hero-divider {
+    width: 1px;
+    height: 60px;
+    background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+    margin: 0 auto 64px;
+    opacity: 0;
+    animation: fade-up 1s ease 0.9s forwards;
+  }
+
+  .hero-lead {
+    max-width: 640px;
+    margin: 0 auto 64px;
+    font-size: 16px;
+    line-height: 1.9;
+    color: rgba(240,232,216,0.65);
+    letter-spacing: 0.02em;
+    opacity: 0;
+    animation: fade-up 1s ease 1.1s forwards;
+  }
+
+  .cta-primary {
+    display: inline-block;
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--obsidian);
+    background: var(--gold);
+    padding: 18px 48px;
+    text-decoration: none;
+    transition: all 0.3s;
+    opacity: 0;
+    animation: fade-up 1s ease 1.3s forwards;
+  }
+
+  .cta-primary:hover {
+    background: var(--gold-light);
+    transform: translateY(-2px);
+  }
+
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ---- SECTION BASE ---- */
+  section {
+    position: relative;
+    z-index: 1;
+  }
+
+  .section-rule {
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+    margin: 0 auto 24px;
+  }
+
+  .section-eyebrow {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.5em;
+    color: var(--gold);
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 4vw, 60px);
+    font-weight: 300;
+    line-height: 1.1;
+    text-align: center;
+    color: var(--cream);
+    margin-bottom: 24px;
+  }
+
+  .section-title em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+
+  /* ---- IF YOU ARE ---- */
+  .ifyou {
+    padding: 120px 40px;
+    background: linear-gradient(to bottom, var(--obsidian), var(--deep));
+  }
+
+  .ifyou-inner {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .ifyou-intro {
+    text-align: center;
+    font-size: 15px;
+    line-height: 1.9;
+    color: rgba(240,232,216,0.55);
+    margin-bottom: 72px;
+  }
+
+  .ifyou-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .ifyou-item {
+    padding: 36px 0;
+    border-bottom: 1px solid rgba(201,169,110,0.12);
+    display: grid;
+    grid-template-columns: 24px 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+
+  .ifyou-item:first-child {
+    border-top: 1px solid rgba(201,169,110,0.12);
+  }
+
+  .ifyou-num {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    color: var(--gold-dim);
+    padding-top: 4px;
+  }
+
+  .ifyou-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 300;
+    line-height: 1.5;
+    color: rgba(240,232,216,0.8);
+  }
+
+  .ifyou-close {
+    margin-top: 72px;
+    padding: 48px;
+    border: 1px solid rgba(201,169,110,0.2);
+    background: rgba(201,169,110,0.04);
+    text-align: center;
+  }
+
+  .ifyou-close p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--cream);
+    margin-bottom: 16px;
+  }
+
+  .ifyou-close strong {
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    font-weight: 400;
+  }
+
+  /* ---- THE PROBLEM ---- */
+  .problem {
+    padding: 120px 40px;
+    background: var(--deep);
+  }
+
+  .problem-inner {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .problem-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin-top: 72px;
+  }
+
+  .problem-card {
+    background: var(--ash);
+    padding: 40px 36px;
+    border-top: 1px solid rgba(201,169,110,0.15);
+    transition: background 0.3s;
+  }
+
+  .problem-card:hover {
+    background: rgba(201,169,110,0.07);
+  }
+
+  .problem-card-num {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.4em;
+    color: var(--gold-dim);
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .problem-card p {
+    font-size: 14px;
+    line-height: 1.8;
+    color: rgba(240,232,216,0.6);
+  }
+
+  .problem-reveal {
+    margin-top: 72px;
+    text-align: center;
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .problem-reveal p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    line-height: 1.7;
+    color: rgba(240,232,216,0.8);
+    margin-bottom: 20px;
+  }
+
+  .problem-reveal .reveal-line {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-style: italic;
+    color: var(--gold-light);
+  }
+
+  /* ---- EPIPHANY ---- */
+  .epiphany {
+    padding: 120px 40px;
+    background: linear-gradient(135deg, var(--deep) 0%, var(--charcoal) 100%);
+  }
+
+  .epiphany-inner {
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  .epiphany-pull {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(24px, 3vw, 38px);
+    font-weight: 300;
+    line-height: 1.5;
+    text-align: center;
+    color: var(--cream);
+    margin-bottom: 72px;
+    padding: 0 20px;
+  }
+
+  .epiphany-pull em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+
+  .story-block {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .story-p {
+    font-size: 16px;
+    line-height: 2;
+    color: rgba(240,232,216,0.65);
+  }
+
+  .story-p.drop {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    color: rgba(240,232,216,0.8);
+    font-style: italic;
+  }
+
+  .story-callout {
+    border-left: 2px solid var(--gold);
+    padding: 24px 32px;
+    background: rgba(201,169,110,0.05);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-style: italic;
+    line-height: 1.6;
+    color: var(--cream);
+  }
+
+  /* ---- THE FRAMEWORK ---- */
+  .framework {
+    padding: 120px 40px;
+    background: var(--obsidian);
+  }
+
+  .framework-inner {
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  .framework-intro {
+    max-width: 600px;
+    margin: 0 auto 80px;
+    text-align: center;
+    font-size: 15px;
+    line-height: 1.9;
+    color: rgba(240,232,216,0.55);
+  }
+
+  .pillars {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2px;
+  }
+
+  .pillar {
+    padding: 60px 40px;
+    background: var(--charcoal);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.4s;
+  }
+
+  .pillar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1px;
+    height: 0;
+    background: var(--gold);
+    transition: height 0.4s;
+  }
+
+  .pillar:hover::before { height: 100%; }
+  .pillar:hover { background: rgba(201,169,110,0.06); }
+
+  .pillar-roman {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--gold-dim);
+    margin-bottom: 24px;
+    display: block;
+  }
+
+  .pillar-name {
+    font-family: 'Cinzel', serif;
+    font-size: 18px;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+
+  .pillar-desc {
+    font-size: 13px;
+    line-height: 1.8;
+    color: rgba(240,232,216,0.5);
+  }
+
+  /* ---- WHAT CHANGES ---- */
+  .results {
+    padding: 120px 40px;
+    background: var(--deep);
+  }
+
+  .results-inner {
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  .results-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    margin-top: 72px;
+  }
+
+  .results-col h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    color: var(--gold-dim);
+    margin-bottom: 32px;
+    text-transform: uppercase;
+  }
+
+  .results-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .results-list li {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 19px;
+    font-weight: 300;
+    line-height: 1.4;
+    color: rgba(240,232,216,0.75);
+    padding-left: 20px;
+    position: relative;
+  }
+
+  .results-list li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--gold-dim);
+    font-size: 14px;
+  }
+
+  .results-close {
+    margin-top: 72px;
+    text-align: center;
+  }
+
+  .results-close p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-style: italic;
+    line-height: 1.6;
+    color: var(--cream);
+    max-width: 600px;
+    margin: 0 auto 48px;
+  }
+
+  /* ---- CTA SECTION ---- */
+  .cta-section {
+    padding: 140px 40px;
+    background: var(--charcoal);
+    text-align: center;
+    position: relative;
+  }
+
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(201,169,110,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .cta-section .section-title {
+    margin-bottom: 32px;
+  }
+
+  .cta-section p {
+    font-size: 16px;
+    line-height: 1.9;
+    color: rgba(240,232,216,0.55);
+    max-width: 500px;
+    margin: 0 auto 56px;
+  }
+
+  .cta-secondary {
+    display: inline-block;
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid rgba(201,169,110,0.35);
+    padding: 18px 48px;
+    text-decoration: none;
+    transition: all 0.3s;
+    margin-left: 20px;
+  }
+
+  .cta-secondary:hover {
+    border-color: var(--gold);
+    background: rgba(201,169,110,0.06);
+  }
+
+  /* ---- FOOTER ---- */
+  footer {
+    padding: 60px 40px;
+    background: var(--obsidian);
+    border-top: 1px solid rgba(201,169,110,0.1);
+    text-align: center;
+  }
+
+  footer .nav-logo {
+    display: block;
+    margin-bottom: 24px;
+  }
+
+  footer p {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: rgba(240,232,216,0.25);
+  }
+
+  /* ---- SCROLL REVEAL ---- */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ---- RESPONSIVE ---- */
+  @media (max-width: 768px) {
+    nav { padding: 20px 24px; }
+    .nav-links { display: none; }
+    .problem-grid { grid-template-columns: 1fr; }
+    .pillars { grid-template-columns: 1fr; }
+    .results-columns { grid-template-columns: 1fr; gap: 40px; }
+    .ifyou, .problem, .epiphany, .framework, .results, .cta-section { padding: 80px 24px; }
+    .hero { padding: 100px 24px 60px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Sacred Geometry SVG Background -->
+<canvas class="geo-canvas" id="geoCanvas"></canvas>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-logo">Everyday Alchemy</span>
+  <ul class="nav-links">
+    <li><a href="#recognition">The Work</a></li>
+    <li><a href="#framework">Framework</a></li>
+    <li><a href="#transformation">Results</a></li>
+    <li><a href="#call">Apply Now</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div>
+    <!-- Sigil SVG -->
+    <svg class="hero-sigil" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="60" cy="60" r="58" stroke="#c9a96e" stroke-width="0.5" opacity="0.6"/>
+      <circle cx="60" cy="60" r="40" stroke="#c9a96e" stroke-width="0.5" opacity="0.4"/>
+      <circle cx="60" cy="60" r="22" stroke="#c9a96e" stroke-width="0.5" opacity="0.3"/>
+      <!-- Star of David / hexagram -->
+      <polygon points="60,8 100,74 20,74" stroke="#c9a96e" stroke-width="0.75" fill="none" opacity="0.7"/>
+      <polygon points="60,112 20,46 100,46" stroke="#c9a96e" stroke-width="0.75" fill="none" opacity="0.7"/>
+      <!-- Inner cross -->
+      <line x1="60" y1="2" x2="60" y2="118" stroke="#c9a96e" stroke-width="0.3" opacity="0.25"/>
+      <line x1="2" y1="60" x2="118" y2="60" stroke="#c9a96e" stroke-width="0.3" opacity="0.25"/>
+      <circle cx="60" cy="60" r="3" fill="#c9a96e" opacity="0.8"/>
+    </svg>
+
+    <p class="hero-eyebrow">Resonance Architecture™</p>
+    <h1 class="hero-title">You don't need<br>to manifest <em>harder.</em></h1>
+    <p class="hero-subtitle">You need to build something that holds.</p>
+    <div class="hero-divider"></div>
+    <p class="hero-lead">
+      You've proven manifestation works. You've had wins. You know how to get into the state. 
+      But the life you actually want — the whole picture — still isn't here. 
+      And nothing you've been taught explains why.
+    </p>
+    <a href="#call" class="cta-primary">Apply Now</a>
+  </div>
+</section>
+
+<!-- IF YOU ARE -->
+<section class="ifyou" id="recognition">
+  <div class="ifyou-inner">
+    <div class="reveal">
+      <div class="section-rule"></div>
+      <p class="section-eyebrow">Recognition</p>
+      <h2 class="section-title">If you are a<br><em>7-figure manifestor</em>...</h2>
+    </div>
+
+    <p class="ifyou-intro reveal" style="transition-delay: 0.1s">
+      Read these slowly. Something here will feel like it was written for you.
+    </p>
+
+    <div class="ifyou-list">
+      <div class="ifyou-item reveal">
+        <span class="ifyou-num">01</span>
+        <p class="ifyou-text">...and it still hasn't come together the way you dreamed about — like you got the income but not the life, and nothing seems to fix it.</p>
+      </div>
+      <div class="ifyou-item reveal">
+        <span class="ifyou-num">02</span>
+        <p class="ifyou-text">...who keeps manifesting pieces of what you want but they never add up to the whole picture you've been holding, and you're starting to wonder if you're doing something fundamentally wrong.</p>
+      </div>
+      <div class="ifyou-item reveal">
+        <span class="ifyou-num">03</span>
+        <p class="ifyou-text">...who thought getting here would feel like freedom. But instead you're more trapped than ever, working harder, stressed more — and the techniques that got you here have stopped working.</p>
+      </div>
+      <div class="ifyou-item reveal">
+        <span class="ifyou-num">04</span>
+        <p class="ifyou-text">...who has direct proof manifestation works — you've seen it land — but now when you go for the big shifts, nothing happens. And you're exhausted from trying the same things harder.</p>
+      </div>
+      <div class="ifyou-item reveal">
+        <span class="ifyou-num">05</span>
+        <p class="ifyou-text">...who manifested the business, the income, the external success — and you're still anxious, still reactive, still waiting for it all to collapse. Wondering why the inner stability never came with the outer results.</p>
+      </div>
+      <div class="ifyou-item reveal">
+        <span class="ifyou-num">06</span>
+        <p class="ifyou-text">...who knows something is missing in how you're being taught to manifest — because you're doing everything right, and your life still doesn't feel the way you thought it would when you got here.</p>
+      </div>
+    </div>
+
+    <div class="ifyou-close reveal">
+      <p>Then you're not broken. You're not missing anything.<br>You're trying to build a coherent life using incomplete tools.</p>
+      <strong>This is the work of Resonance Architecture™</strong>
+    </div>
+  </div>
+</section>
+
+<!-- THE PROBLEM -->
+<section class="problem">
+  <div class="problem-inner">
+    <div class="reveal">
+      <div class="section-rule"></div>
+      <p class="section-eyebrow">The Real Problem</p>
+      <h2 class="section-title">What you've <em>tried</em></h2>
+    </div>
+
+    <div class="problem-grid">
+      <div class="problem-card reveal">
+        <span class="problem-card-num">Tried</span>
+        <p>Robotic affirmations — saying the same statement 1,000 times until your mind goes numb, hoping this time it will finally stick.</p>
+      </div>
+      <div class="problem-card reveal">
+        <span class="problem-card-num">Tried</span>
+        <p>SATS every single night, visualizing in perfect detail, feeling it real, doing everything Neville said — and waking up to the same life, month after month.</p>
+      </div>
+      <div class="problem-card reveal">
+        <span class="problem-card-num">Tried</span>
+        <p>$10K, $15K manifestation coaches who gave you the same techniques with different branding — and blamed your resistance when it didn't work.</p>
+      </div>
+      <div class="problem-card reveal">
+        <span class="problem-card-num">Tried</span>
+        <p>$15K retreats in Sedona, Bali, Costa Rica — doing breathwork and ceremony, hoping this time you'd finally discover what was blocking you. Only to come home and watch the clarity fade within weeks.</p>
+      </div>
+      <div class="problem-card reveal">
+        <span class="problem-card-num">Tried</span>
+        <p>Meditating for hours trying to "get into the state" — chasing that feeling of alignment you've touched before, knowing it's possible, but unable to sustain it.</p>
+      </div>
+      <div class="problem-card reveal">
+        <span class="problem-card-num">Tried</span>
+        <p>"Persisting" through doubt and evidence — told that the only reason it hasn't worked is because you gave up too soon. Until you're exhausted and starting to wonder if persistence is just another word for denial.</p>
+      </div>
+    </div>
+
+    <div class="problem-reveal reveal">
+      <p>Here's what no one is telling you:</p>
+      <p class="reveal-line">You're not accessing wrong.<br>You're just not architecting.</p>
+    </div>
+  </div>
+</section>
+
+<!-- EPIPHANY / STORY -->
+<section class="epiphany" id="story">
+  <div class="epiphany-inner">
+    <div class="reveal">
+      <div class="section-rule"></div>
+      <p class="section-eyebrow">The Epiphany</p>
+    </div>
+
+    <p class="epiphany-pull reveal">
+      "There is no one to change<br>but <em>yourself.</em>"
+    </p>
+
+    <div class="story-block">
+      <p class="story-p drop reveal">
+        I was an entrepreneur. Second AI startup. Working as a server at a brewery to pay bills while building it. Business going sideways. Marriage going sideways. Years of manifesting — affirmations, SATS, scripting, imaginal scenes — and nothing was moving.
+      </p>
+      <p class="story-p reveal">
+        I had manifested things. A $5k payment. A dismissed ticket. A cup of coffee. But the big ones — the business, the relationship, the life — nothing. I kept doing everything they told me to do. And I kept getting more of the same.
+      </p>
+      <p class="story-p reveal">
+        Then I found Neville. Devoured "Feeling is the Secret." <em>Finally</em>, I thought. The missing piece. Except when I finished it... I'd already known all of it. For years. And it still wasn't working.
+      </p>
+      <div class="story-callout reveal">
+        "If I know all this and this is 'the way' — then clearly, something is off."
+      </div>
+      <p class="story-p reveal">
+        Later that day, in a Neville chat group, someone named Josie said something she'd said a thousand times before: <em>"There is no one to change but yourself."</em>
+      </p>
+      <p class="story-p reveal">
+        And I sat there looking at those words. And for the first time, something tumbled loose. I could hear the pebble that starts the avalanche.
+      </p>
+      <p class="story-p reveal">
+        <em>What if the entire approach I've been taking to this is incomplete?</em>
+      </p>
+      <p class="story-p reveal">
+        I asked myself: if I had everything I wanted — who would I be? What would I feel? What would I know? What would I do?
+      </p>
+      <p class="story-p reveal">
+        And I realized I had been visiting the frequencies. Briefly. Then leaving. I had no architecture to hold them.
+      </p>
+      <div class="story-callout reveal">
+        "You have what you hold."
+      </div>
+      <p class="story-p reveal">
+        That was the beginning of Resonance Architecture. Not a new technique. The operating system underneath every technique that ever worked.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- FRAMEWORK -->
+<section class="framework" id="framework">
+  <div class="framework-inner">
+    <div class="reveal">
+      <div class="section-rule"></div>
+      <p class="section-eyebrow">The Framework</p>
+      <h2 class="section-title">Harmonize.<br><em>Crystalize. Alchemize.</em></h2>
+    </div>
+
+    <p class="framework-intro reveal">
+      Three movements. Not steps. Not a system to execute. A way of working with your field that builds resonance that stays — instead of a state you visit and lose.
+    </p>
+
+    <div class="pillars">
+      <div class="pillar reveal">
+        <span class="pillar-roman">I</span>
+        <div class="pillar-name">Harmonize</div>
+        <p class="pillar-desc">Attune to the harmonic of the life you want. Not by visualizing it. By becoming the person who already lives there — in thought, feeling, and being. Here, now.</p>
+      </div>
+      <div class="pillar reveal" style="transition-delay: 0.15s">
+        <span class="pillar-roman">II</span>
+        <div class="pillar-name">Crystalize</div>
+        <p class="pillar-desc">Set the structure. What your field holds is what your life reflects. We build the internal architecture that sustains the frequency — so it's there when you're answering emails, not just when you're meditating.</p>
+      </div>
+      <div class="pillar reveal" style="transition-delay: 0.3s">
+        <span class="pillar-roman">III</span>
+        <div class="pillar-name">Alchemize</div>
+        <p class="pillar-desc">Transform the blocks not by clearing them but by transmuting them — using your alchemy tools to wire each harmonic into your energetic system. This is not repetition. It is entrainment.</p>
+      </div>
+    </div>
+
+    <div class="problem-reveal reveal" style="margin-top: 72px; text-align: center; max-width: 640px; margin-left: auto; margin-right: auto;">
+      <p style="font-family: 'Cormorant Garamond', serif; font-size: 20px; line-height: 1.7; color: rgba(240,232,216,0.75); margin-bottom: 16px;">
+        You've been taught how to access the feeling. No one has taught you how to build the field that holds it. That's the entire difference. That's why it flickers.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- TRANSFORMATION -->
+<section class="results" id="transformation">
+  <div class="results-inner">
+    <div class="reveal">
+      <div class="section-rule"></div>
+      <p class="section-eyebrow">What Actually Changes</p>
+      <h2 class="section-title">You stop chasing <em>the feeling.</em><br>You build something that holds.</h2>
+    </div>
+
+    <div class="results-columns">
+      <div class="results-col reveal">
+        <h3>Without Architecture</h3>
+        <ul class="results-list">
+          <li>Manifesting works sometimes, then goes quiet for no reason you can track</li>
+          <li>You access alignment in meditation, lose it before lunch</li>
+          <li>Every "breakthrough" fades within days or weeks</li>
+          <li>The techniques work for small things and go silent for the ones that matter</li>
+          <li>You keep suspecting it's your blocks, your trauma, your resistance</li>
+        </ul>
+      </div>
+      <div class="results-col reveal" style="transition-delay: 0.2s">
+        <h3>With Architecture</h3>
+        <ul class="results-list">
+          <li>Your field is magnetic — on always, not just during meditation</li>
+          <li>The wobble stabilizes. You stop being thrown by events that previously sent you spiraling</li>
+          <li>New opportunities, relationships, and income align — because your resonance structure called them in</li>
+          <li>The techniques you already know work better than they ever have</li>
+          <li>You stop blaming yourself. You know exactly what to work with and how.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="results-close reveal">
+      <p>"I don't have to meditate to raise my vibration anymore. My field is always on — filling in the background, even when I'm not thinking about it. Absolutely gonzo."</p>
+      <p style="font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.3em; color: var(--gold-dim);">— Tim, Founder of Everyday Alchemy</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="call">
+  <div style="position: relative; z-index: 1;">
+    <div class="section-rule"></div>
+    <p class="section-eyebrow">Begin Here</p>
+    <h2 class="section-title">Your Resonance<br><em>Architecture Blueprint</em></h2>
+    <p>Tell us where you are. We'll tell you if we're the right fit. If you're accepted, we build your Resonance Architecture blueprint together — and get to work.</p>
+    <div>
+      <a href="#" class="cta-primary">Apply Now</a>
+      <a href="#recognition" class="cta-secondary">Start Over</a>
+    </div>
+    <p style="margin-top: 40px; font-size: 12px; letter-spacing: 0.1em; color: rgba(240,232,216,0.25);">
+      This is not for everyone. If you are ready to stop flickering and build something that holds — apply.
+    </p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="nav-logo">Everyday Alchemy</span>
+  <p>© 2026 Everyday Alchemy — Resonance Architecture™. All rights reserved.</p>
+</footer>
+
+<script>
+// Sacred geometry background
+const canvas = document.getElementById('geoCanvas');
+const ctx = canvas.getContext('2d');
+
+function resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+function drawGeo() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  const cx = canvas.width / 2;
+  const cy = canvas.height / 2;
+  
+  ctx.strokeStyle = '#c9a96e';
+  ctx.lineWidth = 0.4;
+
+  // Flower of Life pattern (simplified)
+  const r = Math.min(canvas.width, canvas.height) * 0.35;
+  const positions = [
+    [0, 0],
+    [r, 0], [-r, 0], [0, r], [0, -r],
+    [r * 0.5, r * 0.866], [-r * 0.5, r * 0.866],
+    [r * 0.5, -r * 0.866], [-r * 0.5, -r * 0.866],
+  ];
+
+  positions.forEach(([dx, dy]) => {
+    ctx.beginPath();
+    ctx.arc(cx + dx, cy + dy, r, 0, Math.PI * 2);
+    ctx.globalAlpha = 0.15;
+    ctx.stroke();
+  });
+
+  // Outer rings
+  [r * 2, r * 2.8].forEach(rad => {
+    ctx.beginPath();
+    ctx.arc(cx, cy, rad, 0, Math.PI * 2);
+    ctx.globalAlpha = 0.08;
+    ctx.stroke();
+  });
+}
+
+drawGeo();
+
+// Scroll reveal
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.12 });
+
+reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
