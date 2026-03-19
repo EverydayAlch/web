@@ -21,12 +21,7 @@
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  html, body { 
-    scroll-behavior: smooth;
-    overflow-x: hidden;
-    max-width: 100%;
-  }
+  html { scroll-behavior: smooth; }
 
   body {
     background: var(--obsidian);
@@ -34,9 +29,11 @@
     font-family: 'Jost', sans-serif;
     font-weight: 300;
     overflow-x: hidden;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
   }
 
-  /* ---- SACRED GEOMETRY BACKGROUND ---- */
   .geo-canvas {
     position: fixed;
     inset: 0;
@@ -45,20 +42,18 @@
     opacity: 0.18;
   }
 
-  /* ---- NAV ---- */
   nav {
-    position: sticky;
+    position: fixed;
     top: 0;
-    width: 100%;
-    max-width: 100%;
-    overflow: hidden;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
     z-index: 100;
-    padding: 24px 40px;
+    padding: 24px 60px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: rgba(10,9,8,0.97);
-    box-sizing: border-box;
+    background: linear-gradient(to bottom, rgba(10,9,8,0.95), transparent);
   }
 
   .nav-logo {
@@ -88,7 +83,6 @@
 
   .nav-links a:hover { color: var(--gold-light); }
 
-  /* ---- HERO ---- */
   .hero {
     min-height: 100vh;
     display: flex;
@@ -205,7 +199,6 @@
     to { opacity: 1; transform: translateY(0); }
   }
 
-  /* ---- SECTION BASE ---- */
   section {
     position: relative;
     z-index: 1;
@@ -519,6 +512,209 @@
     color: rgba(240,232,216,0.5);
   }
 
+  /* ---- ARCHITECTURE SECTION (NEW) ---- */
+  .architecture {
+    padding: 120px 40px;
+    background: linear-gradient(to bottom, var(--obsidian), var(--deep));
+    position: relative;
+    overflow: hidden;
+  }
+
+  .architecture::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(201,169,110,0.04) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .architecture-inner {
+    max-width: 960px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .architecture-intro {
+    max-width: 640px;
+    margin: 0 auto 80px;
+    text-align: center;
+    font-size: 15px;
+    line-height: 1.9;
+    color: rgba(240,232,216,0.55);
+  }
+
+  /* Tetrahedron visual */
+  .tetrahedron-wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 80px;
+  }
+
+  .tetrahedron-svg {
+    width: 260px;
+    height: 260px;
+    opacity: 0.85;
+  }
+
+  /* Four harmonics grid */
+  .harmonics-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin-bottom: 72px;
+  }
+
+  .harmonic-card {
+    padding: 52px 44px;
+    background: var(--charcoal);
+    border-top: 1px solid rgba(201,169,110,0.15);
+    transition: background 0.4s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .harmonic-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--gold);
+    transition: width 0.5s ease;
+  }
+
+  .harmonic-card:hover::after { width: 100%; }
+  .harmonic-card:hover { background: rgba(201,169,110,0.05); }
+
+  .harmonic-label {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.5em;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .harmonic-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 300;
+    color: var(--gold);
+    margin-bottom: 20px;
+    line-height: 1;
+  }
+
+  .harmonic-apex {
+    color: var(--gold-light) !important;
+  }
+
+  .harmonic-desc {
+    font-size: 14px;
+    line-height: 1.85;
+    color: rgba(240,232,216,0.55);
+  }
+
+  /* Identity bands */
+  .identity-bands {
+    margin-top: 72px;
+    border: 1px solid rgba(201,169,110,0.12);
+    background: rgba(201,169,110,0.02);
+  }
+
+  .identity-bands-header {
+    padding: 36px 44px 24px;
+    border-bottom: 1px solid rgba(201,169,110,0.1);
+  }
+
+  .identity-bands-header p {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.5em;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .identity-bands-header h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 300;
+    color: var(--cream);
+    line-height: 1.3;
+  }
+
+  .identity-bands-header h3 em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+
+  .identity-band-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+
+  .identity-band {
+    padding: 36px 44px;
+    border-right: 1px solid rgba(201,169,110,0.08);
+    border-bottom: 1px solid rgba(201,169,110,0.08);
+    transition: background 0.3s;
+  }
+
+  .identity-band:nth-child(2n) { border-right: none; }
+  .identity-band:nth-child(3), .identity-band:nth-child(4) { border-bottom: none; }
+  .identity-band:hover { background: rgba(201,169,110,0.04); }
+
+  .band-roman {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.4em;
+    color: var(--gold-dim);
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .band-name {
+    font-family: 'Cinzel', serif;
+    font-size: 14px;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+
+  .band-desc {
+    font-size: 13px;
+    line-height: 1.8;
+    color: rgba(240,232,216,0.5);
+  }
+
+  .architecture-close {
+    margin-top: 72px;
+    text-align: center;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .architecture-close p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 300;
+    line-height: 1.7;
+    color: rgba(240,232,216,0.8);
+    margin-bottom: 20px;
+  }
+
+  .architecture-close .arch-line {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-style: italic;
+    color: var(--gold-light);
+  }
+
   /* ---- WHAT CHANGES ---- */
   .results {
     padding: 120px 40px;
@@ -671,14 +867,16 @@
     .problem-grid { grid-template-columns: 1fr; }
     .pillars { grid-template-columns: 1fr; }
     .results-columns { grid-template-columns: 1fr; gap: 40px; }
-    .ifyou, .problem, .epiphany, .framework, .results, .cta-section { padding: 80px 24px; }
+    .harmonics-grid { grid-template-columns: 1fr; }
+    .identity-band-list { grid-template-columns: 1fr; }
+    .identity-band { border-right: none; }
+    .ifyou, .problem, .epiphany, .framework, .architecture, .results, .cta-section { padding: 80px 24px; }
     .hero { padding: 100px 24px 60px; }
   }
 </style>
 </head>
 <body>
 
-<!-- Sacred Geometry SVG Background -->
 <canvas class="geo-canvas" id="geoCanvas"></canvas>
 
 <!-- NAV -->
@@ -687,23 +885,21 @@
   <ul class="nav-links">
     <li><a href="#recognition">The Work</a></li>
     <li><a href="#framework">Framework</a></li>
+    <li><a href="#architecture">Architecture</a></li>
     <li><a href="#transformation">Results</a></li>
-    <li><a href="https://apply.everydayalchemy.xyz/69ac4516782687f55ffaabde/">Apply Now</a></li>
+    <li><a href="#call">Apply Now</a></li>
   </ul>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
   <div>
-    <!-- Sigil SVG -->
     <svg class="hero-sigil" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="60" cy="60" r="58" stroke="#c9a96e" stroke-width="0.5" opacity="0.6"/>
       <circle cx="60" cy="60" r="40" stroke="#c9a96e" stroke-width="0.5" opacity="0.4"/>
       <circle cx="60" cy="60" r="22" stroke="#c9a96e" stroke-width="0.5" opacity="0.3"/>
-      <!-- Star of David / hexagram -->
       <polygon points="60,8 100,74 20,74" stroke="#c9a96e" stroke-width="0.75" fill="none" opacity="0.7"/>
       <polygon points="60,112 20,46 100,46" stroke="#c9a96e" stroke-width="0.75" fill="none" opacity="0.7"/>
-      <!-- Inner cross -->
       <line x1="60" y1="2" x2="60" y2="118" stroke="#c9a96e" stroke-width="0.3" opacity="0.25"/>
       <line x1="2" y1="60" x2="118" y2="60" stroke="#c9a96e" stroke-width="0.3" opacity="0.25"/>
       <circle cx="60" cy="60" r="3" fill="#c9a96e" opacity="0.8"/>
@@ -718,7 +914,7 @@
       But the life you actually want — the whole picture — still isn't here. 
       And nothing you've been taught explains why.
     </p>
-    <a href="https://apply.everydayalchemy.xyz/69ac4516782687f55ffaabde/" class="cta-primary">Apply Now</a>
+    <a href="#call" class="cta-primary">Apply Now</a>
   </div>
 </section>
 
@@ -901,6 +1097,122 @@
   </div>
 </section>
 
+<!-- THE ARCHITECTURE (NEW SECTION) -->
+<section class="architecture" id="architecture">
+  <div class="architecture-inner">
+    <div class="reveal">
+      <div class="section-rule"></div>
+      <p class="section-eyebrow">The Architecture</p>
+      <h2 class="section-title">The structure beneath<br><em>every technique that ever worked.</em></h2>
+    </div>
+
+    <p class="architecture-intro reveal">
+      Manifestation methods teach you how to access a state. But states fade. A life holds when the structure underneath the state is stable. Resonance Architecture stabilizes four fundamental harmonics — the load-bearing elements of identity itself.
+    </p>
+
+    <!-- Tetrahedron SVG -->
+    <div class="tetrahedron-wrap reveal">
+      <svg class="tetrahedron-svg" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!--
+          3D Tetrahedron wireframe — matching reference drawing
+          Apex (Having):        A = (150, 40)
+          Base front-left:      B = (50,  230)
+          Base front-right:     C = (250, 230)
+          Base back-center:     D = (150, 195)   ← the inner "back" vertex of base triangle
+          Clarity axis: vertical dashed from apex down through base centroid
+        -->
+
+        <!-- Outer face edges (solid) -->
+        <line x1="150" y1="40"  x2="50"  y2="230" stroke="#c9a96e" stroke-width="1"   opacity="0.85"/>
+        <line x1="150" y1="40"  x2="250" y2="230" stroke="#c9a96e" stroke-width="1"   opacity="0.85"/>
+        <line x1="50"  y1="230" x2="250" y2="230" stroke="#c9a96e" stroke-width="1"   opacity="0.85"/>
+
+        <!-- Back base edges from apex to back vertex (dashed — hidden lines) -->
+        <line x1="150" y1="40"  x2="150" y2="195" stroke="#c9a96e" stroke-width="0.6" stroke-dasharray="4 6" opacity="0.5"/>
+
+        <!-- Base triangle inner edges (dashed — hidden lines) -->
+        <line x1="50"  y1="230" x2="150" y2="195" stroke="#c9a96e" stroke-width="0.6" stroke-dasharray="4 6" opacity="0.5"/>
+        <line x1="250" y1="230" x2="150" y2="195" stroke="#c9a96e" stroke-width="0.6" stroke-dasharray="4 6" opacity="0.5"/>
+
+        <!-- Clarity axis — dashed vertical from above apex down through base centroid -->
+        <!-- Base centroid of front base: x=150, y = (230+230+195)/3 ≈ 218 -->
+        <line x1="150" y1="10"  x2="150" y2="255" stroke="#c9a96e" stroke-width="0.5" stroke-dasharray="4 6" opacity="0.4"/>
+
+        <!-- Vertex dots -->
+        <circle cx="150" cy="40"  r="3.5" fill="#e2c98a" opacity="0.95"/>
+        <circle cx="50"  cy="230" r="2.5" fill="#c9a96e" opacity="0.8"/>
+        <circle cx="250" cy="230" r="2.5" fill="#c9a96e" opacity="0.8"/>
+        <circle cx="150" cy="195" r="2.5" fill="#c9a96e" opacity="0.6"/>
+
+        <!-- Labels -->
+        <text x="150" y="28"  fill="#e2c98a" font-size="8.5" font-family="'Cinzel', serif" text-anchor="middle" letter-spacing="3" opacity="0.95">HAVING</text>
+        <text x="26"  y="248" fill="#c9a96e" font-size="8"   font-family="'Cinzel', serif" text-anchor="middle" letter-spacing="2" opacity="0.75">BEING</text>
+        <text x="274" y="248" fill="#c9a96e" font-size="8"   font-family="'Cinzel', serif" text-anchor="middle" letter-spacing="2" opacity="0.75">KNOWING</text>
+        <text x="150" y="213" fill="#c9a96e" font-size="8"   font-family="'Cinzel', serif" text-anchor="middle" letter-spacing="2" opacity="0.65">DOING</text>
+      </svg>
+    </div>
+
+    <!-- Four harmonics -->
+    <div class="harmonics-grid">
+      <div class="harmonic-card reveal">
+        <span class="harmonic-label">Base Harmonic — I</span>
+        <div class="harmonic-name">Being</div>
+        <p class="harmonic-desc">Not "I am the person who has X." The harmonic of existence itself. <em>I am. I exist. That is unquestioned.</em> When this harmonic stabilizes, a massive amount of internal resistance disappears — because the system stops spending energy on whether it's allowed to occupy the space it's in.</p>
+      </div>
+      <div class="harmonic-card reveal" style="transition-delay: 0.1s">
+        <span class="harmonic-label">Base Harmonic — II</span>
+        <div class="harmonic-name">Knowing</div>
+        <p class="harmonic-desc">Not "I know how to build a 10,000-user company." The harmonic of certainty itself — clarity, recognition, the felt sense of understanding. When knowing is stable, decisions come from ground rather than grasping. The system stops looking for permission.</p>
+      </div>
+      <div class="harmonic-card reveal" style="transition-delay: 0.2s">
+        <span class="harmonic-label">Base Harmonic — III</span>
+        <div class="harmonic-name">Doing</div>
+        <p class="harmonic-desc">If you want groceries, you go get them. Doing is the harmonic of agency — the natural movement of energy into the world. Not effort. Not forcing. The aligned action that becomes obvious once the other harmonics are stable. Without it, the geometry collapses.</p>
+      </div>
+      <div class="harmonic-card reveal" style="transition-delay: 0.3s">
+        <span class="harmonic-label">Apex Harmonic</span>
+        <div class="harmonic-name harmonic-apex">Having</div>
+        <p class="harmonic-desc">Not wanting. Not hoping. The harmonic of possession and presence — the felt reality of something being yours. Having sits at the apex, stabilized by the base triangle. When all three harmonics beneath it align, having stops feeling like a goal. It becomes a natural consequence of the architecture.</p>
+      </div>
+    </div>
+
+    <!-- Identity Bands -->
+    <div class="identity-bands reveal">
+      <div class="identity-bands-header">
+        <p>Identity Architecture</p>
+        <h3>Your life expands<br>when <em>the structure expands.</em></h3>
+      </div>
+      <div class="identity-band-list">
+        <div class="identity-band">
+          <span class="band-roman">I</span>
+          <div class="band-name">Present Self</div>
+          <p class="band-desc">The identity that currently feels normal. Results here feel ordinary and unsurprising. This is where you live right now.</p>
+        </div>
+        <div class="identity-band">
+          <span class="band-roman">II</span>
+          <div class="band-name">Unfolding Self</div>
+          <p class="band-desc">Just outside the present. Slightly expanded but believable. Manifestations reliably appear when they fall into this band — because the identity shift is real without being destabilizing.</p>
+        </div>
+        <div class="identity-band">
+          <span class="band-roman">III</span>
+          <div class="band-name">Visionary Self</div>
+          <p class="band-desc">Aspirational. Inspiring. The person you can imagine becoming, but haven't yet built the architecture to inhabit. Not where you aim — where you grow toward.</p>
+        </div>
+        <div class="identity-band">
+          <span class="band-roman">IV</span>
+          <div class="band-name">Audacious Self</div>
+          <p class="band-desc">The BHAG. The horizon. Not the next step — the direction. The audacious vision guides expansion even when it's far outside your current field. It's the outer tetrahedron. Everything else nests inside it.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="architecture-close reveal">
+      <p>Most systems try to pull you to the audacious vision directly.<br>Resonance Architecture builds the nested structure that gets you there.</p>
+      <span class="arch-line">You don't jump identities. You expand them.</span>
+    </div>
+  </div>
+</section>
+
 <!-- TRANSFORMATION -->
 <section class="results" id="transformation">
   <div class="results-inner">
@@ -934,8 +1246,8 @@
     </div>
 
     <div class="results-close reveal">
-      <p>"I don't have to meditate to raise my vibration anymore. My field is always on — filling in the background, even when I'm not thinking about it. Absolutely gonzo."</p>
-      <p style="font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.3em; color: var(--gold-dim);">— Tim, Founder of Everyday Alchemy</p>
+      <p>"When my grandmother passed, I was able to identify exactly what I was feeling, walk through it, and sit with it. The grief moved through cleanly. The harmonic structure held — even there."</p>
+      <p style="font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.3em; color: var(--gold-dim);">— Sanctum Student</p>
     </div>
   </div>
 </section>
@@ -948,7 +1260,7 @@
     <h2 class="section-title">Your Resonance<br><em>Architecture Blueprint</em></h2>
     <p>Tell us where you are. We'll tell you if we're the right fit. If you're accepted, we build your Resonance Architecture blueprint together — and get to work.</p>
     <div>
-      <a href="https://apply.everydayalchemy.xyz/69ac4516782687f55ffaabde/" class="cta-primary">Apply Now</a>
+      <a href="#" class="cta-primary">Apply Now</a>
       <a href="#recognition" class="cta-secondary">Start Over</a>
     </div>
     <p style="margin-top: 40px; font-size: 12px; letter-spacing: 0.1em; color: rgba(240,232,216,0.25);">
@@ -964,7 +1276,6 @@
 </footer>
 
 <script>
-// Sacred geometry background
 const canvas = document.getElementById('geoCanvas');
 const ctx = canvas.getContext('2d');
 
@@ -979,11 +1290,8 @@ function drawGeo() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   const cx = canvas.width / 2;
   const cy = canvas.height / 2;
-  
   ctx.strokeStyle = '#c9a96e';
   ctx.lineWidth = 0.4;
-
-  // Flower of Life pattern (simplified)
   const r = Math.min(canvas.width, canvas.height) * 0.35;
   const positions = [
     [0, 0],
@@ -991,15 +1299,12 @@ function drawGeo() {
     [r * 0.5, r * 0.866], [-r * 0.5, r * 0.866],
     [r * 0.5, -r * 0.866], [-r * 0.5, -r * 0.866],
   ];
-
   positions.forEach(([dx, dy]) => {
     ctx.beginPath();
     ctx.arc(cx + dx, cy + dy, r, 0, Math.PI * 2);
     ctx.globalAlpha = 0.15;
     ctx.stroke();
   });
-
-  // Outer rings
   [r * 2, r * 2.8].forEach(rad => {
     ctx.beginPath();
     ctx.arc(cx, cy, rad, 0, Math.PI * 2);
@@ -1007,10 +1312,8 @@ function drawGeo() {
     ctx.stroke();
   });
 }
-
 drawGeo();
 
-// Scroll reveal
 const reveals = document.querySelectorAll('.reveal');
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
@@ -1019,7 +1322,6 @@ const observer = new IntersectionObserver((entries) => {
     }
   });
 }, { threshold: 0.12 });
-
 reveals.forEach(el => observer.observe(el));
 </script>
 </body>
