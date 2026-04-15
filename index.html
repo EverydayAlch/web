@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+—<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -109,6 +109,8 @@
     opacity: 0.85;
     animation: rotate-slow 60s linear infinite;
   }
+
+
 
   @keyframes rotate-slow {
     from { transform: rotate(0deg); }
@@ -894,15 +896,36 @@
 <!-- HERO -->
 <section class="hero">
   <div>
-    <svg class="hero-sigil" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="60" cy="60" r="58" stroke="#c9a96e" stroke-width="0.5" opacity="0.6"/>
-      <circle cx="60" cy="60" r="40" stroke="#c9a96e" stroke-width="0.5" opacity="0.4"/>
-      <circle cx="60" cy="60" r="22" stroke="#c9a96e" stroke-width="0.5" opacity="0.3"/>
-      <polygon points="60,8 100,74 20,74" stroke="#c9a96e" stroke-width="0.75" fill="none" opacity="0.7"/>
-      <polygon points="60,112 20,46 100,46" stroke="#c9a96e" stroke-width="0.75" fill="none" opacity="0.7"/>
-      <line x1="60" y1="2" x2="60" y2="118" stroke="#c9a96e" stroke-width="0.3" opacity="0.25"/>
-      <line x1="2" y1="60" x2="118" y2="60" stroke="#c9a96e" stroke-width="0.3" opacity="0.25"/>
-      <circle cx="60" cy="60" r="3" fill="#c9a96e" opacity="0.8"/>
+    <!-- Star Tetrahedron as hero sigil -->
+    <svg class="hero-sigil" viewBox="500 150 800 870" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <clipPath id="merkaba-clip">
+          <circle cx="901.9" cy="584" r="349"/>
+        </clipPath>
+      </defs>
+
+      <!-- Inner circles -->
+      <circle cx="901.9" cy="584" r="270" stroke="#c9a96e" stroke-width="2.5" opacity="0.4"/>
+      <circle cx="901.9" cy="584" r="150" stroke="#c9a96e" stroke-width="2" opacity="0.3"/>
+
+      <!-- Geometry clipped to circle -->
+      <g clip-path="url(#merkaba-clip)">
+        <polyline points="1003.5 412 901.9 235.9 601.6 756.2 1202.3 756.2 1102.9 584.1" fill="none" stroke="#c9a96e" stroke-width="3" stroke-miterlimit="10" fill-rule="evenodd" opacity="0.9"/>
+        <line x1="1102.9" y1="584.1" x2="1003.5" y2="412" stroke="#c9a96e" stroke-width="3" stroke-miterlimit="10" opacity="0.9"/>
+        <polyline points="800.3 756.1 901.1 930.8 901.9 932.2 1003.5 756.1" fill="none" stroke="#c9a96e" stroke-width="3" stroke-miterlimit="10" fill-rule="evenodd" opacity="0.9"/>
+        <polyline points="800.3 412 601.6 412 700.9 584.1" fill="none" stroke="#c9a96e" stroke-width="3" stroke-miterlimit="10" fill-rule="evenodd" opacity="0.9"/>
+        <polyline points="1102.9 584.1 1202.3 412 1003.5 412" fill="none" stroke="#c9a96e" stroke-width="3" stroke-miterlimit="10" fill-rule="evenodd" opacity="0.9"/>
+        <polygon points="901.5 756.2 1051.3 494.1 751.7 494.1 901.5 756.2" fill="none" stroke="#c9a96e" stroke-width="3" stroke-miterlimit="10" fill-rule="evenodd" opacity="0.75"/>
+        <line x1="601.6" y1="412" x2="901.5" y2="575.4" stroke="#c9a96e" stroke-width="3" stroke-miterlimit="10" opacity="0.75"/>
+        <line x1="901.9" y1="575.4" x2="1202.3" y2="412" stroke="#c9a96e" stroke-width="3" stroke-miterlimit="10" opacity="0.75"/>
+        <line x1="901.9" y1="575.4" x2="901.1" y2="932.2" stroke="#c9a96e" stroke-width="3" stroke-miterlimit="10" opacity="0.75"/>
+      </g>
+
+      <!-- Center dot -->
+      <circle cx="901.9" cy="575.4" r="10" fill="#c9a96e" opacity="0.9"/>
+
+      <!-- Outer circle rendered last, clean -->
+      <circle cx="901.9" cy="584" r="349" stroke="#c9a96e" stroke-width="4" opacity="0.7"/>
     </svg>
 
     <p class="hero-eyebrow">Resonance Architecture™</p>
