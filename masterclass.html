@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Master Manifestation Masterclass Thumbnail</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1280px;
+    height: 720px;
+    overflow: hidden;
+    background: #000;
+  }
+
+  .thumbnail {
+    width: 1280px;
+    height: 720px;
+    position: relative;
+    background: radial-gradient(ellipse at 50% 30%, #1a1a1a 0%, #0d0d0d 40%, #050505 100%);
+    overflow: hidden;
+    font-family: 'Cinzel', serif;
+  }
+
+  .bg-noise {
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    opacity: 0.4;
+  }
+
+  .center-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -55%);
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(ellipse, rgba(197, 160, 80, 0.1) 0%, rgba(197, 160, 80, 0.04) 40%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  .moon-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -58%);
+    width: 320px;
+    height: 320px;
+  }
+
+  .moon-svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 0 30px rgba(197, 160, 80, 0.25)) drop-shadow(0 0 60px rgba(197, 160, 80, 0.1));
+  }
+
+  .geometry-bg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -58%);
+    width: 600px;
+    height: 600px;
+    opacity: 0.07;
+  }
+
+  .rule-top {
+    position: absolute;
+    top: 72px;
+    left: 80px;
+    right: 80px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(197,160,80,0.6) 20%, rgba(197,160,80,0.6) 80%, transparent);
+  }
+
+  .corner {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+  }
+  .corner svg { width: 100%; height: 100%; }
+  .corner-tl { top: 28px; left: 28px; }
+  .corner-tr { top: 28px; right: 28px; transform: scaleX(-1); }
+  .corner-bl { bottom: 28px; left: 28px; transform: scaleY(-1); }
+  .corner-br { bottom: 28px; right: 28px; transform: scale(-1); }
+
+  .text-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding-bottom: 64px;
+  }
+
+  .title-main {
+    font-family: 'Cinzel', serif;
+    font-size: 68px;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.0;
+    letter-spacing: 0.05em;
+    text-shadow: 0 0 60px rgba(197,160,80,0.2), 0 2px 4px rgba(0,0,0,0.8);
+    margin-bottom: 6px;
+  }
+
+  .title-sub {
+    font-family: 'Cinzel', serif;
+    font-size: 28px;
+    font-weight: 400;
+    color: rgba(197, 160, 80, 0.9);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  .divider-line {
+    width: 120px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(197,160,80,0.5));
+  }
+  .divider-line.right {
+    background: linear-gradient(90deg, rgba(197,160,80,0.5), transparent);
+  }
+
+  .divider-diamond {
+    width: 6px;
+    height: 6px;
+    background: rgba(197,160,80,0.8);
+    transform: rotate(45deg);
+  }
+
+  .instructor {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    font-weight: 300;
+    font-style: italic;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.12em;
+  }
+
+  .top-text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding-top: 44px;
+  }
+
+  .sanctum-logo {
+    font-family: 'Cinzel', serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.5em;
+    color: rgba(197, 160, 80, 0.5);
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+<div class="thumbnail">
+  <div class="bg-noise"></div>
+  <div class="center-glow"></div>
+
+  <!-- Sacred geometry background -->
+  <svg class="geometry-bg" viewBox="0 0 600 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="300" cy="300" r="280" stroke="#C5A050" stroke-width="0.5"/>
+    <circle cx="300" cy="300" r="200" stroke="#C5A050" stroke-width="0.5"/>
+    <circle cx="300" cy="300" r="120" stroke="#C5A050" stroke-width="0.5"/>
+    <line x1="300" y1="20" x2="300" y2="580" stroke="#C5A050" stroke-width="0.5"/>
+    <line x1="102" y1="102" x2="498" y2="498" stroke="#C5A050" stroke-width="0.5"/>
+    <line x1="498" y1="102" x2="102" y2="498" stroke="#C5A050" stroke-width="0.5"/>
+    <polygon points="300,60 524,180 524,420 300,540 76,420 76,180" stroke="#C5A050" stroke-width="0.5" fill="none"/>
+    <polygon points="300,540 524,420 524,180 300,60 76,180 76,420" stroke="#C5A050" stroke-width="0.3" fill="none" transform="rotate(180 300 300)"/>
+  </svg>
+
+  <!-- Thoth's Crescent Moon -->
+  <div class="moon-container">
+    <svg class="moon-svg" viewBox="0 0 320 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="moonGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#C5A050" stop-opacity="0.15"/>
+          <stop offset="100%" stop-color="#C5A050" stop-opacity="0"/>
+        </radialGradient>
+        <linearGradient id="moonGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#E8D5A0"/>
+          <stop offset="40%" stop-color="#C5A050"/>
+          <stop offset="100%" stop-color="#8B6F2E"/>
+        </linearGradient>
+        <filter id="glow">
+          <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+          <feMerge>
+            <feMergeNode in="coloredBlur"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+      </defs>
+
+      <circle cx="160" cy="160" r="150" fill="url(#moonGlow)"/>
+
+      <!-- Crescent: bowl opens UP -->
+      <path d="
+        M 54.8,192.2
+        A 110,110 0 0,1 265.2,192.2
+        A 120,120 0 0,0 54.8,192.2
+        Z
+      "
+        fill="none"
+        stroke="url(#moonGrad)"
+        stroke-width="1.5"
+        filter="url(#glow)"
+        opacity="0.95"
+        transform="scale(1,-1) translate(0,-320)"
+      />
+
+      <line x1="160" y1="10" x2="160" y2="178" stroke="#C5A050" stroke-width="1" opacity="0.7"/>
+
+      <!-- Seven chakra circles spaced from y=10 to y=178, step=28 -->
+      <circle cx="160" cy="10"  r="6" fill="#0d0d0d" stroke="#E8D5A0" stroke-width="1.5" opacity="1"/>
+      <circle cx="160" cy="38"  r="6" fill="#0d0d0d" stroke="#C5A050" stroke-width="1" opacity="0.9"/>
+      <circle cx="160" cy="66"  r="6" fill="#0d0d0d" stroke="#C5A050" stroke-width="1" opacity="0.9"/>
+      <circle cx="160" cy="94"  r="7" fill="#0d0d0d" stroke="#4a9b6f" stroke-width="1.5" opacity="1"/>
+      <circle cx="160" cy="122" r="6" fill="#0d0d0d" stroke="#C5A050" stroke-width="1" opacity="0.9"/>
+      <circle cx="160" cy="150" r="6" fill="#0d0d0d" stroke="#C5A050" stroke-width="1" opacity="0.9"/>
+      <circle cx="160" cy="178" r="6" fill="#0d0d0d" stroke="#C5A050" stroke-width="1" opacity="0.9"/>
+
+      <circle cx="80" cy="100" r="1.5" fill="#C5A050" opacity="0.5"/>
+      <circle cx="255" cy="130" r="1" fill="#C5A050" opacity="0.4"/>
+      <circle cx="70" cy="200" r="1" fill="#C5A050" opacity="0.3"/>
+      <circle cx="260" cy="220" r="1.5" fill="#C5A050" opacity="0.4"/>
+      <circle cx="100" cy="260" r="1" fill="#C5A050" opacity="0.3"/>
+    </svg>
+  </div>
+
+  <!-- Horizontal rule under header -->
+  <div class="rule-top"></div>
+
+  <!-- Corner ornaments -->
+  <div class="corner corner-tl">
+    <svg viewBox="0 0 40 40" fill="none">
+      <line x1="0" y1="40" x2="0" y2="0" stroke="#C5A050" stroke-width="1" opacity="0.6"/>
+      <line x1="0" y1="0" x2="40" y2="0" stroke="#C5A050" stroke-width="1" opacity="0.6"/>
+      <circle cx="0" cy="0" r="3" fill="#C5A050" opacity="0.6"/>
+    </svg>
+  </div>
+  <div class="corner corner-tr">
+    <svg viewBox="0 0 40 40" fill="none">
+      <line x1="0" y1="40" x2="0" y2="0" stroke="#C5A050" stroke-width="1" opacity="0.6"/>
+      <line x1="0" y1="0" x2="40" y2="0" stroke="#C5A050" stroke-width="1" opacity="0.6"/>
+      <circle cx="0" cy="0" r="3" fill="#C5A050" opacity="0.6"/>
+    </svg>
+  </div>
+  <div class="corner corner-bl">
+    <svg viewBox="0 0 40 40" fill="none">
+      <line x1="0" y1="40" x2="0" y2="0" stroke="#C5A050" stroke-width="1" opacity="0.6"/>
+      <line x1="0" y1="0" x2="40" y2="0" stroke="#C5A050" stroke-width="1" opacity="0.6"/>
+      <circle cx="0" cy="0" r="3" fill="#C5A050" opacity="0.6"/>
+    </svg>
+  </div>
+  <div class="corner corner-br">
+    <svg viewBox="0 0 40 40" fill="none">
+      <line x1="0" y1="40" x2="0" y2="0" stroke="#C5A050" stroke-width="1" opacity="0.6"/>
+      <line x1="0" y1="0" x2="40" y2="0" stroke="#C5A050" stroke-width="1" opacity="0.6"/>
+      <circle cx="0" cy="0" r="3" fill="#C5A050" opacity="0.6"/>
+    </svg>
+  </div>
+
+  <!-- Top Sanctum brand -->
+  <div class="top-text">
+    <div class="sanctum-logo">Sanctum Alchemy</div>
+  </div>
+
+  <!-- Main text -->
+  <div class="text-container">
+    <div class="title-main">MASTER</div>
+    <div class="title-sub">Manifestation</div>
+    <div class="divider">
+      <div class="divider-line"></div>
+      <div class="divider-diamond"></div>
+      <div class="divider-line right"></div>
+    </div>
+    <div class="instructor">with [Your Name]</div>
+  </div>
+
+</div>
+</body>
+</html>
