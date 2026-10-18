@@ -107,7 +107,6 @@
     height: 120px;
     margin: 0 auto 48px;
     opacity: 0.85;
-    animation: rotate-slow 60s linear infinite;
   }
 
 
@@ -130,7 +129,7 @@
 
   .hero-title {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(52px, 7vw, 100px);
+    font-size: clamp(38px, 5.2vw, 76px);
     font-weight: 300;
     line-height: 1.0;
     letter-spacing: -0.01em;
@@ -179,16 +178,21 @@
   .cta-primary {
     display: inline-block;
     font-family: 'Cinzel', serif;
-    font-size: 11px;
-    letter-spacing: 0.35em;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--obsidian);
     background: var(--gold);
-    padding: 18px 48px;
+    border-radius: 4px;
+    box-shadow: 0 6px 24px rgba(201,169,110,0.28);
+    padding: 22px 36px;
     text-decoration: none;
     transition: all 0.3s;
     opacity: 0;
-    animation: fade-up 1s ease 1.3s forwards;
+    animation: fade-up 1s ease 1.3s forwards;    max-width: min(440px, 88vw);
+    line-height: 1.5;
+    text-align: center;
   }
 
   .cta-primary:hover {
@@ -865,7 +869,7 @@
   /* ---- RESPONSIVE ---- */
   @media (max-width: 768px) {
     nav { padding: 20px 24px; }
-    .nav-links { display: none; }
+    .nav-links li:not(:last-child) { display: none; }
     .problem-grid { grid-template-columns: 1fr; }
     .pillars { grid-template-columns: 1fr; }
     .results-columns { grid-template-columns: 1fr; gap: 40px; }
@@ -875,6 +879,44 @@
     .ifyou, .problem, .epiphany, .framework, .architecture, .results, .cta-section { padding: 80px 24px; }
     .hero { padding: 100px 24px 60px; }
   }
+
+  /* ---- BANDS: dark / warm-dark / cream, repeating in page order (experiment) ---- */
+  /* order: 1 hero dark, 2 pain warm, 3 how cream, 4 story dark, 5 start warm, 6 free cream, 7 review dark, 8 close warm */
+  nav { background: rgba(10,9,8,0.94); }
+  .hero { background: #0a0908; }
+  .problem { background: #2c261d; }
+  #how { background: #f0e8d8; }
+  .epiphany { background: #0a0908; }
+  #start { background: #2c261d; }
+  #free { background: #f0e8d8; }
+  .results { background: #0a0908; }
+  #call { background: #2c261d; }
+
+  /* cream bands (How It Works, Start Free) need dark type */
+  #how .section-eyebrow, #free .section-eyebrow { color: #6f5528; }
+  #how .section-rule, #free .section-rule { background: #8a6e3e; }
+  #how .pillar { background: #e6dcc6; }
+  #how .pillar:hover { background: #dccfb4; }
+  #how .pillar-roman { color: #8a6e3e; }
+  #how .pillar-name { color: #2a2218; }
+  #how .pillar-desc { color: rgba(42,34,24,0.8); }
+  #free .section-title { color: #2a2218; }
+  #free .section-title em { color: #6f5528; }
+  #free::before { background: none; }
+  /* Where To Start: shared rows so names, descriptions and buttons line up across the three cards */
+  #start .pillars { grid-template-rows: auto auto auto auto; }
+  #start .pillar { display: grid; grid-row: span 4; grid-template-rows: subgrid; justify-items: center; align-items: start; row-gap: 0; }
+  #start .pillar-name { align-self: center; }
+  #start .pillar-desc { margin-bottom: 28px; }
+  #start .pillar .cta-secondary { margin: 0 !important; align-self: end; }
+  /* nav button */
+  .nav-links { align-items: center; }
+  .nav-links a.nav-cta { font-family: 'Cinzel', serif; font-weight: 600; font-size: 12px; letter-spacing: 0.2em; color: var(--obsidian); background: var(--gold); padding: 12px 26px; border-radius: 4px; box-shadow: 0 4px 16px rgba(201,169,110,0.3); }
+  .nav-links a.nav-cta:hover { color: var(--obsidian); background: var(--gold-light); }
+  .nav-links a.nav-cta { white-space: nowrap; display: inline-block; }
+  @media (max-width: 768px) { .nav-links a.nav-cta { padding: 10px 16px; font-size: 11px; letter-spacing: 0.14em; } }
+  footer a { color: rgba(240,232,216,0.5); text-decoration: none; font-size: 11px; letter-spacing: 0.1em; }
+  footer a:hover { color: var(--gold-light); }
 </style>
 </head>
 <body>
@@ -885,11 +927,9 @@
 <nav>
   <span class="nav-logo">Everyday Alchemy</span>
   <ul class="nav-links">
-    <li><a href="#recognition">The Work</a></li>
-    <li><a href="#framework">Framework</a></li>
-    <li><a href="#architecture">Architecture</a></li>
-    <li><a href="#transformation">Results</a></li>
-    <li><a href="#call">Apply Now</a></li>
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#story">My Story</a></li>
+    <li><a href="#call" class="nav-cta">Start Now</a></li>
   </ul>
 </nav>
 
@@ -928,349 +968,138 @@
       <circle cx="901.9" cy="584" r="349" stroke="#c9a96e" stroke-width="4" opacity="0.7"/>
     </svg>
 
-    <p class="hero-eyebrow">Resonance Architecture™</p>
-    <h1 class="hero-title">You don't need<br>to manifest <em>harder.</em></h1>
-    <p class="hero-subtitle">You need to build something that holds.</p>
+    <h1 class="hero-title">Stop wondering when your manifestation will show up.<br><em>Change your beliefs for good.</em></h1>
+    <p class="hero-subtitle">Get the life you've been waiting for.</p>
     <div class="hero-divider"></div>
-    <p class="hero-lead">
-      You've proven manifestation works. You've had wins. You know how to get into the state. 
-      But the life you actually want — the whole picture — still isn't here. 
-      And nothing you've been taught explains why.
-    </p>
-    <a href="#call" class="cta-primary">Apply Now</a>
+    <a href="#call" class="cta-primary">Find out why the life you want hasn&rsquo;t manifested yet &rarr;</a>
   </div>
 </section>
 
-<!-- IF YOU ARE -->
-<section class="ifyou" id="recognition">
-  <div class="ifyou-inner">
-    <div class="reveal">
-      <div class="section-rule"></div>
-      <p class="section-eyebrow">Recognition</p>
-      <h2 class="section-title">If you are a<br><em>7-figure manifestor</em>...</h2>
-    </div>
-
-    <p class="ifyou-intro reveal" style="transition-delay: 0.1s">
-      Read these slowly. Something here will feel like it was written for you.
-    </p>
-
-    <div class="ifyou-list">
-      <div class="ifyou-item reveal">
-        <span class="ifyou-num">01</span>
-        <p class="ifyou-text">...and it still hasn't come together the way you dreamed about — like you got the income but not the life, and nothing seems to fix it.</p>
-      </div>
-      <div class="ifyou-item reveal">
-        <span class="ifyou-num">02</span>
-        <p class="ifyou-text">...who keeps manifesting pieces of what you want but they never add up to the whole picture you've been holding, and you're starting to wonder if you're doing something fundamentally wrong.</p>
-      </div>
-      <div class="ifyou-item reveal">
-        <span class="ifyou-num">03</span>
-        <p class="ifyou-text">...who thought getting here would feel like freedom. But instead you're more trapped than ever, working harder, stressed more — and the techniques that got you here have stopped working.</p>
-      </div>
-      <div class="ifyou-item reveal">
-        <span class="ifyou-num">04</span>
-        <p class="ifyou-text">...who has direct proof manifestation works — you've seen it land — but now when you go for the big shifts, nothing happens. And you're exhausted from trying the same things harder.</p>
-      </div>
-      <div class="ifyou-item reveal">
-        <span class="ifyou-num">05</span>
-        <p class="ifyou-text">...who manifested the business, the income, the external success — and you're still anxious, still reactive, still waiting for it all to collapse. Wondering why the inner stability never came with the outer results.</p>
-      </div>
-      <div class="ifyou-item reveal">
-        <span class="ifyou-num">06</span>
-        <p class="ifyou-text">...who knows something is missing in how you're being taught to manifest — because you're doing everything right, and your life still doesn't feel the way you thought it would when you got here.</p>
-      </div>
-    </div>
-
-    <div class="ifyou-close reveal">
-      <p>Then you're not broken. You're not missing anything.<br>You're trying to build a coherent life using incomplete tools.</p>
-      <strong>This is the work of Resonance Architecture™</strong>
-    </div>
-  </div>
-</section>
-
-<!-- THE PROBLEM -->
-<section class="problem">
+<!-- PAIN -->
+<section class="problem" id="pain">
   <div class="problem-inner">
     <div class="reveal">
       <div class="section-rule"></div>
-      <p class="section-eyebrow">The Real Problem</p>
-      <h2 class="section-title">What you've <em>tried</em></h2>
-    </div>
-
-    <div class="problem-grid">
-      <div class="problem-card reveal">
-        <span class="problem-card-num">Tried</span>
-        <p>Robotic affirmations — saying the same statement 1,000 times until your mind goes numb, hoping this time it will finally stick.</p>
-      </div>
-      <div class="problem-card reveal">
-        <span class="problem-card-num">Tried</span>
-        <p>SATS every single night, visualizing in perfect detail, feeling it real, doing everything Neville said — and waking up to the same life, month after month.</p>
-      </div>
-      <div class="problem-card reveal">
-        <span class="problem-card-num">Tried</span>
-        <p>$10K, $15K manifestation coaches who gave you the same techniques with different branding — and blamed your resistance when it didn't work.</p>
-      </div>
-      <div class="problem-card reveal">
-        <span class="problem-card-num">Tried</span>
-        <p>$15K retreats in Sedona, Bali, Costa Rica — doing breathwork and ceremony, hoping this time you'd finally discover what was blocking you. Only to come home and watch the clarity fade within weeks.</p>
-      </div>
-      <div class="problem-card reveal">
-        <span class="problem-card-num">Tried</span>
-        <p>Meditating for hours trying to "get into the state" — chasing that feeling of alignment you've touched before, knowing it's possible, but unable to sustain it.</p>
-      </div>
-      <div class="problem-card reveal">
-        <span class="problem-card-num">Tried</span>
-        <p>"Persisting" through doubt and evidence — told that the only reason it hasn't worked is because you gave up too soon. Until you're exhausted and starting to wonder if persistence is just another word for denial.</p>
-      </div>
-    </div>
-
-    <div class="problem-reveal reveal">
-      <p>Here's what no one is telling you:</p>
-      <p class="reveal-line">You're not accessing wrong.<br>You're just not architecting.</p>
+      <p class="section-eyebrow">Sound Familiar?</p>
+      <h2 class="section-title">Wondering when it will show up.<br>Spiraling when reality disagrees.<br><em>Not sure you're doing it right.</em></h2>
     </div>
   </div>
 </section>
 
-<!-- EPIPHANY / STORY -->
+<!-- HOW IT WORKS: draft copy, still being worked -->
+<section class="framework" id="how">
+  <div class="framework-inner">
+    <div class="reveal">
+      <div class="section-rule"></div>
+      <p class="section-eyebrow">How It Works</p>
+    </div>
+    <div class="pillars">
+      <div class="pillar reveal">
+        <span class="pillar-roman">I</span>
+        <div class="pillar-name">Stop the Spiral</div>
+      </div>
+      <div class="pillar reveal" style="transition-delay: 0.15s">
+        <span class="pillar-roman">II</span>
+        <div class="pillar-name">End the Doubt</div>
+      </div>
+      <div class="pillar reveal" style="transition-delay: 0.30s">
+        <span class="pillar-roman">III</span>
+        <div class="pillar-name">Know What to Do Next</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STORY -->
 <section class="epiphany" id="story">
   <div class="epiphany-inner">
     <div class="reveal">
       <div class="section-rule"></div>
-      <p class="section-eyebrow">The Epiphany</p>
+      <p class="section-eyebrow">My Story</p>
     </div>
 
-    <p class="epiphany-pull reveal">
-      "There is no one to change<br>but <em>yourself.</em>"
-    </p>
+    <div style="width: min(1000px, 92vw); margin: 0 0 72px calc(50% - min(500px, 46vw));">
+      <p class="epiphany-pull reveal" style="margin-bottom: 0;">If you've done everything right and still feel stuck&hellip;</p>
+      <div style="height: 57px;"></div>
+      <p class="epiphany-pull reveal" style="margin-bottom: 0;">I can help.</p>
+      <div style="height: 57px;"></div>
+      <p class="epiphany-pull reveal" style="margin-bottom: 0;"><em>Because I've stood exactly in that same spot.</em></p>
+    </div>
 
     <div class="story-block">
       <p class="story-p drop reveal">
-        I was an entrepreneur. Second AI startup. Working as a server at a brewery to pay bills while building it. Business going sideways. Marriage going sideways. Years of manifesting — affirmations, SATS, scripting, imaginal scenes — and nothing was moving.
+        There I was, six years into my deep spiritual transformation, running my second AI startup. Working as a server at a brewery to pay bills while building it. Business going sideways. Marriage ended.
+      </p>
+      <p class="story-p drop reveal">
+        And the life I wanted still hadn't manifested.
       </p>
       <p class="story-p reveal">
-        I had manifested things. A $5k payment. A dismissed ticket. A cup of coffee. But the big ones — the business, the relationship, the life — nothing. I kept doing everything they told me to do. And I kept getting more of the same.
+        Then someone in my group said, <em>"There is no one to change but yourself."</em>
       </p>
       <p class="story-p reveal">
-        Then I found Neville. Devoured "Feeling is the Secret." <em>Finally</em>, I thought. The missing piece. Except when I finished it... I'd already known all of it. For years. And it still wasn't working.
+        That&rsquo;s the moment I stopped waiting for reality to catch up. It&rsquo;s the moment you start changing your internal resonance, your vibrations, that you&rsquo;re broadcasting from on a core level.
+      </p>
+      <p class="story-p reveal">
+        You can&rsquo;t change physical reality from the same mind that created it. Resonance Architecture&trade; isn&rsquo;t another tool to try harder. It&rsquo;s choosing a completely different vibration.
       </p>
       <div class="story-callout reveal">
-        "If I know all this and this is 'the way' — then clearly, something is off."
+        You can too. Change your beliefs for good, with Resonance Architecture&trade;.
       </div>
-      <p class="story-p reveal">
-        Later that day, in a Neville chat group, someone named Josie said something she'd said a thousand times before: <em>"There is no one to change but yourself."</em>
-      </p>
-      <p class="story-p reveal">
-        And I sat there looking at those words. And for the first time, something tumbled loose. I could hear the pebble that starts the avalanche.
-      </p>
-      <p class="story-p reveal">
-        <em>What if the entire approach I've been taking to this is incomplete?</em>
-      </p>
-      <p class="story-p reveal">
-        I asked myself: if I had everything I wanted — who would I be? What would I feel? What would I know? What would I do?
-      </p>
-      <p class="story-p reveal">
-        And I realized I had been visiting the frequencies. Briefly. Then leaving. I had no architecture to hold them.
-      </p>
-      <div class="story-callout reveal">
-        "You have what you hold."
-      </div>
-      <p class="story-p reveal">
-        That was the beginning of Resonance Architecture. Not a new technique. The operating system underneath every technique that ever worked.
-      </p>
     </div>
   </div>
 </section>
 
-<!-- FRAMEWORK -->
-<section class="framework" id="framework">
+<!-- WHERE TO START: placeholder structure, copy to be written -->
+<section class="framework" id="start">
   <div class="framework-inner">
     <div class="reveal">
       <div class="section-rule"></div>
-      <p class="section-eyebrow">The Framework</p>
-      <h2 class="section-title">Harmonize.<br><em>Crystalize. Alchemize.</em></h2>
+      <p class="section-eyebrow">Where To Start</p>
     </div>
-
-    <p class="framework-intro reveal">
-      Three movements. Not steps. Not a system to execute. A way of working with your field that builds resonance that stays — instead of a state you visit and lose.
-    </p>
-
     <div class="pillars">
       <div class="pillar reveal">
         <span class="pillar-roman">I</span>
-        <div class="pillar-name">Harmonize</div>
-        <p class="pillar-desc">Attune to the harmonic of the life you want. Not by visualizing it. By becoming the person who already lives there — in thought, feeling, and being. Here, now.</p>
+        <div class="pillar-name">Find out why the life you want hasn&rsquo;t manifested yet</div>
+        <p class="pillar-desc">Stop wondering.</p>
+        <a href="#" class="cta-secondary" style="margin: 28px 0 0;">Start Now</a>
       </div>
       <div class="pillar reveal" style="transition-delay: 0.15s">
         <span class="pillar-roman">II</span>
-        <div class="pillar-name">Crystalize</div>
-        <p class="pillar-desc">Set the structure. What your field holds is what your life reflects. We build the internal architecture that sustains the frequency — so it's there when you're answering emails, not just when you're meditating.</p>
+        <div class="pillar-name">The Cohort</div>
+        <p class="pillar-desc">Change your beliefs for good.</p>
+        <a href="#" class="cta-secondary" style="margin: 28px 0 0;">Start Now</a>
       </div>
       <div class="pillar reveal" style="transition-delay: 0.3s">
         <span class="pillar-roman">III</span>
-        <div class="pillar-name">Alchemize</div>
-        <p class="pillar-desc">Transform the blocks not by clearing them but by transmuting them — using your alchemy tools to wire each harmonic into your energetic system. This is not repetition. It is entrainment.</p>
+        <div class="pillar-name">The Mastermind</div>
+        <p class="pillar-desc">Design the life you&rsquo;ve always wanted.</p>
+        <a href="#" class="cta-secondary" style="margin: 28px 0 0;">Start Now</a>
       </div>
-    </div>
-
-    <div class="problem-reveal reveal" style="margin-top: 72px; text-align: center; max-width: 640px; margin-left: auto; margin-right: auto;">
-      <p style="font-family: 'Cormorant Garamond', serif; font-size: 20px; line-height: 1.7; color: rgba(240,232,216,0.75); margin-bottom: 16px;">
-        You've been taught how to access the feeling. No one has taught you how to build the field that holds it. That's the entire difference. That's why it flickers.
-      </p>
     </div>
   </div>
 </section>
 
-<!-- THE ARCHITECTURE (NEW SECTION) -->
-<section class="architecture" id="architecture">
-  <div class="architecture-inner">
-    <div class="reveal">
-      <div class="section-rule"></div>
-      <p class="section-eyebrow">The Architecture</p>
-      <h2 class="section-title">The structure beneath<br><em>every technique that ever worked.</em></h2>
-    </div>
-
-    <p class="architecture-intro reveal">
-      Manifestation methods teach you how to access a state. But states fade. A life holds when the structure underneath the state is stable. Resonance Architecture stabilizes four fundamental harmonics — the load-bearing elements of identity itself.
-    </p>
-
-    <!-- Tetrahedron SVG -->
-    <div class="tetrahedron-wrap reveal">
-      <svg class="tetrahedron-svg" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!--
-          3D Tetrahedron wireframe — matching reference drawing
-          Apex (Having):        A = (150, 40)
-          Base front-left:      B = (50,  230)
-          Base front-right:     C = (250, 230)
-          Base back-center:     D = (150, 195)   ← the inner "back" vertex of base triangle
-          Clarity axis: vertical dashed from apex down through base centroid
-        -->
-
-        <!-- Outer face edges (solid) -->
-        <line x1="150" y1="40"  x2="50"  y2="230" stroke="#c9a96e" stroke-width="1"   opacity="0.85"/>
-        <line x1="150" y1="40"  x2="250" y2="230" stroke="#c9a96e" stroke-width="1"   opacity="0.85"/>
-        <line x1="50"  y1="230" x2="250" y2="230" stroke="#c9a96e" stroke-width="1"   opacity="0.85"/>
-
-        <!-- Back base edges from apex to back vertex (dashed — hidden lines) -->
-        <line x1="150" y1="40"  x2="150" y2="195" stroke="#c9a96e" stroke-width="0.6" stroke-dasharray="4 6" opacity="0.5"/>
-
-        <!-- Base triangle inner edges (dashed — hidden lines) -->
-        <line x1="50"  y1="230" x2="150" y2="195" stroke="#c9a96e" stroke-width="0.6" stroke-dasharray="4 6" opacity="0.5"/>
-        <line x1="250" y1="230" x2="150" y2="195" stroke="#c9a96e" stroke-width="0.6" stroke-dasharray="4 6" opacity="0.5"/>
-
-        <!-- Clarity axis — dashed vertical from above apex down through base centroid -->
-        <!-- Base centroid of front base: x=150, y = (230+230+195)/3 ≈ 218 -->
-        <line x1="150" y1="10"  x2="150" y2="255" stroke="#c9a96e" stroke-width="0.5" stroke-dasharray="4 6" opacity="0.4"/>
-
-        <!-- Vertex dots -->
-        <circle cx="150" cy="40"  r="3.5" fill="#e2c98a" opacity="0.95"/>
-        <circle cx="50"  cy="230" r="2.5" fill="#c9a96e" opacity="0.8"/>
-        <circle cx="250" cy="230" r="2.5" fill="#c9a96e" opacity="0.8"/>
-        <circle cx="150" cy="195" r="2.5" fill="#c9a96e" opacity="0.6"/>
-
-        <!-- Labels -->
-        <text x="150" y="28"  fill="#e2c98a" font-size="8.5" font-family="'Cinzel', serif" text-anchor="middle" letter-spacing="3" opacity="0.95">HAVING</text>
-        <text x="26"  y="248" fill="#c9a96e" font-size="8"   font-family="'Cinzel', serif" text-anchor="middle" letter-spacing="2" opacity="0.75">BEING</text>
-        <text x="274" y="248" fill="#c9a96e" font-size="8"   font-family="'Cinzel', serif" text-anchor="middle" letter-spacing="2" opacity="0.75">KNOWING</text>
-        <text x="150" y="213" fill="#c9a96e" font-size="8"   font-family="'Cinzel', serif" text-anchor="middle" letter-spacing="2" opacity="0.65">DOING</text>
-      </svg>
-    </div>
-
-    <!-- Four harmonics -->
-    <div class="harmonics-grid">
-      <div class="harmonic-card reveal">
-        <span class="harmonic-label">Base Harmonic — I</span>
-        <div class="harmonic-name">Being</div>
-        <p class="harmonic-desc">Not "I am the person who has X." The harmonic of existence itself. <em>I am. I exist. That is unquestioned.</em> When this harmonic stabilizes, a massive amount of internal resistance disappears — because the system stops spending energy on whether it's allowed to occupy the space it's in.</p>
-      </div>
-      <div class="harmonic-card reveal" style="transition-delay: 0.1s">
-        <span class="harmonic-label">Base Harmonic — II</span>
-        <div class="harmonic-name">Knowing</div>
-        <p class="harmonic-desc">Not "I know how to build a 10,000-user company." The harmonic of certainty itself — clarity, recognition, the felt sense of understanding. When knowing is stable, decisions come from ground rather than grasping. The system stops looking for permission.</p>
-      </div>
-      <div class="harmonic-card reveal" style="transition-delay: 0.2s">
-        <span class="harmonic-label">Base Harmonic — III</span>
-        <div class="harmonic-name">Doing</div>
-        <p class="harmonic-desc">If you want groceries, you go get them. Doing is the harmonic of agency — the natural movement of energy into the world. Not effort. Not forcing. The aligned action that becomes obvious once the other harmonics are stable. Without it, the geometry collapses.</p>
-      </div>
-      <div class="harmonic-card reveal" style="transition-delay: 0.3s">
-        <span class="harmonic-label">Apex Harmonic</span>
-        <div class="harmonic-name harmonic-apex">Having</div>
-        <p class="harmonic-desc">Not wanting. Not hoping. The harmonic of possession and presence — the felt reality of something being yours. Having sits at the apex, stabilized by the base triangle. When all three harmonics beneath it align, having stops feeling like a goal. It becomes a natural consequence of the architecture.</p>
-      </div>
-    </div>
-
-    <!-- Identity Bands -->
-    <div class="identity-bands reveal">
-      <div class="identity-bands-header">
-        <p>Identity Architecture</p>
-        <h3>Your life expands<br>when <em>the structure expands.</em></h3>
-      </div>
-      <div class="identity-band-list">
-        <div class="identity-band">
-          <span class="band-roman">I</span>
-          <div class="band-name">Present Self</div>
-          <p class="band-desc">The identity that currently feels normal. Results here feel ordinary and unsurprising. This is where you live right now.</p>
-        </div>
-        <div class="identity-band">
-          <span class="band-roman">II</span>
-          <div class="band-name">Unfolding Self</div>
-          <p class="band-desc">Just outside the present. Slightly expanded but believable. Manifestations reliably appear when they fall into this band — because the identity shift is real without being destabilizing.</p>
-        </div>
-        <div class="identity-band">
-          <span class="band-roman">III</span>
-          <div class="band-name">Visionary Self</div>
-          <p class="band-desc">Aspirational. Inspiring. The person you can imagine becoming, but haven't yet built the architecture to inhabit. Not where you aim — where you grow toward.</p>
-        </div>
-        <div class="identity-band">
-          <span class="band-roman">IV</span>
-          <div class="band-name">Audacious Self</div>
-          <p class="band-desc">The BHAG. The horizon. Not the next step — the direction. The audacious vision guides expansion even when it's far outside your current field. It's the outer tetrahedron. Everything else nests inside it.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="architecture-close reveal">
-      <p>Most systems try to pull you to the audacious vision directly.<br>Resonance Architecture builds the nested structure that gets you there.</p>
-      <span class="arch-line">You don't jump identities. You expand them.</span>
+<!-- FREE ENTRY (quiz): TODO add the quiz link -->
+<section class="cta-section" id="free">
+  <div style="position: relative; z-index: 1;">
+    <div class="section-rule"></div>
+    <h2 class="section-title">Not sure where to begin?<br><em>Start here.</em></h2>
+    <div style="margin-top: 40px;">
+      <a href="#" class="cta-primary">Find out why the life you want hasn&rsquo;t manifested yet &rarr;</a>
     </div>
   </div>
 </section>
 
-<!-- TRANSFORMATION -->
+<!-- REVIEW: Brandi, public review 25 Aug 2026 (she knows reviews are used; add screenshot) -->
 <section class="results" id="transformation">
   <div class="results-inner">
     <div class="reveal">
       <div class="section-rule"></div>
-      <p class="section-eyebrow">What Actually Changes</p>
-      <h2 class="section-title">You stop chasing <em>the feeling.</em><br>You build something that holds.</h2>
+      <p class="section-eyebrow">In Their Own Words</p>
     </div>
-
-    <div class="results-columns">
-      <div class="results-col reveal">
-        <h3>Without Architecture</h3>
-        <ul class="results-list">
-          <li>Manifesting works sometimes, then goes quiet for no reason you can track</li>
-          <li>You access alignment in meditation, lose it before lunch</li>
-          <li>Every "breakthrough" fades within days or weeks</li>
-          <li>The techniques work for small things and go silent for the ones that matter</li>
-          <li>You keep suspecting it's your blocks, your trauma, your resistance</li>
-        </ul>
-      </div>
-      <div class="results-col reveal" style="transition-delay: 0.2s">
-        <h3>With Architecture</h3>
-        <ul class="results-list">
-          <li>Your field is magnetic — on always, not just during meditation</li>
-          <li>The wobble stabilizes. You stop being thrown by events that previously sent you spiraling</li>
-          <li>New opportunities, relationships, and income align — because your resonance structure called them in</li>
-          <li>The techniques you already know work better than they ever have</li>
-          <li>You stop blaming yourself. You know exactly what to work with and how.</li>
-        </ul>
-      </div>
-    </div>
-
     <div class="results-close reveal">
-      <p>"When my grandmother passed, I was able to identify exactly what I was feeling, walk through it, and sit with it. The grief moved through cleanly. The harmonic structure held — even there."</p>
-      <p style="font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.3em; color: var(--gold-dim);">— Sanctum Student</p>
+      <p style="font-size: 21px;">&ldquo;I have been doing this type of work since a little over a year and I would not change a thing. Every day alchemy has helped me become one with myself, I&rsquo;ve learned my values, what I deserve, my worth, and most importantly how to love myself unconditionally. This has been the truth for me. I have brought things into my life by just &ldquo;being&rdquo; trusting my process and acting on my highest excitement. Everyday I get closer to my truest self, and it&rsquo;s &ldquo;Everyday is Alchemy&rdquo; That has made that happen for me.&rdquo;</p>
+      <p style="font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.3em; color: var(--gold-dim);">&mdash; BRANDI G.</p>
     </div>
   </div>
 </section>
@@ -1279,22 +1108,18 @@
 <section class="cta-section" id="call">
   <div style="position: relative; z-index: 1;">
     <div class="section-rule"></div>
-    <p class="section-eyebrow">Begin Here</p>
-    <h2 class="section-title">Your Resonance<br><em>Architecture Blueprint</em></h2>
-    <p>Tell us where you are. We'll tell you if we're the right fit. If you're accepted, we build your Resonance Architecture blueprint together — and get to work.</p>
-    <div>
-      <a href="#" class="cta-primary">Apply Now</a>
-      <a href="#recognition" class="cta-secondary">Start Over</a>
+    <p class="section-eyebrow">Start Free</p>
+    <h2 class="section-title">Find out why the life you want hasn&rsquo;t <em>manifested yet.</em></h2>
+    <div style="margin-top: 40px;">
+      <a href="#" class="cta-primary">Find out why the life you want hasn&rsquo;t manifested yet &rarr;</a>
     </div>
-    <p style="margin-top: 40px; font-size: 12px; letter-spacing: 0.1em; color: rgba(240,232,216,0.25);">
-      This is not for everyone. If you are ready to stop flickering and build something that holds — apply.
-    </p>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
   <span class="nav-logo">Everyday Alchemy</span>
+  <p><a href="privacy.html">Privacy</a> &nbsp;·&nbsp; <a href="terms.html">Terms</a> &nbsp;·&nbsp; <a href="disclaimer.html">Disclaimer</a></p>
   <p>© 2026 Everyday Alchemy — Resonance Architecture™. All rights reserved.</p>
 </footer>
 
