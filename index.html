@@ -904,8 +904,8 @@
   #free .section-title em { color: #6f5528; }
   #free::before { background: none; }
   /* Where To Start: shared rows so names, descriptions and buttons line up across the three cards */
-  #start .pillars { grid-template-rows: auto auto auto auto; }
-  #start .pillar { display: grid; grid-row: span 4; grid-template-rows: subgrid; justify-items: center; align-items: start; row-gap: 0; }
+  #start .pillars { grid-template-rows: auto auto auto auto auto; }
+  #start .pillar { display: grid; grid-row: span 5; grid-template-rows: subgrid; justify-items: center; align-items: start; row-gap: 0; }
   #start .pillar-name { align-self: center; }
   #start .pillar-desc { margin-bottom: 28px; }
   #start .pillar .cta-secondary { margin: 0 !important; align-self: end; }
@@ -923,6 +923,39 @@
   .promo-bar:hover { background: #fff8e8; }
   nav { top: var(--promo-h) !important; }
   @media (max-width: 768px) { :root { --promo-h: 56px; } .promo-bar { font-size: 14px; } }
+  /* story photo: gold frame offset behind the picture */
+  .story-photo { position: relative; width: min(900px, 86vw); margin: 0 0 80px calc(50% - min(450px, 43vw)); }
+  .story-photo::before { content: ''; position: absolute; inset: 0; transform: translate(-22px, 22px); border: 1px solid rgba(201,169,110,0.55); z-index: 0; }
+  .story-photo img { position: relative; z-index: 1; display: block; width: 100%; height: auto; }
+  @media (max-width: 768px) { .story-photo::before { transform: translate(-10px, 10px); } .story-photo { margin-bottom: 56px; } }
+  /* hero: text left, photo right with offset gold frame and the sigil overlapping its corner */
+  .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; width: min(1200px, 100%); margin: 0 auto; }
+  .hero-text { text-align: left; }
+  .hero-text .hero-divider { display: none; }
+  .hero-text .hero-title { font-size: clamp(36px, 4.2vw, 64px); }
+  .hero-text .hero-subtitle { margin-bottom: 40px; }
+  .hero-visual { position: relative; opacity: 0; animation: fade-up 1s ease 0.7s forwards; }
+  .hero-visual::before { content: ''; position: absolute; inset: 0; transform: translate(22px, 22px); border: 1px solid rgba(201,169,110,0.55); z-index: 0; }
+  .hero-visual img { position: relative; z-index: 1; display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; }
+  .hero-visual .hero-sigil { position: absolute; z-index: 2; left: -44px; bottom: -44px; width: 132px; height: 132px; margin: 0; padding: 10px; background: #0a0908; border-radius: 50%; opacity: 1; }
+  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 56px; }
+    .hero { padding-top: 160px; }
+    .hero-text { text-align: center; }
+    .hero-text .hero-divider { display: block; }
+    .hero-visual { width: min(520px, 84vw); margin: 0 auto; }
+    .hero-visual::before { transform: translate(12px, 12px); }
+    .hero-visual .hero-sigil { left: -16px; bottom: -28px; width: 96px; height: 96px; padding: 8px; }
+  }
+  /* How It Works: photo above each step, offset gold outline, middle card staggered down */
+  #how .pillar-img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; margin: 0 0 36px; position: relative; z-index: 1; box-shadow: 12px 12px 0 -1px #e6dcc6, 12px 12px 0 0 #8a6e3e; }
+  @media (min-width: 901px) { #how .pillar:nth-child(2) { transform: translateY(48px); } #how .pillars { padding-bottom: 48px; } }
+  #start .pillar-img { width: 100%; justify-self: stretch; aspect-ratio: 16 / 10; object-fit: cover; margin: 0 0 40px; position: relative; z-index: 1; box-shadow: -12px 12px 0 -1px var(--charcoal), -12px 12px 0 0 rgba(201,169,110,0.55); }
+  /* Not sure where to begin: river photo with offset outline on the cream band */
+  .begin-photo { position: relative; width: min(760px, 86vw); margin: 0 auto 72px; }
+  .begin-photo::before { content: ''; position: absolute; inset: 0; transform: translate(20px, 20px); border: 1px solid #8a6e3e; z-index: 0; }
+  .begin-photo img { position: relative; z-index: 1; display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; }
+  @media (max-width: 768px) { .begin-photo::before { transform: translate(10px, 10px); } .begin-photo { margin-bottom: 56px; } }
 </style>
 </head>
 <body>
@@ -941,9 +974,17 @@
 
 <!-- HERO -->
 <section class="hero">
-  <div>
-    <!-- Star Tetrahedron as hero sigil -->
-    <svg class="hero-sigil" viewBox="500 150 800 870" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <div class="hero-grid">
+    <div class="hero-text">
+      <h1 class="hero-title">Stop wondering when your manifestation will show up.<br><em>Change your beliefs for good.</em></h1>
+      <p class="hero-subtitle">Get the life you've been waiting for.</p>
+      <div class="hero-divider"></div>
+      <a href="#call" class="cta-primary">Find out why the life you want hasn&rsquo;t manifested yet &rarr;</a>
+    </div>
+    <div class="hero-visual">
+      <img src="images/web/hero-icosahedron.jpg" alt="A glowing mirrored geometric sculpture lit at night in the snow">
+      <!-- Star Tetrahedron as hero sigil, overlapping the photo corner -->
+      <svg class="hero-sigil" viewBox="500 150 800 870" fill="none" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <clipPath id="merkaba-clip">
           <circle cx="901.9" cy="584" r="349"/>
@@ -973,11 +1014,7 @@
       <!-- Outer circle rendered last, clean -->
       <circle cx="901.9" cy="584" r="349" stroke="#c9a96e" stroke-width="4" opacity="0.7"/>
     </svg>
-
-    <h1 class="hero-title">Stop wondering when your manifestation will show up.<br><em>Change your beliefs for good.</em></h1>
-    <p class="hero-subtitle">Get the life you've been waiting for.</p>
-    <div class="hero-divider"></div>
-    <a href="#call" class="cta-primary">Find out why the life you want hasn&rsquo;t manifested yet &rarr;</a>
+    </div>
   </div>
 </section>
 
@@ -1001,14 +1038,17 @@
     </div>
     <div class="pillars">
       <div class="pillar reveal">
+        <img class="pillar-img" src="images/web/how-spiral.jpg" alt="Ocean waves breaking on rocks" loading="lazy">
         <span class="pillar-roman">I</span>
         <div class="pillar-name">Stop the Spiral</div>
       </div>
       <div class="pillar reveal" style="transition-delay: 0.15s">
+        <img class="pillar-img" src="images/web/how-doubt.jpg" alt="Still mountain lake reflecting the sky" loading="lazy">
         <span class="pillar-roman">II</span>
         <div class="pillar-name">End the Doubt</div>
       </div>
       <div class="pillar reveal" style="transition-delay: 0.30s">
+        <img class="pillar-img" src="images/web/how-next.jpg" alt="Sunset over a coastal town from an infinity pool" loading="lazy">
         <span class="pillar-roman">III</span>
         <div class="pillar-name">Know What to Do Next</div>
       </div>
@@ -1031,6 +1071,10 @@
       <div style="height: 57px;"></div>
       <p class="epiphany-pull reveal" style="margin-bottom: 0;"><em>Because I've stood exactly in that same spot.</em></p>
     </div>
+
+    <figure class="story-photo reveal">
+      <img src="images/web/story-night.jpg" alt="Tim with friends at a conference, standing in front of a lit golden geometric sculpture at night" loading="lazy">
+    </figure>
 
     <div class="story-block">
       <p class="story-p drop reveal">
@@ -1064,18 +1108,21 @@
     </div>
     <div class="pillars">
       <div class="pillar reveal">
+        <img class="pillar-img" src="images/web/start-quiz.jpg" alt="A glass flask with a glowing filament bulb" loading="lazy">
         <span class="pillar-roman">I</span>
         <div class="pillar-name">Find out why the life you want hasn&rsquo;t manifested yet</div>
         <p class="pillar-desc">Stop wondering.</p>
         <a href="#" class="cta-secondary" style="margin: 28px 0 0;">Start Now</a>
       </div>
       <div class="pillar reveal" style="transition-delay: 0.15s">
+        <img class="pillar-img" style="object-position: 35% 42%;" src="images/web/start-cohort.jpg" alt="An altar table with a glowing salt lamp, crystals, coins and an alchemy book" loading="lazy">
         <span class="pillar-roman">II</span>
         <div class="pillar-name">The Cohort</div>
         <p class="pillar-desc">Change your beliefs for good.</p>
         <a href="#" class="cta-secondary" style="margin: 28px 0 0;">Start Now</a>
       </div>
       <div class="pillar reveal" style="transition-delay: 0.3s">
+        <img class="pillar-img" src="images/web/start-mastermind.jpg" alt="A Flower of Life mosaic in black and white tile on a wall" loading="lazy">
         <span class="pillar-roman">III</span>
         <div class="pillar-name">The Mastermind</div>
         <p class="pillar-desc">Design the life you&rsquo;ve always wanted.</p>
@@ -1088,6 +1135,9 @@
 <!-- FREE ENTRY (quiz): TODO add the quiz link -->
 <section class="cta-section" id="free">
   <div style="position: relative; z-index: 1;">
+    <figure class="begin-photo">
+      <img src="images/web/begin-river.jpg" alt="A river winding through a green mountain meadow" loading="lazy">
+    </figure>
     <div class="section-rule"></div>
     <h2 class="section-title">Not sure where to begin?<br><em>Start here.</em></h2>
     <div style="margin-top: 40px;">
