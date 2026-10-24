@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Why Hasn't It Manifested Yet? — Everyday Alchemy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --obsidian: #0a0908;
+    --deep: #111009;
+    --charcoal: #1a1814;
+    --ash: #2a2822;
+    --gold: #c9a96e;
+    --gold-light: #e2c98a;
+    --gold-dim: #8a6e3e;
+    --cream: #f0e8d8;
+    --cream-mid: rgba(240,232,216,0.65);
+    --cream-low: rgba(240,232,216,0.4);
+    --gold-border: rgba(201,169,110,0.25);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--obsidian);
+    color: var(--cream);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 30%, rgba(201,169,110,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .top {
+    position: relative;
+    z-index: 1;
+    padding: 28px 24px 0;
+    text-align: center;
+  }
+
+  .logo {
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+
+  .progress {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: rgba(201,169,110,0.12);
+    z-index: 5;
+  }
+  .progress span {
+    display: block;
+    height: 100%;
+    width: 0;
+    background: var(--gold);
+    transition: width 0.4s ease;
+  }
+
+  main {
+    position: relative;
+    z-index: 1;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 24px 64px;
+  }
+
+  .card {
+    width: 100%;
+    max-width: 640px;
+    animation: rise 0.5s ease both;
+  }
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .eyebrow {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.45em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 22px;
+  }
+
+  h1, h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    line-height: 1.12;
+    color: var(--cream);
+    outline: none;
+  }
+  h1 { font-size: clamp(36px, 7vw, 56px); margin-bottom: 20px; }
+  h1 em { font-style: italic; color: var(--gold-light); }
+  h2 { font-size: clamp(30px, 5.5vw, 44px); margin-bottom: 14px; }
+
+  .lede {
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--cream-mid);
+    margin-bottom: 36px;
+  }
+
+  .hint {
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    color: var(--cream-low);
+    margin-bottom: 36px;
+  }
+
+  .sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    font-style: italic;
+    color: var(--cream-mid);
+    margin: 40px 0 8px;
+  }
+
+  /* ---- scale (slider) ---- */
+  .scale { margin: 8px 0 12px; }
+
+  .readout {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 64px;
+    font-weight: 300;
+    line-height: 1;
+    text-align: center;
+    color: var(--gold-light);
+    margin-bottom: 18px;
+    min-height: 64px;
+  }
+  .readout.empty { color: var(--cream-low); }
+
+  input[type=range] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 32px;
+    background: transparent;
+    cursor: pointer;
+  }
+  input[type=range]::-webkit-slider-runnable-track {
+    height: 2px;
+    background: rgba(201,169,110,0.4);
+  }
+  input[type=range]::-moz-range-track {
+    height: 2px;
+    background: rgba(201,169,110,0.4);
+  }
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 30px; height: 30px;
+    margin-top: -14px;
+    border-radius: 50%;
+    background: var(--gold);
+    border: 2px solid var(--gold-light);
+    box-shadow: 0 2px 12px rgba(201,169,110,0.35);
+  }
+  input[type=range]::-moz-range-thumb {
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    background: var(--gold);
+    border: 2px solid var(--gold-light);
+    box-shadow: 0 2px 12px rgba(201,169,110,0.35);
+  }
+  input[type=range].untouched::-webkit-slider-thumb { background: var(--obsidian); box-shadow: none; }
+  input[type=range].untouched::-moz-range-thumb { background: var(--obsidian); box-shadow: none; }
+  input[type=range]:focus-visible { outline: 2px solid var(--gold-light); outline-offset: 6px; }
+
+  .ends {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    margin-top: 10px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--cream-mid);
+  }
+  .ends span { max-width: 45%; }
+  .ends span:last-child { text-align: right; }
+
+  /* ---- option buttons (pick three, year ago, how long) ---- */
+  .options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 8px; }
+
+  .opt {
+    display: block;
+    width: 100%;
+    text-align: left;
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    font-size: 16px;
+    color: var(--cream);
+    background: rgba(240,232,216,0.04);
+    border: 1px solid var(--gold-border);
+    border-radius: 4px;
+    padding: 16px 20px;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .opt:hover:not(:disabled) { background: rgba(201,169,110,0.08); }
+  .opt[aria-pressed="true"], .opt[aria-checked="true"] {
+    background: rgba(201,169,110,0.16);
+    border-color: var(--gold);
+    color: var(--gold-light);
+  }
+  .opt:disabled { opacity: 0.35; cursor: not-allowed; }
+  .opt:focus-visible { outline: 2px solid var(--gold-light); outline-offset: 2px; }
+
+  .count {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin: 18px 0 0;
+  }
+
+  /* ---- points ---- */
+  .pt-row { margin-bottom: 30px; }
+  .pt-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px; }
+  .pt-name { font-family: 'Cormorant Garamond', serif; font-size: 26px; color: var(--cream); }
+  .pt-val { font-family: 'Cormorant Garamond', serif; font-size: 34px; color: var(--gold-light); }
+  .left {
+    font-family: 'Cinzel', serif;
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-top: 8px;
+  }
+  .left.done { color: var(--gold-dim); }
+
+  /* ---- form ---- */
+  .field { margin-bottom: 22px; }
+  .field label, .field .lbl {
+    display: block;
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+  .field .opt-note { color: var(--cream-low); letter-spacing: 0.15em; }
+  input[type=text], input[type=email], input[type=tel], textarea {
+    width: 100%;
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    font-size: 17px;
+    color: var(--cream);
+    background: rgba(240,232,216,0.05);
+    border: 1px solid var(--gold-border);
+    border-radius: 4px;
+    padding: 15px 16px;
+  }
+  textarea { min-height: 120px; resize: vertical; line-height: 1.6; }
+  input::placeholder, textarea::placeholder { color: var(--cream-low); }
+  input[type=text]:focus-visible, input[type=email]:focus-visible, input[type=tel]:focus-visible, textarea:focus-visible {
+    outline: 2px solid var(--gold-light);
+    outline-offset: 1px;
+    border-color: var(--gold);
+  }
+  .consent { display: flex; gap: 12px; align-items: flex-start; font-size: 14px; line-height: 1.6; color: var(--cream-mid); margin: 6px 0 8px; }
+  .consent a { color: var(--gold-light); }
+  .consent input { margin-top: 4px; accent-color: var(--gold); width: 18px; height: 18px; flex-shrink: 0; }
+  .trap { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+  .error { color: #e0907a; font-size: 14px; min-height: 22px; margin: 6px 0 4px; }
+
+  /* ---- nav ---- */
+  .nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 44px; }
+
+  .btn {
+    font-family: 'Cinzel', serif;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--obsidian);
+    background: var(--gold);
+    border: none;
+    border-radius: 4px;
+    padding: 18px 34px;
+    cursor: pointer;
+    box-shadow: 0 6px 24px rgba(201,169,110,0.28);
+    transition: background 0.25s, transform 0.25s, opacity 0.25s;
+  }
+  .btn:hover:not(:disabled) { background: var(--gold-light); transform: translateY(-2px); }
+  .btn:disabled { opacity: 0.35; cursor: not-allowed; box-shadow: none; }
+  .btn:focus-visible { outline: 2px solid var(--cream); outline-offset: 3px; }
+
+  .back {
+    font-family: 'Jost', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--cream-low);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px 4px;
+  }
+  .back:hover { color: var(--gold-light); }
+  .back:focus-visible { outline: 2px solid var(--gold-light); outline-offset: 2px; }
+
+  .done-mark { width: 72px; height: 72px; margin-bottom: 28px; opacity: 0.9; }
+
+  pre.debug {
+    margin-top: 40px;
+    padding: 16px;
+    max-height: 360px;
+    overflow: auto;
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--cream-mid);
+    background: rgba(240,232,216,0.05);
+    border: 1px dashed var(--gold-border);
+    white-space: pre-wrap;
+  }
+
+  @media (max-width: 520px) {
+    .readout { font-size: 54px; }
+    .nav { flex-direction: column-reverse; align-items: stretch; }
+    .btn { width: 100%; }
+    .back { align-self: center; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .card { animation: none; }
+    .progress span { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress" role="progressbar" aria-label="Quiz progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="bar"></span></div>
+
+<header class="top"><a class="logo" href="index.html">Everyday Alchemy</a></header>
+
+<iframe name="ghl-sink" title="" hidden tabindex="-1" aria-hidden="true"></iframe>
+
+<main><div id="stage" class="card">
+  <!-- Shown until the script builds the quiz, or if scripts are off or blocked. -->
+  <p class="eyebrow">Free Quiz</p>
+  <h1>Find out why the life you want hasn&rsquo;t <em>manifested yet.</em></h1>
+  <p class="lede">Loading the quiz&hellip;</p>
+  <p class="hint">If nothing else appears, JavaScript is turned off or blocked here. Open this page in a regular browser such as Chrome or Safari.</p>
+</div></main>
+
+<script>
+/* ------------------------------------------------------------------
+   CONFIG
+   transport:
+     'tracking' (default) the last step is a real <form> with named
+               inputs, and GoHighLevel's External Tracking script (paste
+               it just before </body>) captures the submission, creates or
+               updates the contact and fires its Form Submission trigger.
+               Nothing is fetched by this page.
+     'json' / 'no-cors'   POST to the GHL Inbound Webhook in `endpoint`
+               (a PREMIUM trigger, billed per run: not the plan).
+   ghlTrackingInstalled: flip to true once the GHL snippet is on this
+               page. Until then, on the live site the quiz shows an error
+               instead of a false "Check your inbox"; on localhost or with
+               ?debug=1 it still completes so the flow can be tested.
+------------------------------------------------------------------- */
+const CONFIG = {
+  transport: 'tracking',
+  ghlTrackingInstalled: true,
+  endpoint: '',
+  quizVersion: '1',
+  scoringVersion: '1',
+  totalPoints: 10,
+  picksRequired: 3
+};
+
+/* ------------------------------------------------------------------
+   CONTENT
+   Perceived screens use Tim's wording (agreed). The year-ago and
+   "want" wording for everything except Finances is a first draft.
+------------------------------------------------------------------- */
+const AREAS = [
+  { key: 'finances', label: 'Finances',
+    q: 'How are your finances?',
+    yearAgo: 'Compared to a year ago, how are your finances?',
+    want: 'Where do you want your finances to be?',
+    lo: 'No way to pay the rent or the mortgage', hi: "I haven't thought about it recently" },
+  { key: 'work', label: 'Work',
+    q: 'How is work?',
+    yearAgo: 'Compared to a year ago, how is work?',
+    want: 'Where do you want work to be?',
+    lo: 'What work? / It sucks', hi: 'I love it' },
+  { key: 'health', label: 'Health',
+    q: 'How is your health?',
+    yearAgo: 'Compared to a year ago, how is your health?',
+    want: 'Where do you want your health to be?',
+    lo: 'I struggle most days', hi: 'I feel great' },
+  { key: 'mental', label: 'Mental health',
+    q: 'How is your mental health?',
+    yearAgo: 'Compared to a year ago, how is your mental health?',
+    want: 'Where do you want your mental health to be?',
+    lo: 'Overwhelmed, stressed, worried', hi: 'I feel calm and clear' },
+  { key: 'self', label: 'How I feel about myself',
+    q: 'How do you feel about yourself?',
+    yearAgo: 'Compared to a year ago, how do you feel about yourself?',
+    want: 'How do you want to feel about yourself?',
+    lo: "I'm getting by", hi: 'I love myself' },
+  { key: 'love', label: 'Love life',
+    q: "How's your love life?",
+    yearAgo: "Compared to a year ago, how's your love life?",
+    want: 'Where do you want your love life to be?',
+    lo: 'Lonely', hi: "I'm fulfilled" },
+  { key: 'friends', label: 'Friends',
+    q: 'How are your friendships?',
+    yearAgo: 'Compared to a year ago, how are your friendships?',
+    want: 'Where do you want your friendships to be?',
+    lo: "I don't really have anyone", hi: 'Plenty of awesome friends' }
+];
+const AREA = Object.fromEntries(AREAS.map(a => [a.key, a]));
+
+/* trend: negative = worse than a year ago, positive = better */
+const YEAR_AGO = [
+  { v: -2, t: 'A lot worse' },
+  { v: -1, t: 'A little worse' },
+  { v: 0,  t: 'About the same' },
+  { v: 1,  t: 'A little better' },
+  { v: 2,  t: 'A lot better' }
+];
+
+/* DRAFT profile questions: not yet approved by Tim */
+const TRIED = [
+  'Affirmations',
+  'Visualizing (like Neville’s SATS)',
+  'Scripting',
+  'Manifestation coaches',
+  'Retreats',
+  'Long meditations',
+  'Pushing through the doubt'
+];
+const HOW_LONG = ['Under a year', '1 to 3 years', '3 to 10 years', 'More than 10 years'];
+
+/* DRAFT consent wording: ONE checkbox for marketing by email and text. The
+   exact text shown is stored with every submission as the record of what
+   the person agreed to. Texts only go to a number they typed in. Keep this
+   in line with privacy.html and terms.html. */
+const MARKETING_CONSENT_HTML =
+  'I agree to receive marketing and promotional messages, including emails and text messages, from Everyday Alchemy';
+/* what the person actually read: tags stripped and entities decoded */
+const plain = html => { const d = document.createElement('div'); d.innerHTML = html; return d.textContent; };
+const digits = s => String(s).replace(/\D/g, '');
+const phoneUsable = s => { const n = digits(s).length; return n >= 7 && n <= 15; };
+const phoneOk = s => s.trim() === '' || phoneUsable(s);
+
+/* ------------------------------------------------------------------
+   SCORING (placeholder cut-offs and adjustments: to be tested on
+   real people, not treated as final)
+   gap = desired - perceived, pushed up if things are worse than a
+   year ago and down if better, floor 0. Bucket comes from the
+   LARGEST gap among the three picks, not an average.
+------------------------------------------------------------------- */
+function computeResult(state) {
+  const gaps = {};
+  state.picks.forEach(k => {
+    const d = state.detail[k];
+    gaps[k] = Math.max(0, d.want - state.perceived[k] - d.trend);
+  });
+  const vals = Object.values(gaps);
+  const maxGap = vals.length ? Math.max(...vals) : 0;
+  const bucket = maxGap <= 2 ? 'spiralling' : maxGap <= 4 ? 'doubt' : 'waiting';
+  return { gaps, maxGap, bucket };
+}
+
+/* ------------------------------------------------------------------
+   STATE
+------------------------------------------------------------------- */
+const S = {
+  idx: 0,
+  perceived: {},
+  picks: [],
+  points: {},
+  detail: {},
+  profile: { tried: [], howLong: null, obstacle: '' },
+  contact: { name: '', email: '', phone: '', consent: false },
+  submitting: false,
+  armed: false,
+  error: '',
+  payload: null
+};
+
+/* ranked picks: most points first, ties keep the order picked */
+function ranked() {
+  return S.picks
+    .map((k, i) => ({ k, i }))
+    .sort((a, b) => (S.points[b.k] || 0) - (S.points[a.k] || 0) || a.i - b.i)
+    .map(o => o.k);
+}
+
+/* the step list is fixed in length so progress is stable;
+   d0..d2 resolve to the ranked picks when rendered */
+const STEPS = ['intro']
+  .concat(AREAS.map(a => 'p:' + a.key))
+  .concat(['pick', 'points', 'd0', 'd1', 'd2', 'profile', 'gate', 'done']);
+
+const stage = document.getElementById('stage');
+const bar = document.getElementById('bar');
+const progress = document.querySelector('.progress');
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+/* ------------------------------------------------------------------
+   VALIDATION
+------------------------------------------------------------------- */
+function sumPoints() {
+  return S.picks.reduce((n, k) => n + (S.points[k] || 0), 0);
+}
+
+function isValid(step) {
+  if (step === 'intro') return true;
+  if (step.startsWith('p:')) return S.perceived[step.slice(2)] != null;
+  if (step === 'pick') return S.picks.length === CONFIG.picksRequired;
+  if (step === 'points') return S.picks.length === CONFIG.picksRequired && sumPoints() === CONFIG.totalPoints;
+  if (/^d[0-2]$/.test(step)) {
+    const k = ranked()[Number(step[1])];
+    const d = S.detail[k];
+    return !!d && d.trend != null && d.want != null;
+  }
+  if (step === 'profile') return true;
+  if (step === 'gate') {
+    const c = S.contact;
+    return c.name.trim().length > 0 && EMAIL_RE.test(c.email.trim()) && c.consent && phoneOk(c.phone);
+  }
+  return true;
+}
+
+/* ------------------------------------------------------------------
+   SHARED PIECES
+------------------------------------------------------------------- */
+function scaleHTML(id, area, val) {
+  const empty = val == null;
+  return `
+    <div class="scale">
+      <div class="readout ${empty ? 'empty' : ''}" id="${id}-out" aria-live="polite">${empty ? '–' : val}</div>
+      <input type="range" id="${id}" min="1" max="10" step="1" value="${empty ? 5 : val}"
+        class="${empty ? 'untouched' : ''}" aria-describedby="${id}-ends" aria-valuetext="${empty ? 'No answer yet' : val + ' out of 10'}">
+      <div class="ends" id="${id}-ends"><span>${esc(area.lo)}</span><span>${esc(area.hi)}</span></div>
+    </div>`;
+}
+
+function bindScale(id, onSet) {
+  const el = document.getElementById(id);
+  const out = document.getElementById(id + '-out');
+  const set = () => {
+    el.classList.remove('untouched');
+    out.classList.remove('empty');
+    out.textContent = el.value;
+    el.setAttribute('aria-valuetext', el.value + ' out of 10');
+    onSet(Number(el.value));
+    refreshNext();
+  };
+  el.addEventListener('input', set);
+  el.addEventListener('change', set);
+  el.addEventListener('pointerup', set);
+}
+
+function navHTML(step) {
+  const first = step === 'intro';
+  const label = step === 'intro' ? 'Start'
+    : step === 'gate' ? 'Send me my results'
+    : 'Continue';
+  return `
+    <div class="nav">
+      ${first ? '<span></span>' : '<button type="button" class="back" id="back">Back</button>'}
+      <button type="button" class="btn" id="next">${label}</button>
+    </div>`;
+}
+
+/* ------------------------------------------------------------------
+   RENDER
+------------------------------------------------------------------- */
+function render() {
+  const step = STEPS[S.idx];
+  let html = '';
+  if (step === 'intro') html = renderIntro();
+  else if (step.startsWith('p:')) html = renderPerceived(step.slice(2));
+  else if (step === 'pick') html = renderPick();
+  else if (step === 'points') html = renderPoints();
+  else if (/^d[0-2]$/.test(step)) html = renderDetail(Number(step[1]));
+  else if (step === 'profile') html = renderProfile();
+  else if (step === 'gate') html = renderGate();
+  else if (step === 'done') html = renderDone();
+
+  stage.innerHTML = html;
+  stage.style.animation = 'none'; void stage.offsetWidth; stage.style.animation = '';
+
+  const pct = Math.round((S.idx / (STEPS.length - 1)) * 100);
+  bar.style.width = pct + '%';
+  progress.setAttribute('aria-valuenow', pct);
+
+  const next = document.getElementById('next');
+  if (next) next.addEventListener('click', onNext);
+  const back = document.getElementById('back');
+  if (back) back.addEventListener('click', () => go(-1));
+
+  bindStep(step);
+  refreshNext();
+
+  window.scrollTo(0, 0);
+  const h = stage.querySelector('h1, h2');
+  if (h) { h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: true }); }
+}
+
+function renderIntro() {
+  return `
+    <p class="eyebrow">Free Quiz</p>
+    <h1>Find out why the life you want hasn&rsquo;t <em>manifested yet.</em></h1>
+    <p class="lede">A few quick questions. Answer from your gut. There are no right answers.</p>
+    ${navHTML('intro')}`;
+}
+
+function renderPerceived(key) {
+  const a = AREA[key];
+  const n = AREAS.findIndex(x => x.key === key) + 1;
+  return `
+    <p class="eyebrow">${esc(a.label)} &middot; ${n} of ${AREAS.length}</p>
+    <h2>${esc(a.q)}</h2>
+    <p class="hint">Drag the circle to answer.</p>
+    ${scaleHTML('sc', a, S.perceived[key])}
+    ${navHTML('p')}`;
+}
+
+function renderPick() {
+  const full = S.picks.length >= CONFIG.picksRequired;
+  const opts = AREAS.map(a => {
+    const on = S.picks.includes(a.key);
+    return `<button type="button" class="opt" data-k="${a.key}" aria-pressed="${on}" ${full && !on ? 'disabled' : ''}>${esc(a.label)}</button>`;
+  }).join('');
+  return `
+    <p class="eyebrow">Almost there</p>
+    <h2>Which three would you most like to change?</h2>
+    <p class="hint">Pick three.</p>
+    <div class="options" id="opts">${opts}</div>
+    <p class="count" id="count">${S.picks.length} of ${CONFIG.picksRequired} picked</p>
+    ${navHTML('pick')}`;
+}
+
+function renderPoints() {
+  /* keep points keyed to the current picks */
+  const keep = {};
+  S.picks.forEach(k => { keep[k] = S.points[k] || 1; });
+  S.points = keep;
+  if (sumPoints() > CONFIG.totalPoints) S.picks.forEach(k => { S.points[k] = 1; });
+
+  const rows = S.picks.map(k => `
+    <div class="pt-row">
+      <div class="pt-head">
+        <label class="pt-name" for="pt-${k}">${esc(AREA[k].label)}</label>
+        <span class="pt-val" id="pt-${k}-v">${S.points[k]}</span>
+      </div>
+      <input type="range" id="pt-${k}" data-k="${k}" min="1" max="${CONFIG.totalPoints - (CONFIG.picksRequired - 1)}" step="1" value="${S.points[k]}">
+    </div>`).join('');
+  return `
+    <p class="eyebrow">Your three</p>
+    <h2>You&rsquo;ve got ${CONFIG.totalPoints} points.</h2>
+    <p class="hint">Divide them between your three, based on how much you want each one to change. Use them all.</p>
+    ${rows}
+    <p class="left" id="left" aria-live="polite"></p>
+    ${navHTML('points')}`;
+}
+
+function renderDetail(i) {
+  const k = ranked()[i];
+  const a = AREA[k];
+  const d = S.detail[k] || (S.detail[k] = { trend: null, want: null });
+  const opts = YEAR_AGO.map(o =>
+    `<button type="button" class="opt" role="radio" data-v="${o.v}" aria-checked="${d.trend === o.v}">${o.t}</button>`
+  ).join('');
+  return `
+    <p class="eyebrow">${esc(a.label)} &middot; ${i + 1} of ${CONFIG.picksRequired}</p>
+    <h2>${esc(a.yearAgo)}</h2>
+    <div class="options" id="yr" role="radiogroup" aria-label="${esc(a.yearAgo)}">${opts}</div>
+    <p class="sub">${esc(a.want)}</p>
+    ${scaleHTML('want', a, d.want)}
+    ${navHTML('d')}`;
+}
+
+function renderProfile() {
+  const tried = TRIED.map(t =>
+    `<button type="button" class="opt" data-t="${esc(t)}" aria-pressed="${S.profile.tried.includes(t)}">${esc(t)}</button>`
+  ).join('');
+  const how = HOW_LONG.map(t =>
+    `<button type="button" class="opt" role="radio" data-h="${esc(t)}" aria-checked="${S.profile.howLong === t}">${esc(t)}</button>`
+  ).join('');
+  return `
+    <p class="eyebrow">A little about you</p>
+    <h2>What have you already tried?</h2>
+    <p class="hint">Pick any that apply.</p>
+    <div class="options" id="tried">${tried}</div>
+    <p class="sub">How long have you been at this?</p>
+    <div class="options" id="how" role="radiogroup" aria-label="How long have you been at this?">${how}</div>
+    <p class="sub">What&rsquo;s the biggest thing standing in your way?</p>
+    <div class="field"><textarea id="obstacle" placeholder="In your own words (optional)">${esc(S.profile.obstacle)}</textarea></div>
+    ${navHTML('profile')}`;
+}
+
+function renderGate() {
+  const c = S.contact;
+  return `
+    <p class="eyebrow">Last step</p>
+    <h2>Where should we send your results?</h2>
+    <p class="hint">Your results come by email.</p>
+    <form id="everyday-alchemy-quiz" novalidate method="post" action="about:blank" target="ghl-sink">
+      <div class="field"><label for="f-name">Name</label>
+        <input type="text" id="f-name" name="name" autocomplete="name" value="${esc(c.name)}" required></div>
+      <div class="field"><label for="f-email">Email</label>
+        <input type="email" id="f-email" name="email" autocomplete="email" inputmode="email" value="${esc(c.email)}" required></div>
+      <div class="field"><label for="f-phone">Phone <span class="opt-note">&mdash; optional</span></label>
+        <input type="tel" id="f-phone" name="phone" autocomplete="tel" inputmode="tel" value="${esc(c.phone)}" aria-describedby="phone-err">
+        <p class="error" id="phone-err" style="min-height:0" role="alert"></p></div>
+      <div class="trap" id="quiz-fields" aria-hidden="true"></div>
+      <div class="trap" aria-hidden="true"><label>Company <input type="text" id="f-company" name="company" tabindex="-1" autocomplete="off"></label></div>
+      <label class="consent"><input type="checkbox" id="f-consent" name="marketing_consent" value="true" ${c.consent ? 'checked' : ''}>
+        <span>${MARKETING_CONSENT_HTML}</span></label>
+      <p class="error" id="err" role="alert">${esc(S.error)}</p>
+      ${navHTML('gate')}
+    </form>`;
+}
+
+function renderDone() {
+  const dbg = new URLSearchParams(location.search).has('debug')
+    ? `<pre class="debug">${esc(JSON.stringify({ transport: S.transport, sent: S.sent }, null, 2))}</pre>` : '';
+  return `
+    <svg class="done-mark" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+      <circle cx="50" cy="50" r="46" stroke="#c9a96e" stroke-width="1.5" opacity="0.7"/>
+      <circle cx="50" cy="50" r="28" stroke="#c9a96e" stroke-width="1" opacity="0.4"/>
+      <path d="M50 18 L82 74 H18 Z" stroke="#c9a96e" stroke-width="1.5" opacity="0.9"/>
+    </svg>
+    <p class="eyebrow">Done</p>
+    <h1>Check your <em>inbox.</em></h1>
+    <p class="lede">Your results are on the way. If you don&rsquo;t see them in a few minutes, check your spam folder.</p>
+    ${dbg}`;
+}
+
+/* ------------------------------------------------------------------
+   INTERACTION
+------------------------------------------------------------------- */
+function bindStep(step) {
+  if (step.startsWith('p:')) {
+    const key = step.slice(2);
+    bindScale('sc', v => { S.perceived[key] = v; });
+  }
+
+  if (step === 'pick') {
+    document.getElementById('opts').addEventListener('click', e => {
+      const b = e.target.closest('.opt');
+      if (!b || b.disabled) return;
+      const k = b.dataset.k;
+      const at = S.picks.indexOf(k);
+      if (at >= 0) S.picks.splice(at, 1);
+      else if (S.picks.length < CONFIG.picksRequired) S.picks.push(k);
+      /* re-render the options in place so focus and scroll stay put */
+      const full = S.picks.length >= CONFIG.picksRequired;
+      document.querySelectorAll('#opts .opt').forEach(o => {
+        const on = S.picks.includes(o.dataset.k);
+        o.setAttribute('aria-pressed', on);
+        o.disabled = full && !on;
+      });
+      document.getElementById('count').textContent = `${S.picks.length} of ${CONFIG.picksRequired} picked`;
+      refreshNext();
+    });
+  }
+
+  if (step === 'points') {
+    const update = () => {
+      const left = CONFIG.totalPoints - sumPoints();
+      const el = document.getElementById('left');
+      el.textContent = left === 0 ? 'All points used' : `${left} point${left === 1 ? '' : 's'} left`;
+      el.classList.toggle('done', left === 0);
+      S.picks.forEach(k => { document.getElementById(`pt-${k}-v`).textContent = S.points[k]; });
+      refreshNext();
+    };
+    document.querySelectorAll('input[data-k]').forEach(inp => {
+      inp.addEventListener('input', () => {
+        const k = inp.dataset.k;
+        const others = S.picks.filter(x => x !== k).reduce((n, x) => n + S.points[x], 0);
+        const v = Math.min(Number(inp.value), CONFIG.totalPoints - others);
+        inp.value = v;
+        S.points[k] = v;
+        update();
+      });
+    });
+    update();
+  }
+
+  if (/^d[0-2]$/.test(step)) {
+    const k = ranked()[Number(step[1])];
+    document.getElementById('yr').addEventListener('click', e => {
+      const b = e.target.closest('.opt');
+      if (!b) return;
+      S.detail[k].trend = Number(b.dataset.v);
+      document.querySelectorAll('#yr .opt').forEach(o => o.setAttribute('aria-checked', o === b));
+      refreshNext();
+    });
+    bindScale('want', v => { S.detail[k].want = v; });
+  }
+
+  if (step === 'profile') {
+    document.getElementById('tried').addEventListener('click', e => {
+      const b = e.target.closest('.opt');
+      if (!b) return;
+      const t = b.dataset.t;
+      const at = S.profile.tried.indexOf(t);
+      if (at >= 0) S.profile.tried.splice(at, 1); else S.profile.tried.push(t);
+      b.setAttribute('aria-pressed', S.profile.tried.includes(t));
+    });
+    document.getElementById('how').addEventListener('click', e => {
+      const b = e.target.closest('.opt');
+      if (!b) return;
+      S.profile.howLong = b.dataset.h;
+      document.querySelectorAll('#how .opt').forEach(o => o.setAttribute('aria-checked', o === b));
+    });
+    document.getElementById('obstacle').addEventListener('input', e => { S.profile.obstacle = e.target.value; });
+  }
+
+  if (step === 'gate') {
+    const bind = (id, fn) => document.getElementById(id).addEventListener('input', e => { fn(e.target); S.error = ''; document.getElementById('err').textContent = ''; refreshNext(); });
+    bind('f-name', t => { S.contact.name = t.value; });
+    bind('f-email', t => { S.contact.email = t.value; });
+    bind('f-phone', t => {
+      S.contact.phone = t.value;
+      document.getElementById('phone-err').textContent =
+        phoneOk(t.value) ? '' : 'That number doesn\u2019t look right. Check it, or leave it blank.';
+    });
+    bind('f-consent', t => { S.contact.consent = t.checked; });
+    document.getElementById('everyday-alchemy-quiz').addEventListener('submit', e => {
+      /* armed = onNext already filled the named quiz fields, so this is
+         the real submission GHL's tracking script should see: let it go
+         (it targets a hidden iframe, so the page never navigates) */
+      if (S.armed) {
+        S.armed = false;
+        const btn = document.getElementById('next');
+        if (btn) btn.textContent = 'Sending\u2026';
+        setTimeout(() => { S.submitting = false; go(1); }, 900);
+        return;
+      }
+      /* a stray submit: arm it properly first */
+      e.preventDefault();
+      onNext();
+    });
+    /* Enter must never trigger the browser's own submit, which would hand
+       GHL's script an incomplete submission before the quiz fields are
+       filled in (and a second one after). Route it through the button. */
+    document.getElementById('everyday-alchemy-quiz').addEventListener('keydown', e => {
+      if (e.key === 'Enter' && e.target.tagName !== 'TEXTAREA' && e.target.type !== 'checkbox') {
+        e.preventDefault();
+        onNext();
+      }
+    });
+  }
+}
+
+function refreshNext() {
+  const next = document.getElementById('next');
+  if (!next) return;
+  next.disabled = S.submitting || !isValid(STEPS[S.idx]);
+}
+
+function go(delta) {
+  S.idx = Math.max(0, Math.min(STEPS.length - 1, S.idx + delta));
+  render();
+}
+
+function onNext() {
+  const step = STEPS[S.idx];
+  if (!isValid(step) || S.submitting) return;
+  if (step === 'gate') return submit();
+  go(1);
+}
+
+/* ------------------------------------------------------------------
+   SUBMIT
+------------------------------------------------------------------- */
+function buildPayload() {
+  const result = computeResult(S);
+  const utm = {};
+  new URLSearchParams(location.search).forEach((v, k) => { if (k.startsWith('utm_')) utm[k] = v; });
+  const order = ranked();
+  return {
+    name: S.contact.name.trim(),
+    email: S.contact.email.trim().toLowerCase(),
+    phone: S.contact.phone.trim() || null,
+    consent: S.contact.consent,
+    consent_text: plain(MARKETING_CONSENT_HTML),
+    consent_at: new Date().toISOString(),
+    bucket: result.bucket,
+    max_gap: result.maxGap,
+    gaps: result.gaps,
+    perceived: S.perceived,
+    picks: order,
+    points: S.points,
+    detail: Object.fromEntries(order.map(k => [k, {
+      trend: S.detail[k].trend,
+      trend_label: YEAR_AGO.find(o => o.v === S.detail[k].trend).t,
+      desired: S.detail[k].want
+    }])),
+    profile: {
+      tried: S.profile.tried,
+      how_long: S.profile.howLong,
+      obstacle: S.profile.obstacle.trim() || null
+    },
+    quiz_version: CONFIG.quizVersion,
+    scoring_version: CONFIG.scoringVersion,
+    submitted_at: new Date().toISOString(),
+    utm,
+    page: location.pathname
+  };
+}
+
+/* US-style numbers get +1, a leading + is kept, anything else is
+   passed through untouched (GHL maps phone numbers best as E.164) */
+function e164(raw) {
+  const t = String(raw || '').trim();
+  if (!t) return '';
+  const d = digits(t);
+  if (t.startsWith('+')) return '+' + d;
+  if (d.length === 10) return '+1' + d;
+  if (d.length === 11 && d[0] === '1') return '+' + d;
+  return t;
+}
+
+/* Plain-word field names (the quiz_v1_ prefix keeps them together in GHL and
+   lets a future v2 have its own fields without touching these), so
+   anyone opening a contact can tell what each one is. The names here must
+   match the custom fields created in GHL. quiz_summary is a readable
+   one-paragraph version of the whole result; quiz_all_answers is the raw
+   JSON of everything. */
+function toGhl(p) {
+  const [first, ...rest] = p.name.split(/\s+/);
+  const label = k => AREA[k].label;
+  const cap = t => t.charAt(0).toUpperCase() + t.slice(1);
+  const ago = { '-2': 'a lot worse', '-1': 'a little worse', '0': 'about the same', '1': 'a little better', '2': 'a lot better' };
+  const rank = ['Top priority', 'Second priority', 'Third priority'];
+
+  const parts = ['Result: ' + cap(p.bucket) + '.'];
+  p.picks.forEach((k, i) => {
+    const d = p.detail[k];
+    parts.push(rank[i] + ': ' + label(k) + ' (feels ' + p.perceived[k] + '/10, wants ' + d.desired +
+      '/10, compared to a year ago: ' + ago[d.trend] + ').');
+  });
+  parts.push('Biggest gap between where they are and what they want: ' + p.max_gap + '.');
+  if (p.profile.tried.length) parts.push('Has tried: ' + p.profile.tried.join(', ') + '.');
+  if (p.profile.how_long) parts.push('Time on this path: ' + p.profile.how_long + '.');
+  if (p.profile.obstacle) parts.push('In their words: "' + p.profile.obstacle.replace(/\s+/g, ' ') + '"');
+
+  const out = {
+    first_name: first,
+    last_name: rest.join(' '),
+    name: p.name,
+    email: p.email,
+    phone: e164(p.phone),
+    phone_as_typed: p.phone || '',
+    source: 'Everyday Alchemy quiz',
+    tags: 'quiz, quiz-' + p.bucket,
+    quiz_v1_result: cap(p.bucket),
+    quiz_v1_summary: parts.join(' '),
+    quiz_v1_top_priority: label(p.picks[0]),
+    quiz_v1_second_priority: label(p.picks[1]),
+    quiz_v1_third_priority: label(p.picks[2]),
+    quiz_v1_biggest_gap: p.max_gap,
+    quiz_v1_how_long_at_this: p.profile.how_long || '',
+    quiz_v1_already_tried: p.profile.tried.join(', '),
+    quiz_v1_biggest_obstacle: p.profile.obstacle || '',
+    quiz_v1_scoring_version: p.scoring_version,
+    quiz_v1_submitted_at: p.submitted_at
+  };
+  Object.assign(out, p.utm);
+  AREAS.forEach(a => { out['quiz_v1_perceived_' + a.key] = p.perceived[a.key]; });
+  p.picks.forEach(k => {
+    out['quiz_v1_desired_' + k] = p.detail[k].desired;
+    out['quiz_v1_year_ago_' + k] = p.detail[k].trend;
+    out['quiz_v1_gap_' + k] = p.gaps[k];
+    out['quiz_v1_points_' + k] = p.points[k];
+  });
+  out.quiz_v1_all_answers = JSON.stringify(p);
+  return out;
+}
+
+/* exactly one request, never a retry or a second transport */
+async function send(flat) {
+  const body = JSON.stringify(flat);
+  if (CONFIG.transport === 'no-cors') {
+    await fetch(CONFIG.endpoint, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain' }, body });
+    return 'no-cors: sent (reply unreadable)';
+  }
+  const res = await fetch(CONFIG.endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body });
+  if (!res.ok) throw new Error('HTTP ' + res.status);
+  return 'json: HTTP ' + res.status;
+}
+
+/* the quiz answers become named inputs inside the real form, so GHL's
+   script captures them along with name, email and phone. Keys that
+   already have a visible input are skipped to avoid duplicate names. */
+const VISIBLE_NAMES = ['name', 'email', 'phone', 'marketing_consent'];
+function fillQuizFields(flat) {
+  const box = document.getElementById('quiz-fields');
+  box.textContent = '';
+  Object.keys(flat).forEach(k => {
+    if (VISIBLE_NAMES.includes(k)) return;
+    const i = document.createElement('input');
+    i.type = 'text';
+    i.name = k;
+    i.tabIndex = -1;
+    i.setAttribute('autocomplete', 'off');
+    i.value = flat[k] == null ? '' : String(flat[k]);
+    box.appendChild(i);
+  });
+}
+
+async function submit() {
+  const err = document.getElementById('err');
+  const trap = document.getElementById('f-company');
+  S.submitting = true;
+  refreshNext();
+  S.payload = buildPayload();
+  S.sent = toGhl(S.payload);
+  S.transport = null;
+
+  /* honeypot filled: act as if it worked, send nothing */
+  if (trap && trap.value) { S.submitting = false; return go(1); }
+
+  const devMode = new URLSearchParams(location.search).has('debug') ||
+    ['localhost', '127.0.0.1', ''].includes(location.hostname);
+
+  if (CONFIG.transport === 'tracking') {
+    if (!devMode && !CONFIG.ghlTrackingInstalled) {
+      S.submitting = false;
+      S.error = 'This quiz isn\u2019t connected yet, so your answers weren\u2019t sent. Please try again later.';
+      err.textContent = S.error;
+      refreshNext();
+      return;
+    }
+    const form = document.getElementById('everyday-alchemy-quiz');
+    fillQuizFields(S.sent);
+    /* GHL maps phone numbers best as +1555..., so send that form (the
+       original is kept in phone_as_typed) */
+    const ph = document.getElementById('f-phone');
+    if (ph && ph.value.trim()) ph.value = e164(ph.value);
+    S.transport = 'tracking: real form submit for the GHL script to capture';
+    S.armed = true;
+    if (form.requestSubmit) form.requestSubmit();
+    else form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+    return;
+  }
+
+  if (!CONFIG.endpoint) {
+    if (devMode) {
+      console.info('[quiz] no endpoint configured, nothing sent:', S.sent);
+      S.transport = 'none: no endpoint configured';
+      S.submitting = false;
+      return go(1);
+    }
+    S.submitting = false;
+    S.error = 'This quiz isn’t connected yet, so your answers weren’t sent. Please try again later.';
+    err.textContent = S.error;
+    refreshNext();
+    return;
+  }
+
+  try {
+    S.transport = await send(S.sent);
+    S.submitting = false;
+    go(1);
+  } catch (e) {
+    S.submitting = false;
+    S.transport = 'failed: ' + (e && e.message ? e.message : e);
+    console.error('[quiz] send failed', e);
+    S.error = 'Something went wrong sending that. Your answers are still here. Please try again.';
+    err.textContent = S.error;
+    refreshNext();
+  }
+}
+
+/* test hook, debug mode only */
+if (new URLSearchParams(location.search).has('debug')) {
+  window.__quiz = { S, computeResult, ranked, STEPS, go, render };
+}
+
+render();
+</script>
+
+<!-- GoHighLevel External Tracking: captures this page's form submission and
+     creates or updates the contact. Keep this tag below the quiz script. -->
+<script
+  src="https://link.msgsndr.com/js/external-tracking.js"
+  data-tracking-id="tk_d3287e2a58764cbfb008eb6139fd67fd">
+</script>
+</body>
+</html>
