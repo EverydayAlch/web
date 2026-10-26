@@ -956,6 +956,12 @@
   .begin-photo::before { content: ''; position: absolute; inset: 0; transform: translate(20px, 20px); border: 1px solid #8a6e3e; z-index: 0; }
   .begin-photo img { position: relative; z-index: 1; display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; }
   @media (max-width: 768px) { .begin-photo::before { transform: translate(10px, 10px); } .begin-photo { margin-bottom: 56px; } }
+  /* hero word changer: beliefs, identity, resonance (width follows the visible word) */
+  .word-rotator { display: inline-grid; justify-items: start; vertical-align: bottom; white-space: nowrap; transition: width 0.6s ease; }
+  .word-rotator > span { grid-area: 1 / 1; opacity: 0; transform: translateY(0.3em); transition: opacity 0.5s ease, transform 0.5s ease; }
+  .word-rotator > span.is-active { opacity: 1; transform: translateY(0); }
+  .word-rotator > span.is-leaving { opacity: 0; transform: translateY(-0.3em); }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 </style>
 </head>
 <body>
@@ -976,7 +982,7 @@
 <section class="hero">
   <div class="hero-grid">
     <div class="hero-text">
-      <h1 class="hero-title">Stop wondering when your manifestation will show up.<br><em>Change your beliefs for good.</em></h1>
+      <h1 class="hero-title">Stop wondering when your manifestation will show up.<br><em>Change your <span class="word-rotator" aria-hidden="true"><span class="is-active">beliefs</span><span>identity</span><span>resonance</span></span><span class="sr-only">beliefs</span> for good.</em></h1>
       <p class="hero-subtitle">Get the life you've been waiting for.</p>
       <div class="hero-divider"></div>
       <a href="quiz.html" class="cta-primary">Find out why the life you want hasn&rsquo;t manifested yet &rarr;</a>
@@ -1227,6 +1233,28 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.12 });
 reveals.forEach(el => observer.observe(el));
+</script>
+<script>
+(function () {
+  var box = document.querySelector('.word-rotator');
+  if (!box) return;
+  var words = Array.prototype.slice.call(box.children);
+  var i = 0;
+  function fit() { box.style.width = words[i].getBoundingClientRect().width + 'px'; }
+  fit();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+  window.addEventListener('resize', fit);
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  setInterval(function () {
+    var prev = words[i];
+    prev.classList.remove('is-active');
+    prev.classList.add('is-leaving');
+    setTimeout(function () { prev.classList.remove('is-leaving'); }, 600);
+    i = (i + 1) % words.length;
+    words[i].classList.add('is-active');
+    fit();
+  }, 3000);
+})();
 </script>
 </body>
 </html>
