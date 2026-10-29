@@ -484,7 +484,7 @@ function computeResult(state) {
   });
   const vals = Object.values(gaps);
   const maxGap = vals.length ? Math.max(...vals) : 0;
-  const bucket = maxGap <= 2 ? 'spiralling' : maxGap <= 4 ? 'doubt' : 'waiting';
+  const bucket = maxGap <= 2 ? 'spiralling' : maxGap <= 5 ? 'doubt' : 'waiting';
   return { gaps, maxGap, bucket };
 }
 
