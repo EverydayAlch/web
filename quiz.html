@@ -945,6 +945,32 @@ function e164(raw) {
   return t;
 }
 
+/* RESULTS CODE (version 1): all of one person's answers packed into one short
+   string that is safe inside a link, so a results page can be built from the
+   link alone. It is NOT a secret, only a compact form of their own answers.
+   Sections are separated by "~":
+     v1 ~ bucket letter (s, d or w) ~ pick_pick_pick ~ how long ~ tried ~ obstacle
+   each pick (most important first) is  area.now.want.yearago  where
+     area    = position in AREAS (0 to 6)
+     now     = where they think they are (1 to 10)
+     want    = what they want (1 to 10)
+     yearago = year-ago answer plus 2 (0 a lot worse ... 4 a lot better)
+   how long = position in HOW_LONG (0 to 3), or x if unanswered
+   tried    = whole number; bit i is on when TRIED[i] was picked
+   obstacle = their typed words, UTF-8 as base64url (first 400 characters), or empty */
+function makeResultsCode(p) {
+  const picks = p.picks.map(k => [
+    AREAS.findIndex(a => a.key === k), p.perceived[k], p.detail[k].desired, p.detail[k].trend + 2
+  ].join('.')).join('_');
+  const how = HOW_LONG.indexOf(p.profile.how_long);
+  const mask = TRIED.reduce((m, t, i) => m | (p.profile.tried.includes(t) ? 1 << i : 0), 0);
+  const note = (p.profile.obstacle || '').replace(/\s+/g, ' ').trim().slice(0, 400);
+  const b64 = note
+    ? btoa(unescape(encodeURIComponent(note))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '')
+    : '';
+  return ['v1', p.bucket.charAt(0), picks, how < 0 ? 'x' : how, mask, b64].join('~');
+}
+
 /* Plain-word field names (the quiz_v1_ prefix keeps them together in GHL and
    lets a future v2 have its own fields without touching these), so
    anyone opening a contact can tell what each one is. The names here must
@@ -988,6 +1014,7 @@ function toGhl(p) {
     quiz_v1_already_tried: p.profile.tried.join(', '),
     quiz_v1_biggest_obstacle: p.profile.obstacle || '',
     quiz_v1_scoring_version: p.scoring_version,
+    quiz_v1_results_code: makeResultsCode(p),
     quiz_v1_submitted_at: p.submitted_at
   };
   Object.assign(out, p.utm);
