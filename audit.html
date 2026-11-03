@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Belief &amp; Identity Alignment Audit — Everyday Alchemy</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Cinzel:wght@400;600&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
     --obsidian: #0a0908;
@@ -43,15 +43,9 @@
     pointer-events: none;
   }
 
-  .top { position: relative; z-index: 1; padding: 28px 24px 0; text-align: center; }
-  .logo {
-    font-family: 'Cinzel', serif;
-    font-size: 13px;
-    letter-spacing: 0.3em;
-    color: var(--gold);
-    text-transform: uppercase;
-    text-decoration: none;
-  }
+  .top { position: relative; z-index: 1; width: 100%; max-width: 1148px; margin: 0 auto; padding: 28px 24px 0; display: flex; justify-content: space-between; align-items: baseline; gap: 16px; }
+  .logo { font-family: 'Cormorant Garamond', serif; font-size: 24px; color: var(--cream); text-decoration: none; }
+  .audit-name { font-size: 14px; color: var(--cream-mid); text-align: right; }
 
   .progress {
     position: fixed; top: 0; left: 0; right: 0;
@@ -65,6 +59,8 @@
   .progress span { display: block; height: 100%; width: 0; background: var(--gold); transition: width 0.4s ease; }
 
   main { position: relative; z-index: 1; flex: 1; display: flex; justify-content: center; padding: 32px 24px 64px; }
+  main.landing { padding: 0; }
+  #stage.land { max-width: none; }
   #stage { width: 100%; max-width: 640px; animation: rise 0.5s ease both; }
   #stage.wide { max-width: 760px; }
   #stage.q { align-self: center; }
@@ -91,33 +87,78 @@
   .hint { font-size: 13px; letter-spacing: 0.04em; color: var(--cream-low); margin: 6px 0 22px; }
 
   /* ---- landing ---- */
-  .hero { text-align: center; padding: 24px 0 8px; }
-  .hero h1 { margin-left: auto; margin-right: auto; max-width: 18ch; }
-  .hero .lede { max-width: 34em; margin-left: auto; margin-right: auto; }
-  .hero .hint { margin-bottom: 0; }
-  section.block { margin-top: 72px; padding-top: 48px; border-top: 1px solid var(--gold-border); }
-  section.block.center { text-align: center; }
-  .card.example { max-width: 460px; margin: 56px auto 0; text-align: left; }
-  .example .cap { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 6px; }
-  .example .cap-t { white-space: nowrap; font-size: 15px; color: var(--cream-mid); }
-  .example .level { font-family: 'Cormorant Garamond', serif; font-size: 34px; color: var(--gold-light); }
-  .example .row { display: flex; align-items: center; gap: 14px; margin-top: 14px; font-size: 14px; color: var(--cream-mid); }
-  .example .row .nm { flex: 0 0 156px; }
-  @media (max-width: 420px) { .example .row .nm { flex-basis: 128px; font-size: 13px; } }
-  .example .row .bar { flex: 1; margin: 0; }
-  .example .start { margin-top: 22px; font-size: 14px; color: var(--cream-mid); }
-  .example .start strong { color: var(--gold-light); font-weight: 400; }
-  .stats { display: flex; justify-content: center; gap: 48px; margin-top: 44px; flex-wrap: wrap; }
-  .stats div { text-align: center; }
-  .stats b { display: block; font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: 44px; color: var(--gold-light); line-height: 1; }
-  .stats span { display: block; margin-top: 8px; font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold-dim); }
-  .bio { display: grid; grid-template-columns: 240px 1fr; gap: 40px; align-items: start; }
-  .bio img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 6px; border: 1px solid var(--gold-border); display: block; }
-  @media (max-width: 680px) { .bio { grid-template-columns: 1fr; gap: 24px; } .bio img { max-width: 280px; } }
+  .wrap { width: 100%; max-width: 1148px; margin: 0 auto; padding: 0 24px; }
+  .land h1, .land h2 { font-weight: 500; }
+  .hero2 { padding: 88px 0 96px; }
+  .hero2 .wrap { display: grid; grid-template-columns: 1.25fr 1fr; gap: 72px; align-items: center; }
+  .eyebrow2 { font-size: 12px; font-weight: 500; letter-spacing: 0.24em; text-transform: uppercase; color: var(--cream-mid); margin-bottom: 26px; }
+  .hero2 h1 { font-size: clamp(40px, 5.4vw, 72px); line-height: 1.08; margin-bottom: 28px; max-width: 14em; }
+  .hero2 .sentence { font-size: 20px; line-height: 1.7; color: var(--cream-mid); max-width: 30em; margin-bottom: 36px; }
+  .hero2 .sentence strong { color: var(--cream); font-weight: 500; }
+  .cta-row { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+  .cta-row .hint { margin: 0; }
+  .btn.pill { font-family: 'Jost', sans-serif; font-weight: 500; font-size: 17px; letter-spacing: 0; text-transform: none; border-radius: 999px; padding: 16px 36px; }
+  .card.example { max-width: none; margin: 0; text-align: left; padding: 32px 36px 28px; }
+  .example .eyebrow2 { color: var(--cream-low); margin-bottom: 22px; font-size: 11px; }
+  .example .cap { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 26px; }
+  .example .cap-t { font-family: 'Cormorant Garamond', serif; font-size: 30px; color: var(--cream); }
+  .example .pill-lv { font-size: 13px; font-weight: 500; color: var(--cream); background: rgba(240,232,216,0.1); border-radius: 999px; padding: 6px 14px; }
+  .example .row { margin-bottom: 20px; font-size: 15px; color: var(--cream); }
+  .example .row .bar { margin: 8px 0 0; height: 5px; }
+  .example .start { margin-top: 26px; padding-top: 22px; border-top: 1px solid rgba(240,232,216,0.1); font-size: 15px; color: var(--cream-mid); }
+  .example .start strong { color: var(--cream); font-weight: 500; }
+  .stats { border-top: 1px solid rgba(240,232,216,0.1); border-bottom: 1px solid rgba(240,232,216,0.1); }
+  .stats .wrap { display: grid; grid-template-columns: repeat(3, 1fr); padding: 0; }
+  .stats .cell { text-align: center; padding: 40px 16px; border-left: 1px solid rgba(240,232,216,0.1); }
+  .stats .cell:first-child { border-left: none; }
+  .stats b { display: block; font-size: 36px; font-weight: 500; color: var(--cream); line-height: 1; }
+  .stats span { display: block; margin-top: 14px; font-size: 14px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--cream-mid); }
+  .bio2 { padding: 110px 0; }
+  .bio2 .wrap { display: grid; grid-template-columns: 5fr 7fr; gap: 72px; align-items: center; }
+  .bio2 img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 4px; border: 1px solid var(--gold-border); display: block; }
+  .bio2 h2 { font-size: clamp(34px, 4vw, 52px); margin-bottom: 26px; }
+  .bio2 h2 em { color: var(--cream); }
+  .bio2 p { font-size: 17px; line-height: 1.8; color: var(--cream-mid); margin-bottom: 18px; max-width: 34em; }
+  .bio2 p.soundbite { color: var(--cream); font-weight: 500; }
+  .lite { background: #15130d; padding: 100px 0; }
+  .lite h2 { font-size: clamp(34px, 4.4vw, 56px); margin-bottom: 30px; }
+  .lite p { font-size: 17px; line-height: 1.8; color: var(--cream-mid); max-width: 40em; }
+  .testi { padding: 100px 0; }
+  .testi .eyebrow2 { margin-bottom: 14px; }
+  .testi h2 { font-size: clamp(32px, 4vw, 48px); margin-bottom: 14px; }
+  .tnote { font-size: 14px; font-style: italic; color: var(--cream-low); margin-bottom: 44px; }
+  .testi h2:last-child { margin-bottom: 44px; }
+  .tgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .tcard { background: #131210; border: 1px solid rgba(240,232,216,0.07); border-radius: 4px; padding: 30px 28px; }
+  .tcard blockquote { font-family: 'Jost', sans-serif; font-style: normal; font-size: 18px; line-height: 1.7; color: var(--cream); margin: 0 0 26px; }
+  .tcard .nm { font-size: 15px; font-weight: 500; color: var(--cream); }
+  .tcard .rl { font-size: 14px; color: var(--cream-low); margin-top: 4px; }
+  .closeband { background: #c8a96e; color: #1a150c; text-align: center; padding: 120px 24px 130px; }
+  .closeband h2 { text-wrap: balance; color: #1a150c; font-size: clamp(36px, 5vw, 64px); line-height: 1.1; max-width: 16em; margin: 0 auto 26px; }
+  .closeband p { font-size: 18px; color: #3a2f1a; margin-bottom: 16px; }
+  .closeband .btn { background: #2b2113; color: var(--cream); box-shadow: none; margin-top: 18px; }
+  .closeband .btn:hover { background: #3a2d19; }
+  .bio { display: block; }
   .tagline { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 32px; color: var(--gold-light); margin: 26px 0 6px; }
   .research { font-size: 14px; color: var(--cream-low); margin-top: 26px; line-height: 1.7; }
   blockquote { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-style: italic; line-height: 1.4; color: var(--cream); margin: 0 0 10px; }
   .who { font-size: 13px; letter-spacing: 0.08em; color: var(--cream-low); margin-bottom: 36px; }
+  @media (max-width: 900px) {
+    .hero2 { padding: 48px 0 64px; }
+    .hero2 .wrap, .bio2 .wrap { grid-template-columns: 1fr; gap: 44px; }
+    .bio2 { padding: 72px 0; }
+    .bio2 img { max-width: 360px; }
+    .lite, .testi { padding: 72px 0; }
+    .tgrid { grid-template-columns: 1fr; }
+    .closeband { padding: 84px 24px 90px; }
+    .audit-name { display: none; }
+  }
+  @media (max-width: 520px) {
+    .stats .cell { padding: 28px 6px; }
+    .stats b { font-size: 28px; }
+    .stats span { font-size: 11px; letter-spacing: 0.08em; }
+    .card.example { padding: 26px 22px 22px; }
+  }
 
   /* ---- question ---- */
   .qnum { font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 18px; }
@@ -236,7 +277,7 @@
 
 <div class="progress" id="progress" role="progressbar" aria-label="Audit progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="bar"></span></div>
 
-<header class="top"><a class="logo" href="index.html">Everyday Alchemy</a></header>
+<header class="top"><a class="logo" href="index.html">Everyday Alchemy</a><span class="audit-name">The Belief &amp; Identity Alignment Audit</span></header>
 
 <iframe name="ghl-sink" title="" hidden tabindex="-1" aria-hidden="true"></iframe>
 
@@ -340,10 +381,11 @@ const CONSENT_HTML = 'I agree to receive marketing and promotional emails from E
 
 /* Landing page */
 const LANDING = {
+  eyebrow: 'A diagnostic alignment audit',
   hook: 'Frustrated that the aligned life you&rsquo;ve been asking for hasn&rsquo;t arrived yet?',
   sub: 'Answer seventeen questions to find out. A few minutes.',
-  benefits: 'This assessment will help you to measure and improve three things: what you believe, what you do, and how you think',
-  bioHeading: 'I&rsquo;m Tim and I created Everyday Alchemy.',
+  benefits: 'This assessment will help you to <strong>measure and improve</strong> three things: what you believe, what you do, and how you think',
+  bioHeading: 'I&rsquo;m Tim and I created <em>Everyday Alchemy.</em>',
   bio: [
     'I created Everyday Alchemy because, you know how when you&rsquo;re learning any subject, there&rsquo;s all these ideas that you kind of get and you kind of don&rsquo;t?',
     'And they&rsquo;ve got these big ideas wrapped in fancy words, and you think you understand them, only to find out later that you really didn&rsquo;t?',
@@ -352,7 +394,9 @@ const LANDING = {
   soundbite: 'Alchemy without the woo.',
   tagline: 'An honest look, and a clear place to start.',
   research: 'This assessment draws on work from researchers including Locke and Latham, Harkin, and Amabile and Kramer',
-  /* testimonials for taking the audit: [{ quote: '', who: '' }]. The section stays out of the page until there is one. */
+  testimonialsEyebrow: 'What people say',
+  testimonialsHeading: 'Where the audit sent people first.',
+  /* testimonials for taking the audit: [{ quote: '', who: '', role: '' }]. Until there are real ones, ScoreApp's three placeholder cards show. */
   testimonials: [],
   closeHeading: 'Find out why the life you want isn&rsquo;t here yet.',
   closeBody: ['17 questions. It takes a few minutes.', 'You&rsquo;ll get immediate results and recommendations.'],
@@ -518,6 +562,7 @@ const stage = $('stage');
 
 function setStage(cls, html, focusSel) {
   stage.className = cls || '';
+  document.querySelector('main').classList.toggle('landing', cls === 'land');
   stage.style.animation = 'none'; void stage.offsetWidth; stage.style.animation = '';
   stage.innerHTML = html;
   const bar = $('progress');
@@ -533,44 +578,66 @@ function setStage(cls, html, focusSel) {
 
 function renderLanding() {
   const L = LANDING;
-  const testimonials = L.testimonials.length ? `
-    <section class="block center" aria-label="What people say">
-      ${L.testimonials.map(t => `<blockquote>&ldquo;${esc(t.quote)}&rdquo;</blockquote><p class="who">${esc(t.who)}</p>`).join('')}
-    </section>` : '';
-  setStage('wide', `
-    <div class="hero">
-      <h1>${L.hook}</h1>
-      <p class="lede">${L.benefits}</p>
-      <button type="button" class="btn" data-start>${L.button}</button>
-      <p class="hint" style="margin-top:18px">${L.sub}</p>
+  const placeholders = [
+    { quote: 'Placeholder quote. The audit named the one area I kept avoiding, and starting there finally moved something.', who: 'Name here', role: 'Placeholder role' },
+    { quote: 'Placeholder quote. I expected another manifestation quiz. Instead I got an honest read on where my practice was thin.', who: 'Name here', role: 'Placeholder role' },
+    { quote: 'Placeholder quote. A few minutes gave me more clarity than months of reading. I knew exactly where to begin.', who: 'Name here', role: 'Placeholder role' }
+  ];
+  const real = L.testimonials.length ? L.testimonials : placeholders;
+  const cards = real.map(t => `<div class="tcard"><blockquote>${esc(t.quote)}</blockquote>
+      <p class="nm">${esc(t.who)}</p><p class="rl">${esc(t.role)}</p></div>`).join('');
+  const tnote = L.testimonials.length ? '' : '<p class="tnote">Placeholder quotes below. Swap in real responses before publishing.</p>';
+  setStage('land', `
+    <section class="hero2"><div class="wrap">
+      <div>
+        <p class="eyebrow2">${L.eyebrow}</p>
+        <h1>${L.hook}</h1>
+        <p class="sentence">${L.benefits}</p>
+        <div class="cta-row">
+          <button type="button" class="btn pill" data-start>${L.button}</button>
+          <p class="hint">${L.sub}</p>
+        </div>
+      </div>
       <div class="card example" aria-label="Example result">
-        <p class="eyebrow">Example result</p>
-        <div class="cap"><span class="cap-t">Alignment audit</span><span class="level">Medium</span></div>
-        ${[['Coherence', 78], ['Belief Alignment', 62], ['Embodied Sovereignty', 48], ['Aligned Action', 30]].map(r =>
-          `<div class="row"><span class="nm">${r[0]}</span><div class="bar" aria-hidden="true"><span style="width:${r[1]}%"></span></div></div>`).join('')}
+        <p class="eyebrow2">Example result</p>
+        <div class="cap"><span class="cap-t">Alignment audit</span><span class="pill-lv">Medium</span></div>
+        ${[['Coherence', 72], ['Belief Alignment', 44], ['Embodied Sovereignty', 58], ['Aligned Action', 36]].map(r =>
+          `<div class="row"><span>${r[0]}</span><div class="bar" aria-hidden="true"><span style="width:${r[1]}%"></span></div></div>`).join('')}
         <p class="start">Start with: <strong>Aligned Action</strong></p>
       </div>
-      <div class="stats">
-        <div><b>${TOTAL}</b><span>Questions</span></div>
-        <div><b>${CATS.length}</b><span>Core areas</span></div>
-        <div><b>3</b><span>Alignment levels</span></div>
-      </div>
-    </div>
-    <section class="block bio">
+    </div></section>
+
+    <section class="stats"><div class="wrap">
+      <div class="cell"><b>${TOTAL}</b><span>Questions</span></div>
+      <div class="cell"><b>${CATS.length}</b><span>Core areas</span></div>
+      <div class="cell"><b>3</b><span>Alignment levels</span></div>
+    </div></section>
+
+    <section class="bio2"><div class="wrap">
       <img src="images/web/bio-tim.jpg" alt="Tim Gosnell" loading="lazy">
       <div>
         <h2>${L.bioHeading}</h2>
-        ${L.bio.map(p => `<p class="body">${p}</p>`).join('')}
-        <p class="tagline">${L.soundbite}</p>
-        <p class="body">${L.tagline}</p>
-        <p class="research">${L.research}</p>
+        ${L.bio.map(p => `<p>${p}</p>`).join('')}
+        <p class="soundbite">${L.soundbite}</p>
       </div>
-    </section>
-    ${testimonials}
-    <section class="block center">
+    </div></section>
+
+    <section class="lite"><div class="wrap">
+      <h2>${L.tagline}</h2>
+      <p>${L.research}</p>
+    </div></section>
+
+    <section class="testi"><div class="wrap">
+      <p class="eyebrow2">${L.testimonialsEyebrow}</p>
+      <h2>${L.testimonialsHeading}</h2>
+      ${tnote}
+      <div class="tgrid">${cards}</div>
+    </div></section>
+
+    <section class="closeband">
       <h2>${L.closeHeading}</h2>
-      ${L.closeBody.map(p => `<p class="body">${p}</p>`).join('')}
-      <button type="button" class="btn" data-start>${L.button}</button>
+      ${L.closeBody.map(p => `<p>${p}</p>`).join('')}
+      <button type="button" class="btn pill" data-start>${L.button}</button>
     </section>`);
 }
 
