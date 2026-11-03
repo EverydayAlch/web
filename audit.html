@@ -199,6 +199,8 @@
   input[type=text]:focus-visible, input[type=email]:focus-visible, textarea:focus-visible { outline: 2px solid var(--gold-light); outline-offset: 1px; border-color: var(--gold); }
   .consent { display: flex; gap: 12px; align-items: flex-start; font-size: 14px; line-height: 1.6; color: var(--cream-mid); margin: 6px 0 8px; }
   .consent input { margin-top: 4px; accent-color: var(--gold); width: 18px; height: 18px; flex-shrink: 0; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 420px) { .two { grid-template-columns: 1fr; gap: 0; } }
   .trap { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
   .error { color: #e0907a; font-size: 14px; min-height: 22px; margin: 6px 0 4px; }
 
@@ -296,8 +298,12 @@
     <button type="button" class="x" id="gate-close" aria-label="Close">&times;</button>
     <h2 id="gate-title" tabindex="-1">Start the audit.</h2>
     <p class="hint">Your results show up on the next screen.</p>
-    <div class="field"><label for="f-name">Name</label>
-      <input type="text" id="f-name" name="name" autocomplete="name" required></div>
+    <div class="two">
+      <div class="field"><label for="f-first">First name</label>
+        <input type="text" id="f-first" name="first_name" autocomplete="given-name" required></div>
+      <div class="field"><label for="f-last">Last name</label>
+        <input type="text" id="f-last" name="last_name" autocomplete="family-name" required></div>
+    </div>
     <div class="field"><label for="f-email">Email</label>
       <input type="email" id="f-email" name="email" autocomplete="email" inputmode="email" required></div>
     <div class="trap" id="audit-fields" aria-hidden="true"></div>
@@ -459,7 +465,7 @@ const S = {
   yn: {},               // question id -> true (Yes) / false (No)
   pick: {},             // key -> array of chosen options (multi, single)
   text: '',
-  contact: { name: '', email: '', consent: false },
+  contact: { first: '', last: '', email: '', consent: false },
   armed: false,
   result: null,
   sent: null,
@@ -490,11 +496,11 @@ function compute() {
    inside quiz_all_answers_json, not in the field names.
 ------------------------------------------------------------------- */
 function contactFields() {
-  const name = S.contact.name.trim().replace(/\s+/g, ' ');
-  const [first, ...rest] = name.split(' ');
+  const first = S.contact.first.trim().replace(/\s+/g, ' '), last = S.contact.last.trim().replace(/\s+/g, ' ');
+  const name = (first + ' ' + last).trim();
   const utm = {};
   params.forEach((v, k) => { if (k.indexOf('utm_') === 0) utm[k] = v; });
-  return Object.assign({ first_name: first, last_name: rest.join(' '), name, email: S.contact.email.trim(),
+  return Object.assign({ first_name: first, last_name: last, name, email: S.contact.email.trim(),
     source: CONFIG.source, quiz_version: CONFIG.quizVersion }, utm);
 }
 
@@ -533,7 +539,7 @@ function finishFields(r) {
 }
 
 /* the named fields become inputs inside the real form so GHL's script captures them */
-const VISIBLE_NAMES = ['name', 'email', 'marketing_consent'];
+const VISIBLE_NAMES = ['first_name', 'last_name', 'email', 'marketing_consent'];
 function fillFields(flat) {
   const box = $('audit-fields');
   box.textContent = '';
@@ -673,7 +679,7 @@ function refreshNext() {
 }
 
 function renderResults() {
-  const r = S.result, first = S.contact.name.trim().split(/\s+/)[0] || '';
+  const r = S.result, first = S.contact.first.trim();
   const R = RESULTS, circ = 2 * Math.PI * 70;
   const intro = copy(R.intro[r.tier]).replace('{first_name}', esc(first));
   const cats = r.cats.map(c => `
@@ -684,7 +690,7 @@ function renderResults() {
     </div>`).join('');
   const dbg = debug ? `<pre class="debug">${esc(JSON.stringify({ result: r, sent: S.sent }, null, 2))}</pre>` : '';
   setStage('wide', `
-    <p class="rmeta">${R.header} &middot; Prepared for <strong>${esc(S.contact.name.trim())}</strong></p>
+    <p class="rmeta">${R.header} &middot; Prepared for <strong>${esc((S.contact.first + ' ' + S.contact.last).trim())}</strong></p>
     <div class="rhero">
       <div>
         <p class="eyebrow">${R.eyebrow}</p>
@@ -747,16 +753,18 @@ function openGate() {
   const g = $('gate');
   $('gate-err').textContent = '';
   g.hidden = false;
-  $('f-name').focus();
+  $('f-first').focus();
 }
 function closeGate() { $('gate').hidden = true; }
 
 function startAudit() {
   const err = $('gate-err');
-  S.contact.name = $('f-name').value;
+  S.contact.first = $('f-first').value;
+  S.contact.last = $('f-last').value;
   S.contact.email = $('f-email').value;
   S.contact.consent = $('f-consent').checked;
-  if (!S.contact.name.trim()) { err.textContent = 'Please add your name.'; $('f-name').focus(); return; }
+  if (!S.contact.first.trim()) { err.textContent = 'Please add your first name.'; $('f-first').focus(); return; }
+  if (!S.contact.last.trim()) { err.textContent = 'Please add your last name.'; $('f-last').focus(); return; }
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(S.contact.email.trim())) { err.textContent = 'That email doesn’t look right. Check it and try again.'; $('f-email').focus(); return; }
 
   /* honeypot filled: act as if it worked, send nothing */
@@ -851,7 +859,7 @@ $('everyday-alchemy-audit').addEventListener('submit', e => {
 if (debug) {
   const n = { high: 11, medium: 7, low: 3 }[params.get('preview')];
   if (n) {
-    S.contact = { name: 'Test Person', email: 'test@example.com', consent: false };
+    S.contact = { first: 'Test', last: 'Person', email: 'test@example.com', consent: false };
     YESNO.forEach((q, i) => { S.yn[q.id] = i < n; });
     S.pick = { current_situation: [QUESTIONS[12].options[0]], desired_outcome: [QUESTIONS[13].options[0]],
       already_tried: [QUESTIONS[14].options[0]], solution_preference: [QUESTIONS[15].options[0]] };
