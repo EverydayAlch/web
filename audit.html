@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Belief &amp; Identity Alignment Audit — Everyday Alchemy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --obsidian: #0a0908;
+    --deep: #111009;
+    --charcoal: #1a1814;
+    --ash: #2a2822;
+    --gold: #c9a96e;
+    --gold-light: #e2c98a;
+    --gold-dim: #8a6e3e;
+    --cream: #f0e8d8;
+    --cream-mid: rgba(240,232,216,0.65);
+    --cream-low: rgba(240,232,216,0.4);
+    --gold-border: rgba(201,169,110,0.25);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--obsidian);
+    color: var(--cream);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 30%, rgba(201,169,110,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .top { position: relative; z-index: 1; padding: 28px 24px 0; text-align: center; }
+  .logo {
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+
+  .progress {
+    position: fixed; top: 0; left: 0; right: 0;
+    height: 3px;
+    background: rgba(201,169,110,0.12);
+    z-index: 5;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .progress.on { opacity: 1; }
+  .progress span { display: block; height: 100%; width: 0; background: var(--gold); transition: width 0.4s ease; }
+
+  main { position: relative; z-index: 1; flex: 1; display: flex; justify-content: center; padding: 32px 24px 64px; }
+  #stage { width: 100%; max-width: 640px; animation: rise 0.5s ease both; }
+  #stage.wide { max-width: 760px; }
+  #stage.q { align-self: center; }
+
+  @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+
+  .eyebrow {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.45em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 22px;
+  }
+
+  h1, h2, h3 { font-family: 'Cormorant Garamond', serif; font-weight: 300; line-height: 1.12; color: var(--cream); outline: none; }
+  h1 { font-size: clamp(36px, 7vw, 56px); margin-bottom: 20px; }
+  h1 em, h2 em { font-style: italic; color: var(--gold-light); }
+  h2 { font-size: clamp(30px, 5.5vw, 44px); margin-bottom: 14px; }
+  h3 { font-size: 26px; margin-bottom: 8px; }
+
+  .lede { font-size: 17px; line-height: 1.8; color: var(--cream-mid); margin-bottom: 28px; }
+  p.body { font-size: 16px; line-height: 1.8; color: var(--cream-mid); margin-bottom: 18px; }
+  .hint { font-size: 13px; letter-spacing: 0.04em; color: var(--cream-low); margin: 6px 0 22px; }
+
+  /* ---- landing ---- */
+  .hero { text-align: center; padding: 24px 0 8px; }
+  .hero h1 { margin-left: auto; margin-right: auto; max-width: 18ch; }
+  .hero .lede { max-width: 34em; margin-left: auto; margin-right: auto; }
+  .hero .hint { margin-bottom: 0; }
+  section.block { margin-top: 72px; padding-top: 48px; border-top: 1px solid var(--gold-border); }
+  section.block.center { text-align: center; }
+  .card.example { max-width: 460px; margin: 56px auto 0; text-align: left; }
+  .example .cap { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 6px; }
+  .example .cap-t { white-space: nowrap; font-size: 15px; color: var(--cream-mid); }
+  .example .level { font-family: 'Cormorant Garamond', serif; font-size: 34px; color: var(--gold-light); }
+  .example .row { display: flex; align-items: center; gap: 14px; margin-top: 14px; font-size: 14px; color: var(--cream-mid); }
+  .example .row .nm { flex: 0 0 156px; }
+  @media (max-width: 420px) { .example .row .nm { flex-basis: 128px; font-size: 13px; } }
+  .example .row .bar { flex: 1; margin: 0; }
+  .example .start { margin-top: 22px; font-size: 14px; color: var(--cream-mid); }
+  .example .start strong { color: var(--gold-light); font-weight: 400; }
+  .stats { display: flex; justify-content: center; gap: 48px; margin-top: 44px; flex-wrap: wrap; }
+  .stats div { text-align: center; }
+  .stats b { display: block; font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: 44px; color: var(--gold-light); line-height: 1; }
+  .stats span { display: block; margin-top: 8px; font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold-dim); }
+  .bio { display: grid; grid-template-columns: 240px 1fr; gap: 40px; align-items: start; }
+  .bio img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 6px; border: 1px solid var(--gold-border); display: block; }
+  @media (max-width: 680px) { .bio { grid-template-columns: 1fr; gap: 24px; } .bio img { max-width: 280px; } }
+  .tagline { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 32px; color: var(--gold-light); margin: 26px 0 6px; }
+  .research { font-size: 14px; color: var(--cream-low); margin-top: 26px; line-height: 1.7; }
+  blockquote { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-style: italic; line-height: 1.4; color: var(--cream); margin: 0 0 10px; }
+  .who { font-size: 13px; letter-spacing: 0.08em; color: var(--cream-low); margin-bottom: 36px; }
+
+  /* ---- question ---- */
+  .qnum { font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 18px; }
+  .qtext { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(28px, 5.5vw, 40px); line-height: 1.2; color: var(--cream); margin-bottom: 30px; outline: none; }
+  .qtext em { font-style: italic; color: var(--gold-light); }
+  .yn { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 8px; }
+
+  .opt {
+    display: block; width: 100%; text-align: left;
+    font-family: 'Jost', sans-serif; font-weight: 300; font-size: 16px;
+    color: var(--cream);
+    background: rgba(240,232,216,0.04);
+    border: 1px solid var(--gold-border);
+    border-radius: 4px;
+    padding: 16px 20px;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .yn .opt { text-align: center; font-size: 18px; padding: 20px 20px; }
+  .opt:hover:not(:disabled) { background: rgba(201,169,110,0.08); }
+  .opt[aria-pressed="true"] { background: rgba(201,169,110,0.16); border-color: var(--gold); color: var(--gold-light); }
+  .opt:disabled { opacity: 0.35; cursor: not-allowed; }
+  .opt:focus-visible { outline: 2px solid var(--gold-light); outline-offset: 2px; }
+
+  /* ---- form ---- */
+  .field { margin-bottom: 22px; }
+  .field label, .field .lbl {
+    display: block; font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.35em;
+    text-transform: uppercase; color: var(--gold); margin-bottom: 8px;
+  }
+  input[type=text], input[type=email], textarea {
+    width: 100%; font-family: 'Jost', sans-serif; font-weight: 300; font-size: 17px; color: var(--cream);
+    background: rgba(240,232,216,0.05); border: 1px solid var(--gold-border); border-radius: 4px; padding: 15px 16px;
+  }
+  textarea { min-height: 120px; resize: vertical; line-height: 1.6; }
+  input::placeholder, textarea::placeholder { color: var(--cream-low); }
+  input[type=text]:focus-visible, input[type=email]:focus-visible, textarea:focus-visible { outline: 2px solid var(--gold-light); outline-offset: 1px; border-color: var(--gold); }
+  .consent { display: flex; gap: 12px; align-items: flex-start; font-size: 14px; line-height: 1.6; color: var(--cream-mid); margin: 6px 0 8px; }
+  .consent input { margin-top: 4px; accent-color: var(--gold); width: 18px; height: 18px; flex-shrink: 0; }
+  .trap { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+  .error { color: #e0907a; font-size: 14px; min-height: 22px; margin: 6px 0 4px; }
+
+  /* ---- buttons / nav ---- */
+  .nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 36px; }
+  .btn {
+    font-family: 'Cinzel', serif; font-weight: 600; font-size: 14px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--obsidian); background: var(--gold); border: none; border-radius: 4px; padding: 18px 34px; cursor: pointer;
+    box-shadow: 0 6px 24px rgba(201,169,110,0.28); transition: background 0.25s, transform 0.25s, opacity 0.25s;
+  }
+  .btn:hover:not(:disabled) { background: var(--gold-light); transform: translateY(-2px); }
+  .btn:disabled { opacity: 0.35; cursor: not-allowed; box-shadow: none; }
+  .btn:focus-visible { outline: 2px solid var(--cream); outline-offset: 3px; }
+  .back { font-family: 'Jost', sans-serif; font-size: 13px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--cream-low); background: none; border: none; cursor: pointer; padding: 10px 4px; }
+  .back:hover { color: var(--gold-light); }
+  .back:focus-visible { outline: 2px solid var(--gold-light); outline-offset: 2px; }
+
+  /* ---- pop-up ---- */
+  .modal { position: fixed; inset: 0; z-index: 20; background: rgba(10,9,8,0.86); display: flex; align-items: center; justify-content: center; padding: 24px; overflow-y: auto; }
+  .modal[hidden] { display: none; }
+  .modal form { width: 100%; max-width: 460px; background: var(--charcoal); border: 1px solid var(--gold-border); border-radius: 6px; padding: 36px 32px 28px; position: relative; animation: rise 0.35s ease both; }
+  .modal h2 { font-size: 34px; }
+  .modal .x { position: absolute; top: 10px; right: 14px; background: none; border: none; color: var(--cream-low); font-size: 26px; cursor: pointer; padding: 6px 10px; }
+  .modal .x:hover { color: var(--gold-light); }
+  .modal .nav { margin-top: 22px; justify-content: stretch; }
+  .modal .btn { width: 100%; }
+
+  /* ---- results ---- */
+  .rmeta { font-size: 13px; letter-spacing: 0.06em; color: var(--cream-low); margin-bottom: 40px; }
+  .rmeta strong { color: var(--cream-mid); font-weight: 400; }
+  .rhero { display: grid; grid-template-columns: 1fr 280px; gap: 40px; align-items: start; margin-bottom: 20px; }
+  .rhero .lede { margin-bottom: 0; }
+  .card { background: var(--charcoal); border: 1px solid var(--gold-border); border-radius: 6px; padding: 28px 24px; text-align: center; }
+  .gauge { position: relative; width: 170px; height: 170px; margin: 0 auto 14px; }
+  .gauge svg { transform: rotate(-90deg); }
+  .gauge .pct { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 48px; color: var(--cream); }
+  .card .cap { font-family: 'Cormorant Garamond', serif; font-size: 22px; color: var(--gold-light); margin-bottom: 10px; }
+  .card p { font-size: 15px; line-height: 1.7; color: var(--cream-mid); }
+  .rs { margin-top: 64px; padding-top: 40px; border-top: 1px solid var(--gold-border); }
+  .ladder { display: flex; gap: 8px; margin-top: 22px; max-width: 460px; }
+  .ladder div { flex: 1; text-align: center; font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; padding: 12px 4px; border: 1px solid var(--gold-border); border-radius: 4px; color: var(--cream-low); }
+  .ladder div.on { background: rgba(201,169,110,0.16); border-color: var(--gold); color: var(--gold-light); }
+  .cat { padding: 22px 0; border-bottom: 1px solid rgba(201,169,110,0.15); }
+  .cat:last-child { border-bottom: none; }
+  .cat-head { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; margin-bottom: 10px; }
+  .cat-name { font-family: 'Cormorant Garamond', serif; font-size: 26px; color: var(--cream); }
+  .cat-score { font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); white-space: nowrap; }
+  .bar { height: 4px; background: rgba(201,169,110,0.14); border-radius: 2px; margin-bottom: 12px; }
+  .bar span { display: block; height: 100%; background: var(--gold); border-radius: 2px; }
+  .cat p { font-size: 15px; line-height: 1.7; color: var(--cream-mid); }
+  .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 8px; }
+  .pair .card { text-align: left; }
+  .pair h3 { margin: 4px 0 10px; }
+  @media (min-width: 681px) { .pair .eyebrow { min-height: 3em; } }
+  .todo { color: var(--gold-dim); border-bottom: 1px dashed var(--gold-dim); }
+
+  pre.debug { margin-top: 40px; padding: 16px; max-height: 360px; overflow: auto; font-size: 12px; line-height: 1.5; color: var(--cream-mid); background: rgba(240,232,216,0.05); border: 1px dashed var(--gold-border); white-space: pre-wrap; }
+
+  @media (max-width: 680px) {
+    .rhero { grid-template-columns: 1fr; }
+    .pair { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 520px) {
+    .nav { flex-direction: column-reverse; align-items: stretch; }
+    .btn { width: 100%; }
+    .back { align-self: center; }
+    .modal form { padding: 32px 22px 22px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #stage, .modal form { animation: none; }
+    .progress span { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress" role="progressbar" aria-label="Audit progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="bar"></span></div>
+
+<header class="top"><a class="logo" href="index.html">Everyday Alchemy</a></header>
+
+<iframe name="ghl-sink" title="" hidden tabindex="-1" aria-hidden="true"></iframe>
+
+<main><div id="stage">
+  <!-- Shown until the script builds the page, or if scripts are off or blocked. -->
+  <p class="eyebrow">Free Audit</p>
+  <h1>Frustrated that the aligned life you&rsquo;ve been asking for hasn&rsquo;t arrived yet?</h1>
+  <p class="lede">Loading the audit&hellip;</p>
+  <p class="hint">If nothing else appears, JavaScript is turned off or blocked here. Open this page in a regular browser such as Chrome or Safari.</p>
+</div></main>
+
+<!-- Name and email pop-up. It stays in the page all session so the hidden quiz fields can be
+     added to this same form and sent again at the end. -->
+<div class="modal" id="gate" hidden role="dialog" aria-modal="true" aria-labelledby="gate-title">
+  <form id="everyday-alchemy-audit" novalidate method="post" action="about:blank" target="ghl-sink">
+    <button type="button" class="x" id="gate-close" aria-label="Close">&times;</button>
+    <h2 id="gate-title" tabindex="-1">Start the audit.</h2>
+    <p class="hint">Your results show up on the next screen.</p>
+    <div class="field"><label for="f-name">Name</label>
+      <input type="text" id="f-name" name="name" autocomplete="name" required></div>
+    <div class="field"><label for="f-email">Email</label>
+      <input type="email" id="f-email" name="email" autocomplete="email" inputmode="email" required></div>
+    <div class="trap" id="audit-fields" aria-hidden="true"></div>
+    <div class="trap" aria-hidden="true"><label>Company <input type="text" id="f-company" name="company" tabindex="-1" autocomplete="off"></label></div>
+    <label class="consent"><input type="checkbox" id="f-consent" name="marketing_consent" value="true">
+      <span id="consent-text"></span></label>
+    <p class="error" id="gate-err" role="alert"></p>
+    <div class="nav"><button type="submit" class="btn" id="gate-go">Start the audit</button></div>
+  </form>
+</div>
+
+<script>
+/* ------------------------------------------------------------------
+   CONFIG
+   Same wiring as the old quiz: the pop-up form is a real <form> with named
+   inputs, and GoHighLevel's External Tracking script (paste it just before
+   </body>) captures each submission, creates or updates the contact and
+   fires its Form Submission trigger. This page fetches nothing itself.
+   The form is submitted twice: once from the pop-up (name and email) and
+   once when the last question is answered (everything).
+   ghlTrackingInstalled: flip to true once the GHL snippet is on this page.
+   Until then, on the live site the pop-up shows an error instead of letting
+   people through unsent; on localhost or with ?debug=1 it still runs so the
+   flow can be tested. Never test with the tracking tag loaded.
+------------------------------------------------------------------- */
+const CONFIG = {
+  ghlTrackingInstalled: true,
+  quizVersion: '2',
+  source: 'Everyday Alchemy audit'
+};
+
+/* ------------------------------------------------------------------
+   CONTENT
+   Questions, answers and scoring come from the ScoreApp build (read from
+   the preview). Anything in [square brackets] is copy that hasn't been
+   written yet and shows on the page as a dashed placeholder.
+------------------------------------------------------------------- */
+const CATS = [
+  { key: 'coherence',   name: 'Coherence',            field: 'coherence' },
+  { key: 'belief',      name: 'Belief Alignment',     field: 'belief_alignment' },
+  { key: 'sovereignty', name: 'Embodied Sovereignty', field: 'embodied_sovereignty' },
+  { key: 'action',      name: 'Aligned Action',       field: 'aligned_action' }
+];
+const CAT = Object.fromEntries(CATS.map(c => [c.key, c]));
+
+/* A Yes scores one point in the question's category. A No scores nothing. */
+const QUESTIONS = [
+  { id: 1,  type: 'yesno', cat: 'action',      q: 'Do you have a daily practice?' },
+  { id: 2,  type: 'yesno', cat: 'belief',      q: 'Have you decided what you actually want?' },
+  { id: 3,  type: 'yesno', cat: 'belief',      q: 'Is what you want something you could accomplish in the next twelve months?' },
+  { id: 4,  type: 'yesno', cat: 'sovereignty', q: 'Have you decided you&rsquo;re <em>doing it</em>, full stop? Come hell or high water, whatever anybody says or does, however many times it fails?' },
+  { id: 5,  type: 'yesno', cat: 'belief',      q: 'Have you gotten really specific about it? And I mean really specific. (Not I own my own company...)' },
+  { id: 6,  type: 'yesno', cat: 'coherence',   q: 'Have you learned how to meditate?' },
+  { id: 7,  type: 'yesno', cat: 'coherence',   q: 'Have you learned how to observe your own thoughts and feelings in a meditative state?' },
+  { id: 8,  type: 'yesno', cat: 'sovereignty', q: 'Do you know how to get into present time?' },
+  { id: 9,  type: 'yesno', cat: 'action',      q: 'Do you understand that you actually have to become the person, in physical reality, who gets what you want?' },
+  { id: 10, type: 'yesno', cat: 'coherence',   q: 'Would you be okay if everything you ever desired came through a different person, a different path than the one you have in mind?' },
+  { id: 11, type: 'yesno', cat: 'action',      q: 'When you set an intention, do you then do everything you can see to bring it about?' },
+  { id: 12, type: 'yesno', cat: 'sovereignty', q: 'Have you stopped wondering where the life you want is? Why source, the universe, God, has not delivered it yet?' },
+  { id: 13, type: 'multi', key: 'current_situation', min: 1, max: 3, hint: 'Pick up to three.',
+    q: 'Which best describes your current situation?',
+    options: ['I’m not happy with my financial situation', 'Feeling alone', 'The weight of it all is too much',
+              'My thoughts spiral', 'I’m wondering if it actually works', 'My body hurts / I feel terrible'] },
+  { id: 14, type: 'single', key: 'desired_outcome',
+    q: 'Which best describes what you&rsquo;re looking for?',
+    options: ['Financially abundant', 'More friends and love', 'Knowing that I can handle what comes',
+              'Getting calm, clear, and present', 'My life going in the right direction', 'My body feeling good/healthy'] },
+  { id: 15, type: 'multi', key: 'already_tried', min: 1, max: null, hint: 'Pick as many as apply.',
+    q: 'What have you tried that hasn&rsquo;t worked?',
+    options: ['Visualization', 'Scripting', 'Meditation', 'Retreats', 'Other coaches', 'Redoing coursework'] },
+  { id: 16, type: 'single', key: 'solution_preference',
+    q: 'What kind of solution would best suit your needs?',
+    options: ['One-on-one mentoring', 'A mastermind', 'A cohort (working on it in a group)',
+              'Weekly group sessions', 'Coursework', 'Do-it-yourself kit'] },
+  { id: 17, type: 'text', key: 'anything_else', q: 'Is there anything else you&rsquo;d like me to know?', placeholder: 'In your own words (optional)' }
+];
+const YESNO = QUESTIONS.filter(q => q.type === 'yesno');
+const TOTAL = QUESTIONS.length;
+
+const CONSENT_HTML = 'I agree to receive marketing and promotional emails from Everyday Alchemy';
+
+/* Landing page */
+const LANDING = {
+  hook: 'Frustrated that the aligned life you&rsquo;ve been asking for hasn&rsquo;t arrived yet?',
+  sub: 'Answer seventeen questions to find out. A few minutes.',
+  benefits: 'This assessment will help you to measure and improve three things: what you believe, what you do, and how you think',
+  bioHeading: 'I&rsquo;m Tim and I created Everyday Alchemy.',
+  bio: [
+    'I created Everyday Alchemy because, you know how when you&rsquo;re learning any subject, there&rsquo;s all these ideas that you kind of get and you kind of don&rsquo;t?',
+    'And they&rsquo;ve got these big ideas wrapped in fancy words, and you think you understand them, only to find out later that you really didn&rsquo;t?',
+    'Yeah, well, the spiritual community has all sorts of that in it, and it doesn&rsquo;t help everyday people learn the concepts.'
+  ],
+  soundbite: 'Alchemy without the woo.',
+  tagline: 'An honest look, and a clear place to start.',
+  research: 'This assessment draws on work from researchers including Locke and Latham, Harkin, and Amabile and Kramer',
+  /* testimonials for taking the audit: [{ quote: '', who: '' }]. The section stays out of the page until there is one. */
+  testimonials: [],
+  closeHeading: 'Find out why the life you want isn&rsquo;t here yet.',
+  closeBody: ['17 questions. It takes a few minutes.', 'You&rsquo;ll get immediate results and recommendations.'],
+  button: 'Start the audit'
+};
+
+/* Results page */
+const RESULTS = {
+  header: 'Belief &amp; Identity Alignment Audit',
+  eyebrow: 'Your alignment, reflected',
+  heading: 'Where belief meets lived reality.',
+  intro: {
+    High: 'Hi {first_name}, you&rsquo;ve been thinking, &ldquo;What more do I need to do?&rdquo; and &ldquo;Why isn&rsquo;t it here yet? I&rsquo;ve done everything.&rdquo; You&rsquo;ve gone over the material and redone it and looked again and looked again, and yet you&rsquo;re still in the same place. And the truth is, most of what you need is in place, and that&rsquo;s actually the most insidious problem, because almost all of it IS there. So here&rsquo;s what isn&rsquo;t...',
+    Medium: '[Medium score intro: to write]',
+    Low: '[Low score intro: to write]'
+  },
+  scoreLabel: 'Your overall alignment',
+  scoreCopy: '[Line under the score ring: to write]',
+  s1: '01 · Your Scores',
+  tierHeading: '{tier} Alignment',
+  tierCopy: { High: '[High level paragraph: to write]', Medium: '[Medium level paragraph: to write]', Low: '[Low level paragraph: to write]' },
+  s2: '02 · The four areas as one system',
+  s2Intro: '[Intro to the four areas: to write]',
+  catCopy: {
+    coherence:   { High: '[Coherence, high: to write]',   Medium: '[Coherence, medium: to write]',   Low: '[Coherence, low: to write]' },
+    belief:      { High: '[Belief Alignment, high: to write]', Medium: '[Belief Alignment, medium: to write]', Low: '[Belief Alignment, low: to write]' },
+    sovereignty: { High: '[Embodied Sovereignty, high: to write]', Medium: '[Embodied Sovereignty, medium: to write]', Low: '[Embodied Sovereignty, low: to write]' },
+    action:      { High: '[Aligned Action, high: to write]', Medium: '[Aligned Action, medium: to write]', Low: '[Aligned Action, low: to write]' }
+  },
+  s3: '03 · Your pattern',
+  strongestEyebrow: 'Where you are most embodied',
+  strongestCopy: '[Strongest area paragraph: to write]',
+  focusEyebrow: 'Your key focus area',
+  focusCopy: '[Key focus area paragraph: to write]',
+  s4: '04 · Your next step',
+  nextHeading: '[Next step heading: to write]',
+  nextCopy: '[Next step paragraph: to write]'
+};
+
+/* ------------------------------------------------------------------
+   HELPERS
+------------------------------------------------------------------- */
+const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const plain = html => { const d = document.createElement('div'); d.innerHTML = html; return d.textContent; };
+const $ = id => document.getElementById(id);
+const params = new URLSearchParams(location.search);
+const debug = params.has('debug');
+const devMode = debug || ['localhost', '127.0.0.1', ''].includes(location.hostname);
+/* unwritten copy shows as a dashed placeholder; written copy shows as is */
+const copy = t => (t.charAt(0) === '[' ? `<span class="todo">${esc(t)}</span>` : t);
+const tierOf = pct => (pct >= 80 ? 'High' : pct >= 40 ? 'Medium' : 'Low');
+const slug = s => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+
+/* ------------------------------------------------------------------
+   STATE
+------------------------------------------------------------------- */
+const S = {
+  step: 'landing',      // landing | q | results
+  i: 0,                 // index into QUESTIONS
+  yn: {},               // question id -> true (Yes) / false (No)
+  pick: {},             // key -> array of chosen options (multi, single)
+  text: '',
+  contact: { name: '', email: '', consent: false },
+  armed: false,
+  result: null,
+  sent: null,
+  error: ''
+};
+
+/* ------------------------------------------------------------------
+   SCORING
+------------------------------------------------------------------- */
+function compute() {
+  const per = Object.fromEntries(CATS.map(c => [c.key, 0]));
+  let yes = 0;
+  YESNO.forEach(q => { if (S.yn[q.id] === true) { per[q.cat]++; yes++; } });
+  const pct = Math.round(yes / YESNO.length * 100);
+  const cats = CATS.map(c => {
+    const n = per[c.key], p = Math.round(n / 3 * 100);
+    return { key: c.key, name: c.name, points: n, potential: 3, percent: p, tier: tierOf(p) };
+  });
+  /* ties go to the first area in the list, as ScoreApp did */
+  let hi = cats[0], lo = cats[0];
+  cats.forEach(c => { if (c.points > hi.points) hi = c; if (c.points < lo.points) lo = c; });
+  return { points: yes, potential: YESNO.length, percent: pct, tier: tierOf(pct), cats, strongest: hi, focus: lo };
+}
+
+/* ------------------------------------------------------------------
+   GOHIGHLEVEL FIELDS
+   Plain names with a quiz_ prefix. The version lives in quiz_version and
+   inside quiz_all_answers_json, not in the field names.
+------------------------------------------------------------------- */
+function contactFields() {
+  const name = S.contact.name.trim().replace(/\s+/g, ' ');
+  const [first, ...rest] = name.split(' ');
+  const utm = {};
+  params.forEach((v, k) => { if (k.indexOf('utm_') === 0) utm[k] = v; });
+  return Object.assign({ first_name: first, last_name: rest.join(' '), name, email: S.contact.email.trim(),
+    source: CONFIG.source, quiz_version: CONFIG.quizVersion }, utm);
+}
+
+function startFields() {
+  return Object.assign(contactFields(), { tags: 'audit-started' });
+}
+
+function finishFields(r) {
+  const out = Object.assign(contactFields(), {
+    tags: ['audit-started', 'audit-completed', 'audit-' + r.tier.toLowerCase(), 'audit-focus-' + slug(r.focus.name)].join(', '),
+    quiz_overall_level: r.tier,
+    quiz_score_total: r.points,
+    quiz_score_percent: r.percent,
+    quiz_highest_scoring_category: r.strongest.name,
+    quiz_lowest_scoring_category: r.focus.name,
+    quiz_current_situation: (S.pick.current_situation || []).join(', '),
+    quiz_desired_outcome: (S.pick.desired_outcome || []).join(', '),
+    quiz_already_tried: (S.pick.already_tried || []).join(', '),
+    quiz_solution_preference: (S.pick.solution_preference || []).join(', '),
+    quiz_anything_else: S.text.trim(),
+    quiz_completed_at: new Date().toISOString()
+  });
+  r.cats.forEach(c => { out['quiz_score_' + CAT[c.key].field] = c.points; });
+  out.quiz_all_answers_json = JSON.stringify({
+    quiz_version: CONFIG.quizVersion,
+    yes_no: Object.fromEntries(YESNO.map(q => [q.id, S.yn[q.id] === true ? 'Yes' : 'No'])),
+    current_situation: S.pick.current_situation || [],
+    desired_outcome: S.pick.desired_outcome || [],
+    already_tried: S.pick.already_tried || [],
+    solution_preference: S.pick.solution_preference || [],
+    anything_else: S.text.trim(),
+    score: { points: r.points, potential: r.potential, percent: r.percent, tier: r.tier,
+      areas: Object.fromEntries(r.cats.map(c => [CAT[c.key].field, c.points])) }
+  });
+  return out;
+}
+
+/* the named fields become inputs inside the real form so GHL's script captures them */
+const VISIBLE_NAMES = ['name', 'email', 'marketing_consent'];
+function fillFields(flat) {
+  const box = $('audit-fields');
+  box.textContent = '';
+  Object.keys(flat).forEach(k => {
+    if (VISIBLE_NAMES.indexOf(k) >= 0) return;
+    const i = document.createElement('input');
+    i.type = 'text'; i.name = k; i.tabIndex = -1; i.setAttribute('autocomplete', 'off');
+    i.value = flat[k] == null ? '' : String(flat[k]);
+    box.appendChild(i);
+  });
+}
+
+function sendForm(flat) {
+  const form = $('everyday-alchemy-audit');
+  fillFields(flat);
+  S.sent = flat;
+  S.armed = true;
+  if (form.requestSubmit) form.requestSubmit();
+  else form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+}
+
+/* ------------------------------------------------------------------
+   RENDER
+------------------------------------------------------------------- */
+const stage = $('stage');
+
+function setStage(cls, html, focusSel) {
+  stage.className = cls || '';
+  stage.style.animation = 'none'; void stage.offsetWidth; stage.style.animation = '';
+  stage.innerHTML = html;
+  const bar = $('progress');
+  const on = S.step === 'q';
+  bar.classList.toggle('on', on);
+  const pct = on ? Math.round(S.i / TOTAL * 100) : 0;
+  $('bar').style.width = pct + '%';
+  bar.setAttribute('aria-valuenow', pct);
+  const f = focusSel && stage.querySelector(focusSel);
+  if (f) { f.setAttribute('tabindex', '-1'); f.focus({ preventScroll: true }); }
+  window.scrollTo(0, 0);
+}
+
+function renderLanding() {
+  const L = LANDING;
+  const testimonials = L.testimonials.length ? `
+    <section class="block center" aria-label="What people say">
+      ${L.testimonials.map(t => `<blockquote>&ldquo;${esc(t.quote)}&rdquo;</blockquote><p class="who">${esc(t.who)}</p>`).join('')}
+    </section>` : '';
+  setStage('wide', `
+    <div class="hero">
+      <h1>${L.hook}</h1>
+      <p class="lede">${L.benefits}</p>
+      <button type="button" class="btn" data-start>${L.button}</button>
+      <p class="hint" style="margin-top:18px">${L.sub}</p>
+      <div class="card example" aria-label="Example result">
+        <p class="eyebrow">Example result</p>
+        <div class="cap"><span class="cap-t">Alignment audit</span><span class="level">Medium</span></div>
+        ${[['Coherence', 78], ['Belief Alignment', 62], ['Embodied Sovereignty', 48], ['Aligned Action', 30]].map(r =>
+          `<div class="row"><span class="nm">${r[0]}</span><div class="bar" aria-hidden="true"><span style="width:${r[1]}%"></span></div></div>`).join('')}
+        <p class="start">Start with: <strong>Aligned Action</strong></p>
+      </div>
+      <div class="stats">
+        <div><b>${TOTAL}</b><span>Questions</span></div>
+        <div><b>${CATS.length}</b><span>Core areas</span></div>
+        <div><b>3</b><span>Alignment levels</span></div>
+      </div>
+    </div>
+    <section class="block bio">
+      <img src="images/web/bio-tim.jpg" alt="Tim Gosnell" loading="lazy">
+      <div>
+        <h2>${L.bioHeading}</h2>
+        ${L.bio.map(p => `<p class="body">${p}</p>`).join('')}
+        <p class="tagline">${L.soundbite}</p>
+        <p class="body">${L.tagline}</p>
+        <p class="research">${L.research}</p>
+      </div>
+    </section>
+    ${testimonials}
+    <section class="block center">
+      <h2>${L.closeHeading}</h2>
+      ${L.closeBody.map(p => `<p class="body">${p}</p>`).join('')}
+      <button type="button" class="btn" data-start>${L.button}</button>
+    </section>`);
+}
+
+function renderQuestion() {
+  const q = QUESTIONS[S.i];
+  let body = '';
+  if (q.type === 'yesno') {
+    const a = S.yn[q.id];
+    body = `<div class="yn" role="group" aria-label="Answer">
+      <button type="button" class="opt" data-yn="1" aria-pressed="${a === true}">Yes</button>
+      <button type="button" class="opt" data-yn="0" aria-pressed="${a === false}">No</button></div>`;
+  } else if (q.type === 'multi' || q.type === 'single') {
+    const chosen = S.pick[q.key] || [];
+    body = (q.hint ? `<p class="hint">${q.hint}</p>` : '') +
+      `<div class="options" id="opts" role="group" aria-label="Answer">` +
+      q.options.map(o => `<button type="button" class="opt" data-o="${esc(o)}" aria-pressed="${chosen.indexOf(o) >= 0}">${esc(o)}</button>`).join('') + `</div>`;
+  } else {
+    body = `<div class="field"><textarea id="f-text" placeholder="${esc(q.placeholder)}">${esc(S.text)}</textarea></div>`;
+  }
+  const last = q.type === 'text';
+  const nav = `<div class="nav">
+      ${S.i > 0 ? '<button type="button" class="back" id="back">Back</button>' : '<span></span>'}
+      ${q.type === 'yesno' ? '<span></span>' : `<button type="button" class="btn" id="next">${last ? 'See my results' : 'Next'}</button>`}
+    </div>`;
+  setStage('q', `<p class="qnum">${q.id} of ${TOTAL}</p><h2 class="qtext" id="qtext">${q.q}</h2>${body}${nav}`, '#qtext');
+  refreshNext();
+}
+
+function refreshNext() {
+  const q = QUESTIONS[S.i], b = $('next');
+  if (!b) return;
+  if (q.type === 'multi' || q.type === 'single') b.disabled = (S.pick[q.key] || []).length < (q.min || 1);
+}
+
+function renderResults() {
+  const r = S.result, first = S.contact.name.trim().split(/\s+/)[0] || '';
+  const R = RESULTS, circ = 2 * Math.PI * 70;
+  const intro = copy(R.intro[r.tier]).replace('{first_name}', esc(first));
+  const cats = r.cats.map(c => `
+    <div class="cat">
+      <div class="cat-head"><span class="cat-name">${esc(c.name)}</span><span class="cat-score">${c.points} of ${c.potential} &middot; ${c.tier}</span></div>
+      <div class="bar" aria-hidden="true"><span style="width:${c.percent}%"></span></div>
+      <p>${copy(R.catCopy[c.key][c.tier])}</p>
+    </div>`).join('');
+  const dbg = debug ? `<pre class="debug">${esc(JSON.stringify({ result: r, sent: S.sent }, null, 2))}</pre>` : '';
+  setStage('wide', `
+    <p class="rmeta">${R.header} &middot; Prepared for <strong>${esc(S.contact.name.trim())}</strong></p>
+    <div class="rhero">
+      <div>
+        <p class="eyebrow">${R.eyebrow}</p>
+        <h1 id="rh" tabindex="-1">${R.heading}</h1>
+        <p class="lede">${intro}</p>
+      </div>
+      <div class="card">
+        <div class="gauge" role="img" aria-label="${r.percent} percent">
+          <svg width="170" height="170" viewBox="0 0 170 170" aria-hidden="true">
+            <circle cx="85" cy="85" r="70" fill="none" stroke="rgba(201,169,110,0.14)" stroke-width="8"/>
+            <circle cx="85" cy="85" r="70" fill="none" stroke="#c9a96e" stroke-width="8" stroke-linecap="round"
+              stroke-dasharray="${circ.toFixed(1)}" stroke-dashoffset="${(circ * (1 - r.percent / 100)).toFixed(1)}"/>
+          </svg>
+          <div class="pct">${r.percent}%</div>
+        </div>
+        <p class="cap">${R.scoreLabel}</p>
+        <p>${copy(R.scoreCopy)}</p>
+      </div>
+    </div>
+
+    <section class="rs">
+      <p class="eyebrow">${R.s1}</p>
+      <h2>${R.tierHeading.replace('{tier}', r.tier)}</h2>
+      <p class="body">${copy(R.tierCopy[r.tier])}</p>
+      <div class="ladder" aria-hidden="true">${['Low', 'Medium', 'High'].map(t => `<div class="${t === r.tier ? 'on' : ''}">${t}</div>`).join('')}</div>
+    </section>
+
+    <section class="rs">
+      <p class="eyebrow">${R.s2}</p>
+      <p class="body">${copy(R.s2Intro)}</p>
+      ${cats}
+    </section>
+
+    <section class="rs">
+      <p class="eyebrow">${R.s3}</p>
+      <div class="pair">
+        <div class="card"><p class="eyebrow">${R.strongestEyebrow}</p><h3>${esc(r.strongest.name)}</h3><p>${copy(R.strongestCopy)}</p></div>
+        <div class="card"><p class="eyebrow">${R.focusEyebrow}</p><h3>${esc(r.focus.name)}</h3><p>${copy(R.focusCopy)}</p></div>
+      </div>
+    </section>
+
+    <section class="rs">
+      <p class="eyebrow">${R.s4}</p>
+      <h2>${copy(R.nextHeading)}</h2>
+      <p class="body">${copy(R.nextCopy)}</p>
+    </section>
+    ${dbg}`, '#rh');
+}
+
+function render() {
+  if (S.step === 'landing') renderLanding();
+  else if (S.step === 'q') renderQuestion();
+  else renderResults();
+}
+
+/* ------------------------------------------------------------------
+   FLOW
+------------------------------------------------------------------- */
+function openGate() {
+  const g = $('gate');
+  $('gate-err').textContent = '';
+  g.hidden = false;
+  $('f-name').focus();
+}
+function closeGate() { $('gate').hidden = true; }
+
+function startAudit() {
+  const err = $('gate-err');
+  S.contact.name = $('f-name').value;
+  S.contact.email = $('f-email').value;
+  S.contact.consent = $('f-consent').checked;
+  if (!S.contact.name.trim()) { err.textContent = 'Please add your name.'; $('f-name').focus(); return; }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(S.contact.email.trim())) { err.textContent = 'That email doesn’t look right. Check it and try again.'; $('f-email').focus(); return; }
+
+  /* honeypot filled: act as if it worked, send nothing */
+  if ($('f-company').value) return begin();
+
+  if (!devMode && !CONFIG.ghlTrackingInstalled) {
+    err.textContent = 'This audit isn’t connected yet, so your details weren’t sent. Please try again later.';
+    return;
+  }
+  $('gate-go').disabled = true;
+  sendForm(startFields());
+  setTimeout(begin, 700);
+}
+
+function begin() {
+  $('gate-go').disabled = false;
+  closeGate();
+  S.step = 'q'; S.i = 0;
+  render();
+}
+
+function finish() {
+  S.result = compute();
+  S.step = 'results';
+  /* the same form goes out again, this time with every answer in it. A honeypot
+     visitor never reaches here because they weren't sent in the first place. */
+  if (!$('f-company').value && (devMode || CONFIG.ghlTrackingInstalled)) sendForm(finishFields(S.result));
+  else S.sent = finishFields(S.result);
+  render();
+}
+
+function advance() {
+  if (S.i < TOTAL - 1) { S.i++; render(); } else finish();
+}
+
+/* ------------------------------------------------------------------
+   EVENTS
+------------------------------------------------------------------- */
+stage.addEventListener('click', e => {
+  const t = e.target;
+  if (t.closest('[data-start]')) return openGate();
+
+  const yn = t.closest('[data-yn]');
+  if (yn) {
+    S.yn[QUESTIONS[S.i].id] = yn.dataset.yn === '1';
+    stage.querySelectorAll('[data-yn]').forEach(b => b.setAttribute('aria-pressed', b === yn));
+    return setTimeout(advance, 220);
+  }
+
+  const o = t.closest('[data-o]');
+  if (o) {
+    const q = QUESTIONS[S.i], val = o.dataset.o;
+    let cur = S.pick[q.key] || [];
+    if (q.type === 'single') cur = [val];
+    else if (cur.indexOf(val) >= 0) cur = cur.filter(x => x !== val);
+    else if (!q.max || cur.length < q.max) cur = cur.concat(val);
+    S.pick[q.key] = cur;
+    const full = q.max && cur.length >= q.max;
+    stage.querySelectorAll('[data-o]').forEach(b => {
+      const on = cur.indexOf(b.dataset.o) >= 0;
+      b.setAttribute('aria-pressed', on);
+      b.disabled = q.type === 'multi' && full && !on;
+    });
+    return refreshNext();
+  }
+
+  if (t.closest('#back')) { if (S.i > 0) { S.i--; render(); } return; }
+  if (t.closest('#next')) {
+    const q = QUESTIONS[S.i];
+    if (q.type === 'text') S.text = $('f-text').value;
+    return advance();
+  }
+});
+
+$('gate-close').addEventListener('click', closeGate);
+$('gate').addEventListener('keydown', e => { if (e.key === 'Escape') closeGate(); });
+$('consent-text').textContent = plain(CONSENT_HTML);
+
+$('everyday-alchemy-audit').addEventListener('submit', e => {
+  /* armed = the quiz fields are already in the form, so this is the real
+     submission GHL's tracking script should see: let it go (it targets a
+     hidden iframe, so the page never navigates) */
+  if (S.armed) { S.armed = false; return; }
+  e.preventDefault();
+  startAudit();
+});
+
+/* ------------------------------------------------------------------
+   START
+------------------------------------------------------------------- */
+/* test hook, debug mode only: ?debug=1&preview=high|medium|low jumps to a results page */
+if (debug) {
+  const n = { high: 11, medium: 7, low: 3 }[params.get('preview')];
+  if (n) {
+    S.contact = { name: 'Test Person', email: 'test@example.com', consent: false };
+    YESNO.forEach((q, i) => { S.yn[q.id] = i < n; });
+    S.pick = { current_situation: [QUESTIONS[12].options[0]], desired_outcome: [QUESTIONS[13].options[0]],
+      already_tried: [QUESTIONS[14].options[0]], solution_preference: [QUESTIONS[15].options[0]] };
+    S.result = compute(); S.step = 'results'; S.sent = finishFields(S.result);
+  }
+  window.__audit = { S, compute, render, QUESTIONS, finishFields };
+}
+render();
+</script>
+
+<!-- GoHighLevel External Tracking: captures this page's form submissions and
+     creates or updates the contact. Keep this tag below the audit script. -->
+<script
+  src="https://link.msgsndr.com/js/external-tracking.js"
+  data-tracking-id="tk_d3287e2a58764cbfb008eb6139fd67fd">
+</script>
+</body>
+</html>
