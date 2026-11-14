@@ -332,6 +332,11 @@
     margin: 0 auto;
   }
 
+  /* each sentence on its own line, alternating cream and gold italic */
+  .pain-lines { font-size: clamp(26px, 3vw, 40px); line-height: 1.25; }
+  .pain-lines > span, .pain-lines > em { display: block; }
+  .pain-lines > span + em, .pain-lines > em + span { margin-top: 0.7em; }
+
   .problem-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -443,6 +448,17 @@
     font-style: italic;
     line-height: 1.6;
     color: var(--cream);
+  }
+
+  /* the closing line of the story: the big finish */
+  .story-finale {
+    margin: 72px 0 0;
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(24px, 3vw, 38px);
+    font-weight: 300;
+    line-height: 1.15;
+    color: var(--gold-light);
   }
 
   /* ---- THE FRAMEWORK ---- */
@@ -902,15 +918,28 @@
   #how .pillar:hover { background: #dccfb4; }
   #how .pillar-roman { color: #8a6e3e; }
   #how .pillar-name { color: #2a2218; }
+  #how .pillar-name { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 400; letter-spacing: 0; line-height: 1.3; }
   #how .pillar-desc { color: rgba(42,34,24,0.8); }
   #free .section-title { color: #2a2218; }
   #free .section-title em { color: #6f5528; }
   #free::before { background: none; }
   /* Where To Start: shared rows so names, descriptions and buttons line up across the three cards */
   #start .pillars { grid-template-rows: auto auto auto auto auto; }
+  #start .pillars { grid-template-columns: 1fr 1fr; max-width: 900px; margin-left: auto; margin-right: auto; }
+  @media (max-width: 900px) { #start .pillars { grid-template-columns: 1fr; } }
   #start .pillar { display: grid; grid-row: span 5; grid-template-rows: subgrid; justify-items: center; align-items: start; row-gap: 0; }
   #start .pillar-name { align-self: center; }
-  #start .pillar-desc { margin-bottom: 28px; }
+  #start .pillar-desc { margin-bottom: 28px; font-size: 18px; line-height: 1.6; color: var(--cream); text-align: left; justify-self: stretch; }
+  /* no gold vertical line through the middle of the cards on hover */
+  #start .pillar::before, #how .pillar::before { display: none; }
+  /* How It Works cards are not links: no hover change */
+  #how .pillar, #how .pillar:hover { background: #e6dcc6; cursor: default; }
+  #start .seasonal-a, #start .seasonal-b { display: block; }
+  #start .seasonal-label { display: block; margin-bottom: 4px; font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); font-style: normal; }
+  #start .to-list { list-style: none; margin: 4px 0 0; padding: 0; font-style: italic; color: var(--gold-light); }
+  #start .to-list li { margin: 0.45em 0; padding-left: 1.2em; position: relative; }
+  #start .to-list li::before { content: '\2022'; color: var(--gold); position: absolute; left: 0; font-style: normal; }
+  #start .seasonal-b { margin-top: 1.8em; font-style: italic; color: var(--gold-light); }
   #start .pillar .cta-secondary { margin: 0 !important; align-self: end; }
   /* nav button */
   .nav-links { align-items: center; }
@@ -965,6 +994,16 @@
   .word-rotator > span.is-active { opacity: 1; transform: translateY(0); }
   .word-rotator > span.is-leaving { opacity: 0; transform: translateY(-0.3em); }
   .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  /* Is Everyday Alchemy for you: cream band */
+  .foryou { background: #f0e8d8; padding: 120px 40px; position: relative; z-index: 1; }
+  .foryou-inner { max-width: 860px; margin: 0 auto; text-align: center; }
+  .foryou .section-eyebrow { color: #6f5528; }
+  .foryou .section-rule { background: #8a6e3e; margin-left: auto; margin-right: auto; }
+  .foryou .section-title { color: #2a2218; margin-bottom: 32px; }
+  .foryou-lead { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: clamp(22px, 2.6vw, 32px); font-weight: 400; line-height: 1.5; color: #6f5528; margin: 0 auto 64px; max-width: 30em; }
+  .foryou .section-title em { color: #6f5528; }
+  .foryou-line { font-family: 'Cormorant Garamond', serif; font-size: clamp(22px, 2.6vw, 32px); font-weight: 300; line-height: 1.5; color: #2a2218; margin: 0 auto 36px; max-width: 34em; }
+  @media (max-width: 768px) { .foryou { padding: 80px 24px; } }
 </style>
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="images/web/favicon-32.png">
@@ -974,13 +1013,13 @@
 
 <canvas class="geo-canvas" id="geoCanvas"></canvas>
 
-<a href="quiz.html" class="promo-bar">Find out why the life you want hasn&rsquo;t manifested yet &rarr;</a>
+<a href="audit.html" class="promo-bar">Find out what&rsquo;s holding you back &rarr;</a>
 
 <!-- NAV -->
 <nav>
   <a href="index.html" class="nav-logo"><img src="images/web/logo-gold.png" alt="Everyday Alchemy" class="logo-img"></a>
   <ul class="nav-links">
-    <li><a href="quiz.html" class="nav-cta">Start Now</a></li>
+    <li><a href="audit.html" class="nav-cta">Start Now</a></li>
   </ul>
 </nav>
 
@@ -988,10 +1027,10 @@
 <section class="hero">
   <div class="hero-grid">
     <div class="hero-text">
-      <h1 class="hero-title">Stop wondering when your manifestation will show up.<br><em>Change your <span class="word-rotator" aria-hidden="true"><span class="is-active">beliefs</span><span>identity</span><span>resonance</span></span><span class="sr-only">beliefs</span> for good.</em></h1>
-      <p class="hero-subtitle">Get the life you've been waiting for.</p>
+      <h1 class="hero-title">Stop refreshing your inbox for a yes that hasn&rsquo;t come.<br><em>Or picking up your phone and looking for that text or DM.</em></h1>
+      <p class="hero-subtitle">Get the clients, the money, and all the yeses you&rsquo;ve been waiting for.</p>
       <div class="hero-divider"></div>
-      <a href="quiz.html" class="cta-primary">Find out why the life you want hasn&rsquo;t manifested yet &rarr;</a>
+      <a href="audit.html" class="cta-primary">Find out what&rsquo;s holding you back &rarr;</a>
     </div>
     <div class="hero-visual">
       <img src="images/web/hero-icosahedron.jpg" alt="A glowing mirrored geometric sculpture lit at night in the snow">
@@ -1036,7 +1075,12 @@
     <div class="reveal">
       <div class="section-rule"></div>
       <p class="section-eyebrow">Sound Familiar?</p>
-      <h2 class="section-title">Wondering when it will show up.<br>Spiraling when reality disagrees.<br><em>Not sure you're doing it right.</em></h2>
+      <h2 class="section-title pain-lines">
+        <span>Your biggest client&rsquo;s contract is up for renewal, and they&rsquo;ve been quiet, and you&rsquo;re not sure they&rsquo;re going to stay.</span>
+        <em>Years into this, still not making enough, asking if you should quit and go back to a 9-to-5.</em>
+        <span>So here you are, 5 AM, going back through your coursework to make sure you&rsquo;re doing it right.</span>
+        <em>And you&rsquo;re still wondering if you&rsquo;re doing it right.</em>
+      </h2>
     </div>
   </div>
 </section>
@@ -1052,17 +1096,17 @@
       <div class="pillar reveal">
         <img class="pillar-img" src="images/web/how-spiral.jpg" alt="Ocean waves breaking on rocks" loading="lazy">
         <span class="pillar-roman">I</span>
-        <div class="pillar-name">Stop the Spiral</div>
+        <div class="pillar-name">A client goes quiet, you follow up, you go about your evening&hellip; and you don&rsquo;t spiral.</div>
       </div>
       <div class="pillar reveal" style="transition-delay: 0.15s">
         <img class="pillar-img" src="images/web/how-doubt.jpg" alt="Still mountain lake reflecting the sky" loading="lazy">
         <span class="pillar-roman">II</span>
-        <div class="pillar-name">End the Doubt</div>
+        <div class="pillar-name">You make a decision about your business, you don&rsquo;t second guess it.</div>
       </div>
       <div class="pillar reveal" style="transition-delay: 0.30s">
         <img class="pillar-img" src="images/web/how-next.jpg" alt="Sunset over a coastal town from an infinity pool" loading="lazy">
         <span class="pillar-roman">III</span>
-        <div class="pillar-name">Know What to Do Next</div>
+        <div class="pillar-name">Every day, the most important task that moves your business forward is what you do first.</div>
       </div>
     </div>
   </div>
@@ -1104,9 +1148,9 @@
       <p class="story-p reveal">
         You can&rsquo;t change physical reality from the same mind that created it. Resonance Architecture&trade; isn&rsquo;t another tool to try harder. It&rsquo;s choosing a completely different vibration.
       </p>
-      <div class="story-callout reveal">
-        You can too. Change your beliefs for good, with Resonance Architecture&trade;.
-      </div>
+      <p class="epiphany-pull reveal" style="margin-bottom: 24px;">You can too.</p>
+      <p class="story-finale reveal" style="margin-top: 0;">Get the Law of Attraction working for you.</p>
+      <p class="story-finale reveal" style="margin-top: -14px;">Change your beliefs for good, with Resonance Architecture&trade;.</p>
     </div>
   </div>
 </section>
@@ -1123,16 +1167,31 @@
         <img class="pillar-img" src="images/web/start-quiz.jpg" alt="A glass flask with a glowing filament bulb" loading="lazy">
         <span class="pillar-roman">I</span>
         <div class="pillar-name">Find out why the life you want hasn&rsquo;t manifested yet</div>
-        <p class="pillar-desc">Stop wondering.</p>
-        <a href="quiz.html" class="cta-secondary" style="margin: 28px 0 0;">Start Now</a>
+        <div class="pillar-desc"><span class="seasonal-a"><span class="seasonal-label">From:</span> Going back through everything you&rsquo;ve learned, trying to figure out what you missed.</span><span class="seasonal-b"><span class="seasonal-label">To:</span> Knowing if&hellip;
+          <ul class="to-list">
+            <li>You are specific about what your business really looks like at the end of the year.</li>
+            <li>When a prospect says no, you recognize a tire kicker.</li>
+            <li>You second guess it when you make a decision about your business.</li>
+            <li>Every day, the most important tasks that move your business forward are what you do first.</li>
+          </ul></span></div>
+        <a href="audit.html" class="cta-secondary" style="margin: 28px 0 0;">Start Now</a>
       </div>
       <div class="pillar reveal" style="transition-delay: 0.15s">
         <img class="pillar-img" style="object-position: 35% 42%;" src="images/web/start-cohort.jpg" alt="An altar table with a glowing salt lamp, crystals, coins and an alchemy book" loading="lazy">
         <span class="pillar-roman">II</span>
-        <div class="pillar-name">The Cohort</div>
-        <p class="pillar-desc">Change your beliefs for good.</p>
+        <div class="pillar-name">Join the Alchemy Society</div>
+        <div class="pillar-desc"><span class="seasonal-a"><span class="seasonal-label">From:</span> <span id="seasonal-a">Hoping the steady stream of clients and revenue shows up before Christmas.</span></span><span class="seasonal-b"><span class="seasonal-label">To:</span>
+          <ul class="to-list">
+            <li>Payments showing up in your accounts</li>
+            <li>Booked meetings on your calendar</li>
+            <li>Scheduled deliverables</li>
+            <li>Full sessions</li>
+            <li>A waiting list of customers</li>
+            <li>You walk away from a client meeting with a smile on your face, knowing the Law of Attraction is working for you</li>
+          </ul></span></div>
         <a href="#" class="cta-secondary" style="margin: 28px 0 0;">Start Now</a>
       </div>
+      <!-- Mastermind card removed for now (not offered yet). Restore by moving it out of this comment.
       <div class="pillar reveal" style="transition-delay: 0.3s">
         <img class="pillar-img" src="images/web/start-mastermind.jpg" alt="A Flower of Life mosaic in black and white tile on a wall" loading="lazy">
         <span class="pillar-roman">III</span>
@@ -1140,6 +1199,7 @@
         <p class="pillar-desc">Design the life you&rsquo;ve always wanted.</p>
         <a href="#" class="cta-secondary" style="margin: 28px 0 0;">Start Now</a>
       </div>
+      -->
     </div>
   </div>
 </section>
@@ -1153,7 +1213,7 @@
     <div class="section-rule"></div>
     <h2 class="section-title">Not sure where to begin?<br><em>Start here.</em></h2>
     <div style="margin-top: 40px;">
-      <a href="quiz.html" class="cta-primary">Find out why the life you want hasn&rsquo;t manifested yet &rarr;</a>
+      <a href="audit.html" class="cta-primary">Find out what&rsquo;s holding you back &rarr;</a>
     </div>
   </div>
 </section>
@@ -1172,14 +1232,31 @@
   </div>
 </section>
 
+<!-- IS IT FOR YOU: audience named, "this is for you if" criteria (pattern: Alba "Is Alba right for you?", Kristine "This Work Is For You If") -->
+<section class="foryou" id="foryou">
+  <div class="foryou-inner">
+    <div class="reveal">
+      <div class="section-rule"></div>
+      <h2 class="section-title">Is Everyday Alchemy <em>for you?</em></h2>
+      <p class="foryou-lead">If you are a spiritual entrepreneur, awakened business owner, or conscious leader&hellip;</p>
+    </div>
+    <div class="foryou-list">
+      <p class="foryou-line reveal">You&rsquo;re in the work: therapy, mindset, manifesting, love and light, meditation.</p>
+      <p class="foryou-line reveal">And you feel like a different person, but your life still hasn&rsquo;t changed to reflect that.</p>
+      <p class="foryou-line reveal">At least not the way you want it to.</p>
+    </div>
+  </div>
+</section>
+
 <!-- CTA -->
 <section class="cta-section" id="call">
   <div style="position: relative; z-index: 1;">
     <div class="section-rule"></div>
     <p class="section-eyebrow">Start Free</p>
-    <h2 class="section-title">Find out why the life you want hasn&rsquo;t <em>manifested yet.</em></h2>
+    <h2 class="section-title">Find out what&rsquo;s <em>holding you back.</em></h2>
+    <p style="margin-bottom: 0;">It takes a few minutes.</p>
     <div style="margin-top: 40px;">
-      <a href="quiz.html" class="cta-primary">Find out why the life you want hasn&rsquo;t manifested yet &rarr;</a>
+      <a href="audit.html" class="cta-primary">Start now &rarr;</a>
     </div>
   </div>
 </section>
@@ -1239,6 +1316,32 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.12 });
 reveals.forEach(el => observer.observe(el));
+</script>
+<script>
+/* Seasonal Point A for the 90-Day card. Windows end ahead of the day the line names
+   (the Christmas line is gone by Dec 10). Northern hemisphere. If this script does not
+   run, the Christmas line in the HTML stays. */
+(function () {
+  var el = document.getElementById('seasonal-a');
+  if (!el) return;
+  var LINES = {
+    holiday: 'Hoping the steady stream of clients and revenue shows up before Christmas.',
+    newyear: 'Hoping this is the year the steady stream of clients and revenue finally starts.',
+    spring:  'Hoping this is the spring the garden finally begins to grow: a steady stream of clients and revenue.',
+    summer:  'Hoping this is the summer the business finally blossoms into a steady stream of clients and revenue.',
+    fall:    'Hoping the harvest finally comes: a steady stream of clients and revenue.'
+  };
+  function season(d) {
+    var md = (d.getMonth() + 1) * 100 + d.getDate();
+    if (md >= 1015 && md <= 1210) return 'holiday';
+    if (md >= 1211 || md <= 214)  return 'newyear';
+    if (md >= 215  && md <= 514)  return 'spring';
+    if (md >= 515  && md <= 814)  return 'summer';
+    return 'fall'; /* Aug 15 to Oct 14 */
+  }
+  var qs = location.search.match(/[?&]season=(holiday|newyear|spring|summer|fall)\b/); /* ?season=spring to preview */
+  el.textContent = LINES[qs ? qs[1] : season(new Date())];
+})();
 </script>
 <script>
 (function () {

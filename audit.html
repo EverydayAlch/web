@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Belief &amp; Identity Alignment Audit — Everyday Alchemy</title>
+<title>The Alignment Profile — Everyday Alchemy</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Cinzel:wght@400;600&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -45,6 +45,7 @@
 
   .top { position: relative; z-index: 1; width: 100%; max-width: 1148px; margin: 0 auto; padding: 28px 24px 0; display: flex; justify-content: space-between; align-items: baseline; gap: 16px; }
   .logo { font-family: 'Cormorant Garamond', serif; font-size: 24px; color: var(--cream); text-decoration: none; }
+  .logo-img { display: block; height: 28px; width: auto; }
   .audit-name { font-size: 14px; color: var(--cream-mid); text-align: right; }
 
   .progress {
@@ -255,6 +256,15 @@
   .pair .card { text-align: left; }
   .pair h3 { margin: 4px 0 10px; }
   @media (min-width: 681px) { .pair .eyebrow { min-height: 3em; } }
+  .nextnote { margin-top: 20px; font-size: 15px; line-height: 1.7; color: var(--cream-mid); }
+  .ctas { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 30px; }
+  a.btn { display: inline-block; text-decoration: none; text-align: center; }
+  .btn.ghost { background: transparent; color: var(--cream); border: 1px solid var(--gold-border); box-shadow: none; }
+  .btn.ghost:hover { background: rgba(201,169,110,0.1); transform: translateY(-2px); }
+  .pvbar { position: fixed; left: 50%; bottom: 18px; transform: translateX(-50%); z-index: 30; display: flex; align-items: center; gap: 6px; background: #f4f1ea; color: #1a150c; border-radius: 999px; padding: 8px 10px 8px 18px; box-shadow: 0 8px 30px rgba(0,0,0,0.5); font-size: 13px; }
+  .pvbar span { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #6b6354; margin-right: 6px; }
+  .pvbar button { font-family: 'Jost', sans-serif; font-size: 14px; text-transform: capitalize; background: transparent; border: none; border-radius: 999px; padding: 8px 16px; cursor: pointer; color: #1a150c; }
+  .pvbar button[aria-pressed="true"] { background: #1a150c; color: #f4f1ea; }
   .todo { color: var(--gold-dim); border-bottom: 1px dashed var(--gold-dim); }
 
   pre.debug { margin-top: 40px; padding: 16px; max-height: 360px; overflow: auto; font-size: 12px; line-height: 1.5; color: var(--cream-mid); background: rgba(240,232,216,0.05); border: 1px dashed var(--gold-border); white-space: pre-wrap; }
@@ -279,7 +289,7 @@
 
 <div class="progress" id="progress" role="progressbar" aria-label="Audit progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="bar"></span></div>
 
-<header class="top"><a class="logo" href="index.html">Everyday Alchemy</a><span class="audit-name">The Belief &amp; Identity Alignment Audit</span></header>
+<header class="top"><a class="logo" href="index.html"><img src="images/web/logo-gold.png" alt="Everyday Alchemy" class="logo-img"></a><span class="audit-name">The Alignment Profile</span></header>
 
 <iframe name="ghl-sink" title="" hidden tabindex="-1" aria-hidden="true"></iframe>
 
@@ -342,7 +352,7 @@ const CONFIG = {
    written yet and shows on the page as a dashed placeholder.
 ------------------------------------------------------------------- */
 const CATS = [
-  { key: 'coherence',   name: 'Coherence',            field: 'coherence' },
+  { key: 'coherence',   name: 'Internal Integrity',   label: 'Internal Integrity', field: 'coherence' },
   { key: 'belief',      name: 'Belief Alignment',     field: 'belief_alignment' },
   { key: 'sovereignty', name: 'Embodied Sovereignty', field: 'embodied_sovereignty' },
   { key: 'action',      name: 'Aligned Action',       field: 'aligned_action' }
@@ -365,11 +375,11 @@ const QUESTIONS = [
   { id: 12, type: 'yesno', cat: 'sovereignty', q: 'Have you stopped wondering where the life you want is? Why source, the universe, God, has not delivered it yet?' },
   { id: 13, type: 'multi', key: 'current_situation', min: 1, max: 3, hint: 'Pick up to three.',
     q: 'Which best describes your current situation?',
-    options: ['I’m not happy with my financial situation', 'Feeling alone', 'The weight of it all is too much',
+    options: ['I’m not happy with my financial situation', 'Worried about revenue', 'Should I quit and go back to my 9-to-5?', 'Feeling alone', 'The weight of it all is too much',
               'My thoughts spiral', 'I’m wondering if it actually works', 'My body hurts / I feel terrible'] },
   { id: 14, type: 'single', key: 'desired_outcome',
     q: 'Which best describes what you&rsquo;re looking for?',
-    options: ['Financially abundant', 'More friends and love', 'Knowing that I can handle what comes',
+    options: ['Financially abundant', 'Steady stream of customers', 'Consistent revenue', 'More friends and love', 'Knowing that I can handle what comes',
               'Getting calm, clear, and present', 'My life going in the right direction', 'My body feeling good/healthy'] },
   { id: 15, type: 'multi', key: 'already_tried', min: 1, max: null, hint: 'Pick as many as apply.',
     q: 'What have you tried that hasn&rsquo;t worked?',
@@ -389,7 +399,7 @@ const CONSENT_HTML = 'I agree to receive marketing and promotional emails from E
 const LANDING = {
   eyebrow: 'A diagnostic alignment audit',
   hook: 'Frustrated that the aligned life you&rsquo;ve been asking for hasn&rsquo;t arrived yet?',
-  sub: 'Answer seventeen questions to find out. A few minutes.',
+  sub: 'Answer ~15 questions to find out. A few minutes.',
   benefits: 'This assessment will help you to <strong>measure and improve</strong> three things: what you believe, what you do, and how you think',
   bioHeading: 'I&rsquo;m Tim and I created <em>Everyday Alchemy.</em>',
   bio: [
@@ -405,41 +415,46 @@ const LANDING = {
   /* testimonials for taking the audit: [{ quote: '', who: '', role: '' }]. Until there are real ones, ScoreApp's three placeholder cards show. */
   testimonials: [],
   closeHeading: 'Find out why the life you want isn&rsquo;t here yet.',
-  closeBody: ['17 questions. It takes a few minutes.', 'You&rsquo;ll get immediate results and recommendations.'],
+  closeBody: ['~15 questions. It takes a few minutes.', 'You&rsquo;ll get immediate results and recommendations.'],
   button: 'Start the audit'
 };
 
 /* Results page */
 const RESULTS = {
-  header: 'Belief &amp; Identity Alignment Audit',
+  header: 'The Alignment Profile',
   eyebrow: 'Your alignment, reflected',
   heading: 'Where belief meets lived reality.',
   intro: {
     High: 'Hi {first_name}, you&rsquo;ve been thinking, &ldquo;What more do I need to do?&rdquo; and &ldquo;Why isn&rsquo;t it here yet? I&rsquo;ve done everything.&rdquo; You&rsquo;ve gone over the material and redone it and looked again and looked again, and yet you&rsquo;re still in the same place. And the truth is, most of what you need is in place, and that&rsquo;s actually the most insidious problem, because almost all of it IS there. So here&rsquo;s what isn&rsquo;t...',
-    Medium: '[Medium score intro: to write]',
-    Low: '[Low score intro: to write]'
+    Medium: 'Hi {first_name}, you&rsquo;ve been thinking, &ldquo;What more do I need to do?&rdquo; and &ldquo;Why isn&rsquo;t it here yet? I&rsquo;ve done everything.&rdquo; You&rsquo;ve gone over the material and redone it and looked again and looked again, and yet you&rsquo;re still in the same place. And the truth is, most of what you need is in place, and that&rsquo;s actually the most insidious problem, because almost all of it IS there. So here&rsquo;s what isn&rsquo;t...',
+    Low: 'Hi {first_name}, you&rsquo;ve been thinking, &ldquo;What more do I need to do?&rdquo; and &ldquo;Why isn&rsquo;t it here yet? I&rsquo;ve done everything.&rdquo; You&rsquo;ve gone over the material and redone it and looked again and looked again, and yet you&rsquo;re still in the same place. And the truth is, most of what you need is in place, and that&rsquo;s actually the most insidious problem, because almost all of it IS there. So here&rsquo;s what isn&rsquo;t...'
   },
   scoreLabel: 'Your overall alignment',
   scoreCopy: 'Four areas control how your inner clarity shows up in your real life. See what&rsquo;s driving your results, and where you&rsquo;re losing traction.',
   s1: '01 · Your Scores',
   tierHeading: '{tier} Alignment',
-  tierCopy: { High: '[High level paragraph: to write]', Medium: '[Medium level paragraph: to write]', Low: '[Low level paragraph: to write]' },
+  tierCopy: { High: '<em>You&rsquo;ve done the work, you know the concepts, and your inner world feels clear. But if your daily life&mdash;your body, your bank account, your relationships&mdash;isn&rsquo;t reflecting that same clarity, there&rsquo;s a gap. You don&rsquo;t need another practice, higher vision, or better mindset. You need to pull all that high-level awareness down into the physical room you&rsquo;re sitting in right <strong>now</strong>.</em>', Medium: '<em>You have the tools, but your reality hasn&rsquo;t caught up to what you know. When life stays predictable, you&rsquo;re fine&mdash;it&rsquo;s when things don&rsquo;t turn out the way you want that your alignment breaks.</em>', Low: '<em>You&rsquo;re putting a tremendous amount of energy into trying to move forward, but it feels like you&rsquo;re fighting the ground you&rsquo;re standing on. When you can&rsquo;t accept your current reality, your presence pulls back&mdash;leaving you feeling exhausted, fragmented, and disconnected from your own power.</em>' },
   s2: '02 · The four areas as one system',
-  s2Intro: '[Intro to the four areas: to write]',
+  s2Intro: '<em>These numbers aren&rsquo;t isolated results; they&rsquo;re a snapshot of one living circuit. Being sharp in your head doesn&rsquo;t matter if it isn&rsquo;t embodied in your daily life. Look at how all four work together.</em>',
   catCopy: {
-    coherence:   { High: '[Coherence, high: to write]',   Medium: '[Coherence, medium: to write]',   Low: '[Coherence, low: to write]' },
-    belief:      { High: '[Belief Alignment, high: to write]', Medium: '[Belief Alignment, medium: to write]', Low: '[Belief Alignment, low: to write]' },
-    sovereignty: { High: '[Embodied Sovereignty, high: to write]', Medium: '[Embodied Sovereignty, medium: to write]', Low: '[Embodied Sovereignty, low: to write]' },
-    action:      { High: '[Aligned Action, high: to write]', Medium: '[Aligned Action, medium: to write]', Low: '[Aligned Action, low: to write]' }
+    coherence:   { High: 'Your internal compass is dialed in, and you aren&rsquo;t outsourcing your authority. That&rsquo;s high-level stability. But high internal integrity in your head won&rsquo;t change your physical reality until you let it drive your real-world choices.',   Medium: 'You can hear your own truth, but it competes with other voices. Getting into present time more often will let you tell your knowing apart from your conditioning.',   Low: 'You&rsquo;ve been spending a lot of energy fighting where your feet are currently planted. It&rsquo;s easy to pull your presence out of the present moment when it doesn&rsquo;t look or feel like the life you want, but that leaves you feeling fragmented. You aren&rsquo;t broken&mdash;you&rsquo;re just trying to build a future from a space you haven&rsquo;t fully stepped into yet.' },
+    belief:      { High: 'Your stated desire and your private expectation are in sync. That&rsquo;s rare, and it eliminates wasted energy. But high belief alignment is just clear potential. It still requires you to physically step through the door.', Medium: 'You logically agree with where you&rsquo;re going, but old subconscious programming still holds veto power. When you move toward a big shift, subtle doubts and legacy safety rules pull you back into what&rsquo;s familiar.', Low: 'You&rsquo;re working hard, but it feels like you&rsquo;re driving with the emergency brake on. You have real intent to move forward, but old, inherited rules and survival programs are still running in the background. It&rsquo;s exhausting to want one thing while your baseline conditioning is trying to protect you by keeping you right where you are.' },
+    sovereignty: { High: 'You stopped waiting to be handed what&rsquo;s yours. Your authority is fully in your body, not floating in theory. You are physically standing in the reality you chose, no permission required.', Medium: 'Your authority works fine until it gets tested. When real pushback hits, you give up your seniority and start looking for whether it&rsquo;s ok to take up space.', Low: 'You&rsquo;ve spent a long time prioritizing everyone else&rsquo;s comfort, noise, and expectations over your own center. When you constantly shape-shift to keep the peace or stay safe, your own energy gets depleted. This isn&rsquo;t a character flaw; it&rsquo;s just an old protective system that served its purpose and is ready to be laid down.' },
+    action:      { High: 'Zero lag between insight and execution. You don&rsquo;t let clean awareness rot in your head&mdash;you translate it straight into real-world behavior, which is why your physical life changes.', Medium: 'You move, but you don&rsquo;t fully let go. You carry high-level intent into the physical step, but then you grip the timing or the final form&mdash;switching from clean creation into micromanaging the results.', Low: 'Action feels heavy right now because it&rsquo;s wrapped in pressure, fear of the outcome, or overthinking every step. When you feel like you have to force or grip the result to be safe, moving forward becomes an uphill battle. You&rsquo;re ready to learn how to step forward without having to carry the weight of the entire outcome on your shoulders.' }
   },
   s3: '03 · Your pattern',
   strongestEyebrow: 'Where you are most embodied',
-  strongestCopy: '[Strongest area paragraph: to write]',
+  strongestCopy: 'This is your current strength. The real question is whether the other three areas are keeping pace with it, or quietly draining what this one creates.',
   focusEyebrow: 'Your key focus area',
-  focusCopy: '[Key focus area paragraph: to write]',
+  focusCopy: 'This is the area holding the rest of the system back. Strength elsewhere cannot fully land until this one is embodied, not just understood. This is where the next real change comes from.',
   s4: '04 · Your next step',
-  nextHeading: '[Next step heading: to write]',
-  nextCopy: '[Next step paragraph: to write]'
+  nextHeading: 'From understanding into embodiment.',
+  nextNote: 'A grounded 30 minute conversation. You leave with clarity on your next area, whether or not we work together.',
+  bookLabel: 'Explore the next level of work',
+  bookUrl: 'https://api.leadconnectorhq.com/widget/booking/BdQTYPdQvcf1Z43zc0pg',
+  reportLabel: 'Download my full audit',
+  reportUrl: { coherence: '/downloads/internal-integrity.pdf', belief: '/downloads/belief-alignment.pdf', sovereignty: '/downloads/embodied-sovereignty.pdf', action: '/downloads/aligned-action.pdf' },   /* one PDF per lowest category */
+  nextCopy: 'Understanding where the gap is is only the first shift. The work of Everyday Alchemy is the bridge from non-physical (energy) into the physical embodiment (form), where consciousness changes first and physical reality follows. Book a conversation and we will look honestly at your pattern together and map the one area to embody next. Complimentary.'
 };
 
 /* ------------------------------------------------------------------
@@ -482,7 +497,7 @@ function compute() {
   const pct = Math.round(yes / YESNO.length * 100);
   const cats = CATS.map(c => {
     const n = per[c.key], p = Math.round(n / 3 * 100);
-    return { key: c.key, name: c.name, points: n, potential: 3, percent: p, tier: tierOf(p) };
+    return { key: c.key, name: c.name, label: c.label || c.name, points: n, potential: 3, percent: p, tier: tierOf(p) };
   });
   /* ties go to the first area in the list, as ScoreApp did */
   let hi = cats[0], lo = cats[0];
@@ -607,7 +622,7 @@ function renderLanding() {
       <div class="card example" aria-label="Example result">
         <p class="eyebrow2">Example result</p>
         <div class="cap"><span class="cap-t">Alignment audit</span><span class="pill-lv">Medium</span></div>
-        ${[['Coherence', 72], ['Belief Alignment', 44], ['Embodied Sovereignty', 58], ['Aligned Action', 36]].map(r =>
+        ${[['Internal Integrity', 72], ['Belief Alignment', 44], ['Embodied Sovereignty', 58], ['Aligned Action', 36]].map(r =>
           `<div class="row"><span>${r[0]}</span><div class="bar" aria-hidden="true"><span style="width:${r[1]}%"></span></div></div>`).join('')}
         <p class="start">Start with: <strong>Aligned Action</strong></p>
       </div>
@@ -684,7 +699,7 @@ function renderResults() {
   const intro = copy(R.intro[r.tier]).replace('{first_name}', esc(first));
   const cats = r.cats.map(c => `
     <div class="cat">
-      <div class="cat-head"><span class="cat-name">${esc(c.name)}</span><span class="cat-score">${c.points} of ${c.potential} &middot; ${c.tier}</span></div>
+      <div class="cat-head"><span class="cat-name">${esc(c.label)}</span><span class="cat-score">${c.points} of ${c.potential} &middot; ${c.tier}</span></div>
       <div class="bar" aria-hidden="true"><span style="width:${c.percent}%"></span></div>
       <p>${copy(R.catCopy[c.key][c.tier])}</p>
     </div>`).join('');
@@ -736,6 +751,11 @@ function renderResults() {
       <p class="eyebrow">${R.s4}</p>
       <h2>${copy(R.nextHeading)}</h2>
       <p class="body">${copy(R.nextCopy)}</p>
+      <div class="ctas">
+        <a class="btn pill" href="${esc(R.bookUrl || '#')}">${R.bookLabel}</a>
+        <a class="btn pill ghost" href="${esc(R.reportUrl[r.focus.key] || '#')}">${R.reportLabel}</a>
+      </div>
+      <p class="nextnote">${R.nextNote}</p>
     </section>
     ${dbg}`, '#rh');
 }
@@ -855,18 +875,36 @@ $('everyday-alchemy-audit').addEventListener('submit', e => {
 /* ------------------------------------------------------------------
    START
 ------------------------------------------------------------------- */
-/* test hook, debug mode only: ?debug=1&preview=high|medium|low jumps to a results page */
-if (debug) {
-  const n = { high: 11, medium: 7, low: 3 }[params.get('preview')];
-  if (n) {
-    S.contact = { first: 'Test', last: 'Person', email: 'test@example.com', consent: false };
-    YESNO.forEach((q, i) => { S.yn[q.id] = i < n; });
-    S.pick = { current_situation: [QUESTIONS[12].options[0]], desired_outcome: [QUESTIONS[13].options[0]],
-      already_tried: [QUESTIONS[14].options[0]], solution_preference: [QUESTIONS[15].options[0]] };
-    S.result = compute(); S.step = 'results'; S.sent = finishFields(S.result);
-  }
-  window.__audit = { S, compute, render, QUESTIONS, finishFields };
+/* preview shortcut: ?preview=high|medium|low jumps to a results page with made-up answers and sends nothing.
+   A "Viewing as" bar at the bottom switches every area to that level at once.
+   Add &debug=1 to also show the raw data box under the results. */
+const PREVIEW_YES = { high: 3, medium: 2, low: 1 };   /* Yes answers given in each of the four areas */
+function previewAs(level) {
+  const used = {};
+  S.contact = { first: 'Test', last: 'Person', email: 'test@example.com', consent: false };
+  YESNO.forEach(q => { used[q.cat] = used[q.cat] || 0; S.yn[q.id] = used[q.cat] < PREVIEW_YES[level]; used[q.cat]++; });
+  S.pick = { current_situation: [QUESTIONS[12].options[0]], desired_outcome: [QUESTIONS[13].options[0]],
+    already_tried: [QUESTIONS[14].options[0]], solution_preference: [QUESTIONS[15].options[0]] };
+  S.result = compute(); S.step = 'results'; S.sent = finishFields(S.result);
 }
+if (PREVIEW_YES[params.get('preview')]) {
+  previewAs(params.get('preview'));
+  const bar = document.createElement('div');
+  bar.className = 'pvbar';
+  bar.innerHTML = '<span>Viewing as</span>' + ['low', 'medium', 'high'].map(l => `<button type="button" data-pv="${l}">${l}</button>`).join('');
+  document.body.appendChild(bar);
+  const mark = () => bar.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', b.dataset.pv === S.result.tier.toLowerCase()));
+  bar.addEventListener('click', e => {
+    const b = e.target.closest('[data-pv]');
+    if (!b) return;
+    const y = window.scrollY;
+    previewAs(b.dataset.pv); render(); mark(); window.scrollTo(0, y);
+    history.replaceState(null, '', location.pathname + location.search.replace(/preview=[a-z]+/, 'preview=' + b.dataset.pv));
+  });
+  mark();
+}
+/* test hook, debug mode only */
+if (debug) window.__audit = { S, compute, render, QUESTIONS, finishFields };
 render();
 </script>
 
