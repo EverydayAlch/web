@@ -31,34 +31,28 @@ COVER_PHOTO = os.path.join(HERE, 'images', 'stones.jpg')   # the same cover phot
 PDFS = {
     'action': dict(
         file='aligned-action.pdf',
-        image=DESERT,
-        inner_label='The inner monologue',
-        loops_label='The friction loops',
         name='Aligned Action',
-        cover='IT’S BEEN\nFAR TOO LONG',
-        subtitle='…and still nothing',
+        image=DESERT,
+        cover='THE ACTION GAP',
+        one_line=True,
+        subtitle='Stopping the Energy Leak of Overwhelm and Paralysis',
         quote='Choose your work… for all must labor.',
         credit='The Emerald Tablets',
-        monologue=[
-            '“I’m so tired and exhausted of all this.”',
-            '“I just wanna get out of this cycle.”',
-            '“How do I not be stuck anymore?”',
-            '“So it’s like I either give up or don’t.”',
+        # sections layout (Tim, 2026-11-15), same as the other three
+        sections=[
+            ('Where You Are Right Now', [
+                'You know what you want to build, but taking the physical steps to execute feels like pushing through wet cement. You find yourself trapped between a drive to move forward and a physical heaviness that stops you cold.',
+                'It’s easy to call this laziness or a lack of discipline. It isn’t. You are simply running a high-frequency intention into an old, protective physical baseline, and the resulting static shuts down your momentum.',
+            ]),
+            '@image',
+            '@pagebreak',
+            ('The Reality', [
+                '##The Identity Gap.',
+                'When you set an intention for a new outcome, your mind instantly demands to see all ten steps before it allows your body to move.',
+                'When you look across that gap without knowing the full blueprint, your brain perceives the unknown as a threat. It fires an electrical panic charge into your nervous system, which triggers a heavy magnetic response—fatigue, confusion, or sudden distraction.',
+                'The leak happens when you sit in the overwhelm and believe you are stuck, rather than recognizing your system is simply running hot on outdated rules.',
+            ]),
         ],
-        callout='That’s exhausting and you’re not broken.',
-        loops=[
-            '“The weight of it all is too much.”',
-            '“I’m stuck in this cycle and I don’t know what to do.”',
-            '“My mind says give up but my heart says I can’t.”',
-            '“I truly don’t want to give up.”',
-            '“I’m just really torn.”',
-        ],
-        guess='You don’t have a motivation problem. You have an identity gap.',
-        why=[
-            'When you set a clear vision, your physical reality doesn’t shift instantly. There is a gap between who you are today and the version of you who comfortably owns that reality.',
-            'When you look across that gap without knowing the exact steps, your brain sees an invisible threat. It floods your system with overwhelm to keep you safe from making a mistake. You aren’t lazy, and you aren’t self-sabotaging. Your system just shut down because it hit a wall of static.',
-        ],
-        shift='Aligned action isn’t about figuring out the whole 10-step plan. It’s about letting the version of you who already has the outcome tell you the very next micro-step. You don’t need the whole map; you just need the immediate move.',
         todo=[
             'Write down the one physical action you keep avoiding or overthinking.',
             'Don’t force yourself to do it, and don’t analyze why you haven’t.',
@@ -70,39 +64,26 @@ PDFS = {
         file='internal-integrity.pdf',
         name='Internal Integrity',
         image=WHIRLPOOL,
-        cover='WHY YOUR MIND\nWON’T SLOW DOWN',
-        subtitle='…your thoughts won’t stop spinning',
+        cover='THE STATIC LOOP',
+        one_line=True,
+        subtitle='How to Stop the Electrical Noise and Reset Your Field',
         quote='As above, so below.',
         credit='The Emerald Tablets',
-        inner_label=None,
-        monologue=[
-            '“If I’m doing all the work, why is this still happening?”',
-            '“It’s never gonna happen.”',
-            '“Why? Why me?”',
-            '“I cannot get out of my head today.”',
-            '“I’m scared my fears and thoughts are going to ruin it.”',
+        # sections layout (Tim, 2026-11-14), same as Embodied Sovereignty
+        sections=[
+            ('Where You Are Right Now', [
+                'Your mind is spinning, running scenarios, and trying to solve problems that aren’t happening right now. You find yourself trapped in overthinking, worrying that your fears will ruin your progress, or feeling completely exhausted by the noise in your head.',
+                'You try to use your mind to fix your mind, which only makes the noise louder. Nothing is broken, but the fatigue is real.',
+            ]),
+            '@image',
+            '@pagebreak',
+            ('The Reality', [
+                '##Conflating Electricity with Identity.',
+                'Thoughts are purely electrical. Emotions are magnetic.',
+                'When a stressful electrical thought fires, it instantly triggers a magnetic response in your body—tightness, anxiety, or a dip in your chest. Because magnetism pulls like-frequencies, that physical sensation immediately attracts three more electrical thoughts to justify why you feel that way.',
+                'The leak happens when you sit in the middle of that loop and claim it as “yours.” Trying to think your way out of a thought loop just dumps more current into a short circuit. You aren’t failing; your electromagnetic system is simply running hot because you’re sitting in the driver’s seat of the noise instead of resting in the center of your head.',
+            ]),
         ],
-        callout='That’s exhausting, and nothing is wrong with you.',
-        loops_label='The swirling thoughts',
-        loops=[
-            '“I overthink everything.”',
-            '“I’m spiraling again.”',
-            '“I spend hours spiraling.”',
-            '“I’m just too much in my head.”',
-            '“My brain doesn’t stop.”',
-            '“I go straight to panic.”',
-            '“I’m driving myself crazy.”',
-        ],
-        guess='There’s more to this than just wanting it.',
-        why=[
-            'When thoughts loop, nothing is broken. You are simply experiencing how an electromagnetic system operates when it runs hot.',
-            '##Is it me?',
-            'No. A single thought is electric and triggers a physical, magnetic reaction in the body—tightness, panic, or adrenaline. Because that physical feeling is magnetic, it naturally pulls in more thoughts that match its exact frequency. You aren’t failing; your system is simply reacting to its own feedback loop.',
-            '##Does this work work?',
-            'Yes, but not by using the mind to fix the mind. Trying to think your way out of a thought loop only adds more electricity to the circuit. This work changes the dynamic entirely: instead of trying to control or stop the thoughts, you shift your attention to the neutral observer. The moment you step back and observe the loop without engaging it, the electrical charge drops, and the loop naturally dissolves.',
-        ],
-        shift=None,
-        tight=True,                      # page 3 is full: trim the spacing a little so the two links can sit apart
         todo=[
             '<font name="Jost">Tonight, write down the thought that loops the most.</font>',
             '<font name="Jost">Don’t fix it or argue with it.</font>',
@@ -114,44 +95,26 @@ PDFS = {
         file='belief-alignment.pdf',
         name='Belief Alignment',
         image=CLOCK,
-        cover='IT’S NOT THAT\nNOTHING WORKS',
-        subtitle='…not sure it’s going to work',
+        cover='THE DOUBT LOOP',
+        one_line=True,
+        subtitle='Stopping the Energy Leak of Waiting for Proof',
         quote='Man is only what he believes.',
         credit='The Emerald Tablets',
-        inner_label=None,
-        monologue=[
-            '“I’ve tried everything, so why hasn’t it happened yet?”',
-            '“What if it all just isn’t true?”',
-            '“Am I missing some secret everyone else knows?”',
-            '“I don’t love it. It could be a little bit better.”',
+        # sections layout (Tim, 2026-11-14), same as Internal Integrity
+        sections=[
+            ('Where You Are Right Now', [
+                'You’ve done the work, cleared the past, and applied the tools, yet a quiet background voice keeps asking, “Is this actually working?” You catch yourself checking for physical proof before you fully commit your energy to the outcome.',
+                'You hold a clear vision in meditation or quiet moments, but as soon as you step into daily demands, the certainty slips. It leaves you feeling like you’re constantly starting over, pulling up the seed to see if it’s growing, and exhausting yourself trying to fix a broken link that isn’t actually broken.',
+            ]),
+            '@image',
+            '@pagebreak',
+            ('The Reality', [
+                '##Running Past Failure in Present Time.',
+                'Doubt is not a personal weakness or a lack of faith; it is an electrical memory loop.',
+                'When a past effort didn’t yield the physical result you wanted, the electrical charge of that disappointment was stored in your field. Today, when you launch a new intention, your electrical system automatically scans back to that old reference point.',
+                'The moment you brace for potential disappointment, your body generates a magnetic response—tightness, hesitation, or subtle anxiety. That magnetic charge instantly clamps down on your field, pulling your focus out of present time and into a memory of failure. You end up trying to create a new future while running the energy of an old disappointment.',
+            ]),
         ],
-        callout='That makes sense, and nothing is wrong with you.',
-        loops_label='The uncertainty',
-        loops=[
-            '“Is it my blocks? My trauma? My resistance?”',
-            '“The more I understand, the more I question.”',
-            '“I’ll try one more technique, one more teacher, one more course.”',
-            '“I already know this. What the hell.”',
-            '“It works sometimes, then it stops working and I don’t know why.”',
-            '“I find the feeling in meditation and lose it before lunch.”',
-            '“I’m tired of trying the same things over and over again… And nothing seems to work.”',
-        ],
-        guess='There’s more to this than just wanting it.',
-        why=[
-            'Wondering whether it will work is a kind of fear. You’re not sure it will, so part of you braces for it to fail.',
-            'And that comes from somewhere real. At some point in your past, something you tried didn’t work. Now you’re doing something today that’s meant to bring a result later, and that old moment speaks up about the future. Of course it does. Part of you is remembering.',
-        ],
-        bridge=[
-            ('“What if it all just isn’t true?”',
-             'That’s a fear that it won’t work. You’re not sure it will, so part of you expects it to fail.'),
-            ('“I always plant a seed and after a few days I dig it up.”',
-             'That’s the past speaking about the future. An old moment where something didn’t work is shaping what you expect from today.'),
-            ('“Something’s not right. I just need to fix it.”',
-             'That’s feedback from Source. When something doesn’t feel right yet, it lets you tune what you’re doing to get better results.'),
-        ],
-        source='Source is the larger field of intelligence that everything comes from, and that you’re part of.',
-        shift=None,
-        tight=True,
         todo=[
             '<font name="Jost">Notice the thought</font> when it comes up. Don’t argue with it.',
             '<font name="Jost">Breathe into right now.</font> The past is over and the future hasn’t happened. This moment is where you work from.',
@@ -164,34 +127,31 @@ PDFS = {
         file='embodied-sovereignty.pdf',
         name='Embodied Sovereignty',
         image=THUNDERHEAD,
-        cover='STILL ASKING\nIF I SHOULD',
-        subtitle='…will it work?',
+        cover='THE PERMISSION LOOP',
+        one_line=True,
+        subtitle='Stopping the Energy Leak of Hesitation and Second-Guessing:',
         quote='Master are ye of your destiny, free to take or reject at will.',
         credit='The Emerald Tablets',
-        inner_label=None,
-        monologue=[
-            '“Is it okay? What if I say no?”',
-            '“Is that ok to think?”',
-            '“I’m scared to say.”',
-            '“Should I start being more real and genuine?”',
+        # sections layout (Tim, 2026-11-14): 'Where You Are Right Now' / 'The Reality' / 'The Truth of Your Worth'.
+        # items: plain text = paragraph, '##' = sub-heading, '>>' = big line, '@image' / '@pagebreak' = layout markers
+        sections=[
+            ('Where You Are Right Now', [
+                'You hesitate before making a choice, checking the room to see if it’s safe to simply be yourself. In your business, your relationships, and your daily life, you tone down your truth, edit your words, or wait for someone else to validate your position before you stand in it.',
+                'You spend immense energy predicting how others will react to you. It leaves you feeling split—holding a massive, beautiful reality on the inside, while presenting a carefully filtered version on the outside.',
+            ]),
+            ('The Reality', [
+                '##The Permission Loop.',
+                'Every time you wait for external approval or alter your voice to prevent friction, your energy leaks out. You are attempting to run your life through other people’s considerations, past rules, and old survival stories, rather than resting in your own grounded center.',
+                'The energy that is meant to build your life, your creative vision, and your joy gets burned up in hesitation, second-guessing, and holding yourself back.',
+            ]),
+            ('The Truth of Your Worth', [
+                '##There is nothing wrong with you. There never was.',
+                'Your worth isn’t something you have to prove, earn, or convince anyone of—including yourself. Worth isn’t given when a gate opens; worth is realizing the gate was never locked, and the only barrier was the habit of asking for permission to enter.',
+                'You do not exist to be validated by the outside world. You are here, now, as a living, sovereign expression of creation.',
+            ]),
+            '@pagebreak',
+            '@image',
         ],
-        callout='There is nothing wrong with you. There never was.',     # Tim's Sanctum "Deserving" page
-        loops_label='The hesitation',
-        loops=[
-            '“I don’t want to say too much.”',
-            '“I just felt I need to speak up about it.”',
-            '“I get told I’m too much.”',
-            '“I don’t know who I am anymore, I think.”',
-            '“I don’t know who I’m being because what I’m saying I am doesn’t match who I am.”',
-        ],
-        guess='Worth is not confirmed by others.',                         # Tim's Sanctum "Worthy" page, as are the rest below
-        why=[
-            'Worthy isn’t something you say to convince yourself. It’s where you are. It’s home.',
-            'You are not worthy because of what you’ve done or do. You are worthy because you are here now.',
-            'Worthy is not proven. Worthy is not earned. Worthy is chosen. Choosing… not being shown.',
-            'Worthy is not when the gate opens to you. Worthy is when you realize it always was. And the only gate was the one you placed there.',
-        ],
-        shift='The moment the self says: “I will no longer change to be allowed.” “I already match. I already belong.”',
         todo=[
             'Write down one thing you aren’t sure if you should do.',
             'Take three slow connected breaths.',
@@ -217,7 +177,7 @@ def wrap_words(text, font, size, width):
     return lines
 
 
-def make_cover(out_path, headline, subtitle, photo, margin=62):
+def make_cover(out_path, headline, subtitle, photo, margin=62, one_line=False):
     """Same cover as the other PDFs (Aboreto title, Cantata One subtitle, photo with the offset gold frame, gold logo),
     but the title can run to several lines because these titles are longer."""
     from PIL import Image as PILImage
@@ -227,8 +187,8 @@ def make_cover(out_path, headline, subtitle, photo, margin=62):
     c.setFillColor(OBSIDIAN)
     c.rect(0, 0, W, H, stroke=0, fill=1)
     size = 44
-    if '\n' in headline:                           # explicit line breaks: use them as written, shrink to fit
-        lines = headline.split('\n')
+    if one_line or '\n' in headline:               # one line, or explicit line breaks: use them as written, shrink to fit
+        lines = [headline] if one_line else headline.split('\n')
         while max(pdfmetrics.stringWidth(ln, 'Aboreto', size) for ln in lines) > width and size > 24:
             size -= 1
     else:
@@ -277,6 +237,31 @@ def build(key):
     doc.addPageTemplates([PageTemplate(id='p', frames=[frame], onPage=page_bg)])
 
     s = [Spacer(1, 18), GoldBand(d['quote'], d['credit']), Spacer(1, 26)]
+    if d.get('sections'):
+        first = True
+        for sec in d['sections']:
+            if sec == '@pagebreak':
+                s += [PageBreak()]
+                first = True
+            elif sec == '@image':
+                from PIL import Image as PILImage
+                pw, ph = PILImage.open(d['image']).size
+                s += [Spacer(1, 12), HeroImage(d['image'], CONTENT_W, CONTENT_W * ph / pw)]
+            else:
+                label, items = sec
+                s += [Spaced(label, before=0 if first else 29, after=8)]
+                first = False
+                for it in items:
+                    if it.startswith('##'):
+                        s += [P(it[2:], qa)]
+                    elif it.startswith('>>'):
+                        s += [callout(it[2:])]
+                    else:
+                        s += [P(it)]
+        s += [KeepTogether([Spaced('What to do', before=14)] + steps(d['todo']))]
+        s += [KeepTogether([Spaced('If you’re ready, reach out to start the next level.', before=14, after=4),
+                            Paragraph('<a href="%s?utm_source=%s-pdf&amp;utm_medium=pdf&amp;utm_campaign=quiz" color="#e2c98a">%s</a>' % (BOOK_URL, os.path.splitext(d['file'])[0], BOOK_LABEL), link)])]
+        return finish_build(doc, s, out, d)
     if d.get('inner_label'):
         s += [Spaced(d['inner_label'], before=0, after=8)]
     s += [P(t, inner) for t in d['monologue']]
@@ -300,10 +285,14 @@ def build(key):
     s += [KeepTogether([Spaced('What to do', before=10 - tg // 3)] + steps(d['todo']))]
     s += [KeepTogether([Spaced('If you’re ready, reach out to start the next level.', before=14 - tg * 2 // 3, after=4),
                         Paragraph('<a href="%s?utm_source=%s-pdf&amp;utm_medium=pdf&amp;utm_campaign=quiz" color="#e2c98a">%s</a>' % (BOOK_URL, os.path.splitext(d['file'])[0], BOOK_LABEL), link)])]
+    return finish_build(doc, s, out, d)
+
+
+def finish_build(doc, s, out, d):
     doc.build(s, canvasmaker=ClosingCanvas)
 
     cover = out + '.cover.pdf'
-    make_cover(cover, d['cover'], d['subtitle'], COVER_PHOTO)
+    make_cover(cover, d['cover'], d['subtitle'], COVER_PHOTO, one_line=d.get('one_line', False))
     prepend_cover(out, cover)
     os.remove(cover)
     print('wrote', out)

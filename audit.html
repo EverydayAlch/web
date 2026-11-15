@@ -753,7 +753,7 @@ function renderResults() {
       <p class="body">${copy(R.nextCopy)}</p>
       <div class="ctas">
         <a class="btn pill" href="${esc(R.bookUrl || '#')}">${R.bookLabel}</a>
-        <a class="btn pill ghost" href="${esc(R.reportUrl[r.focus.key] || '#')}">${R.reportLabel}</a>
+        <a class="btn pill ghost" href="${esc(R.reportUrl[r.focus.key] || '#')}" target="_blank" rel="noopener">${R.reportLabel}</a>
       </div>
       <p class="nextnote">${R.nextNote}</p>
     </section>
